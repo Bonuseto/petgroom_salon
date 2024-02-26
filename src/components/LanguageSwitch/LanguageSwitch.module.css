@@ -1,0 +1,39 @@
+/* LanguageSwitch.css */
+
+/* Container for language switch */
+.languageSwitch {
+  position: relative;
+  height: 50px;
+}
+
+/* Icon for language switch */
+.languageSwitchIcon {
+  height: 30px; /* Set the height of the image to 30px */
+  background-color: transparent;
+}
+
+/* Dropdown for language selection */
+.languageSwitchDropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+/* Button for language switch */
+.languageSwitchButton {
+  background-color: transparent;
+  border: none;
+}
+
+/* Options for language selection */
+.languageOption {
+  padding: 10px;
+  cursor: pointer;
+  color: black;
+}
