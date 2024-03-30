@@ -2,8 +2,9 @@
 
 /* Container for language switch */
 .languageSwitch {
-  position: relative;
-  height: 50px;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
 }
 
 /* Icon for language switch */

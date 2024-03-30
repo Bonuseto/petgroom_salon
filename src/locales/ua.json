@@ -1,9 +1,10 @@
 {
   "pageTitle": "Ласкаво просимо до моєї програми",
+  "howToFindUs": "ЯК НАС ЗНАЙТИ",
   "language": {
-      "english": "EN",
-      "polish": "PL",
-      "ukranian": "UA",
-      "russian": "RU"
-    }
+    "english": "EN",
+    "polish": "PL",
+    "ukranian": "UA",
+    "russian": "RU"
   }
+}

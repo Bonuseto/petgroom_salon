@@ -1,9 +1,10 @@
 {
-    "pageTitle": "Witaj w Mojej Aplikacji",
-    "language": {
-      "english": "EN",
-      "polish": "PL",
-      "ukranian": "UA",
-      "russian": "RU"
-    }
+  "pageTitle": "Witaj w Mojej Aplikacji",
+  "howToFindUs": "JAK NAS ZNALEŹĆ",
+  "language": {
+    "english": "EN",
+    "polish": "PL",
+    "ukranian": "UA",
+    "russian": "RU"
   }
+}

@@ -13,11 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import LanguageSwitch from '../LanguageSwitch/LanguageSwitch';
 import i18n from '../../i18n';
 import { useState } from 'react';
@@ -122,7 +118,8 @@ export default function PersistentDrawerRight() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Main open={open}>
+      <Main open={open}
+        sx={{ p: 0, height: 56 }}>
         <DrawerHeader />
         <Typography id="pictures" paragraph>
           {/* Pictures content */}
@@ -153,7 +150,7 @@ export default function PersistentDrawerRight() {
           {[
             { text: 'Tomik and Nina', id: 'tomikandnina' },
             { text: 'Brown doggis', id: 'dingo' },
-            { text: 'Mochalka doggis', id: 'mochalka' },
+            { text: 'How to find us', id: 'how-to-find' },
             { text: 'Noseboy', id: 'nose' }
           ].map(({ text, id }) => (
             <ListItem

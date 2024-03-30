@@ -1,9 +1,10 @@
 {
-    "pageTitle": "Welcome to My App",
-    "language": {
-      "english": "EN",
-      "polish": "PL",
-      "ukranian": "UA",
-      "russian": "RU"
-    }
+  "pageTitle": "Welcome to My App",
+  "howToFindUs": "HOW TO FIND US",
+  "language": {
+    "english": "EN",
+    "polish": "PL",
+    "ukranian": "UA",
+    "russian": "RU"
   }
+}
