@@ -1,6 +1,7 @@
 Webpage created for pet grooming salon
 
 ![Image Alt Text](salonpic.png)
+![Image Alt Text](mapcomp.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
