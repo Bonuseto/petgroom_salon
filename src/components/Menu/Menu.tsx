@@ -2,7 +2,7 @@ import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import MuiAppBar, { type AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import CssBaseline from '@mui/material/CssBaseline';
 import List from '@mui/material/List';
@@ -21,44 +21,44 @@ import { useState } from 'react';
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
-  open?: boolean;
+  open?: boolean
 }>(({ theme, open }) => ({
   flexGrow: 1,
   padding: theme.spacing(3),
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
+    duration: theme.transitions.duration.leavingScreen
   }),
   marginRight: -drawerWidth,
-  ...(open && {
+  ...((open ?? false) && {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.enteringScreen
     }),
-    marginRight: 0,
+    marginRight: 0
   }),
-  position: 'relative',
+  position: 'relative'
 }));
 
 interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
+  open?: boolean
 }
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== 'open'
 })<AppBarProps>(({ theme, open }) => ({
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
+    duration: theme.transitions.duration.leavingScreen
   }),
-  ...(open && {
+  ...((open ?? false) && {
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.enteringScreen
     }),
-    marginRight: drawerWidth,
-  }),
+    marginRight: drawerWidth
+  })
 }));
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -66,31 +66,33 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
-  justifyContent: 'flex-start',
+  justifyContent: 'flex-start'
 }));
 
-export default function PersistentDrawerRight() {
+export default function PersistentDrawerRight (): JSX.Element {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
+  const handleDrawerOpen = (): void => {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
+  const handleDrawerClose = (): void => {
     setOpen(false);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>('en');
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleLanguageSelect = (language: string) => {
     setSelectedLanguage(language);
-    i18n.changeLanguage(language);
+    void i18n.changeLanguage(language);
   };
 
-  const scrollTo = (id: string) => {
+  const scrollTo = (id: string): void => {
     const element = document.getElementById(id);
-    if (element) {
+    if (element != null) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -101,7 +103,7 @@ export default function PersistentDrawerRight() {
       <AppBar position="fixed" open={open} sx={{ backgroundColor: '#0ABAB5' }}>
         <Toolbar >
           <LanguageSwitch
-            icon={require("./globe.png")}
+            icon={require('./globe.png')}
             onSelectLanguage={handleLanguageSelect}
           />
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
@@ -133,8 +135,8 @@ export default function PersistentDrawerRight() {
           width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
-          },
+            width: drawerWidth
+          }
         }}
         variant="persistent"
         anchor="right"
@@ -156,7 +158,7 @@ export default function PersistentDrawerRight() {
             <ListItem
               button
               key={text}
-              onClick={() => scrollTo(id)} // Scroll to the section when clicked
+              onClick={() => { scrollTo(id); }} // Scroll to the section when clicked
             >
               <ListItemText primary={text} />
             </ListItem>

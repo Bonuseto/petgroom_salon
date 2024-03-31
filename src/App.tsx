@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Menu from './components/Menu/Menu'
-import LocationMap from './components/LocationMap/LocationMap'
+import Menu from './components/Menu/Menu';
+import LocationMap from './components/LocationMap/LocationMap';
 import './i18n'; // Import i18n configuration
-import { useTranslation } from 'react-i18next'; 
+import { useTranslation } from 'react-i18next';
 
-function App() {
+function App (): JSX.Element {
   const { t } = useTranslation(); // Initialize useTranslation hook
   return (
     <div className="App">

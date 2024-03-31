@@ -1,4 +1,3 @@
-// i18n.js or i18n.ts
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import enTranslation from './locales/en.json';
@@ -7,7 +6,7 @@ import uaTranslation from './locales/ua.json';
 import ruTranslation from './locales/ru.json';
 
 // Initialize i18next
-i18n
+void i18n
   .use(initReactI18next) // bind react-i18next to the instance
   .init({
     lng: 'en', // default language
