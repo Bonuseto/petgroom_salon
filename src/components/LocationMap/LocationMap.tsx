@@ -25,7 +25,7 @@ const LocationMap = () => {
             {t('howToFindUs')}
         </Typography>
         <Box sx={{ height: '450px', mb: 2 }}>
-          <APIProvider apiKey={'AIzaSyDOb2cLSir3udieOn1BOWaOVjd5Wd1vn2I'}>
+          <APIProvider apiKey={'YOUR_API_KEY'}>
             <Map
               defaultCenter={cityCenterPosition}
               defaultZoom={13}
