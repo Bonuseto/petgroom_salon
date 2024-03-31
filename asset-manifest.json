@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/petgroom_salon/static/css/main.d344a9ce.css",
-    "main.js": "/petgroom_salon/static/js/main.303e4d25.js",
+    "main.js": "/petgroom_salon/static/js/main.6b2ea0d3.js",
     "static/js/787.a630f643.chunk.js": "/petgroom_salon/static/js/787.a630f643.chunk.js",
     "static/media/globe.png": "/petgroom_salon/static/media/globe.d26c4c2f3e261e2ddfbb.png",
     "index.html": "/petgroom_salon/index.html",
     "main.d344a9ce.css.map": "/petgroom_salon/static/css/main.d344a9ce.css.map",
-    "main.303e4d25.js.map": "/petgroom_salon/static/js/main.303e4d25.js.map",
+    "main.6b2ea0d3.js.map": "/petgroom_salon/static/js/main.6b2ea0d3.js.map",
     "787.a630f643.chunk.js.map": "/petgroom_salon/static/js/787.a630f643.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d344a9ce.css",
-    "static/js/main.303e4d25.js"
+    "static/js/main.6b2ea0d3.js"
   ]
 }
