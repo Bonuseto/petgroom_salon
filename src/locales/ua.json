@@ -6,5 +6,10 @@
     "polish": "PL",
     "ukranian": "UA",
     "russian": "RU"
-  }
+  },
+  "aboutUs": "Про нас",
+  "services": "Послуги",
+  "prices": "Ціни",
+  "reviews": "Відгуки",
+  "map": "Карта"
 }
