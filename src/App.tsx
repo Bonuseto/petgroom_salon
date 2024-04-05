@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Menu from './components/Menu/Menu';
 import LocationMap from './components/LocationMap/LocationMap';
+import GoogleMapsReviews from './components/Reviews/GoogleMapsReviews';
 
 function App (): JSX.Element {
   return (
@@ -16,9 +17,9 @@ function App (): JSX.Element {
       <header className="App-header">
         <img id="pricesId" className="n9wygc" alt="Prices" src="https://edit.org/img/blog/7pr-price-list-templates-edit-editable-personalize-free-easy-fast-print-bandamp-w-black-white-pricing.webp" ></img>
       </header>
-      <header className="App-header">
-        <img id="reviewsId" className="n9wygc" alt="Reviews" src="https://smashballoon.com/wp-content/uploads/2020/09/google-reviews-feed-example.jpg" ></img>
-      </header>
+      <div id="reviewsId">
+      <GoogleMapsReviews placeId='PLACE_ID' apiKey='API_KEY'/>
+      </div>
       <div id="howToFindId">
         <LocationMap />
       </div>
