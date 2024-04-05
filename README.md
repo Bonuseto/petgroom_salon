@@ -1,5 +1,7 @@
 Webpage created for pet grooming salon
 
+[---Demo webpage---](https://github.com/facebook/create-react-app)
+
 ![Image Alt Text](salonpic.png)
 ![Image Alt Text](mapcomp.png)
 
