@@ -78,7 +78,7 @@ const GoogleMapsReviews: React.FC<GoogleMapsReviewsProps> = ({ placeId, apiKey }
             </div>
             <div>
               {Array.from({ length: review.rating }, (_, i) => (
-                <span key={i}>★</span>
+                <span style={{ color: '#FBBC04' }} key={i}>★</span>
               ))}
             </div>
             <p style={{ textAlign: 'center' }}>{review.text}</p>
