@@ -18,7 +18,7 @@ function App (): JSX.Element {
         <img id="pricesId" className="n9wygc" alt="Prices" src="https://edit.org/img/blog/7pr-price-list-templates-edit-editable-personalize-free-easy-fast-print-bandamp-w-black-white-pricing.webp" ></img>
       </header>
       <div id="reviewsId">
-      <GoogleMapsReviews placeId='PLACE_ID' apiKey='API_KEY'/>
+      <GoogleMapsReviews />
       </div>
       <div id="howToFindId">
         <LocationMap />

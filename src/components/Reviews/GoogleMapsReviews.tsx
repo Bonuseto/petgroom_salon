@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -5,40 +9,57 @@ import 'slick-carousel/slick/slick-theme.css';
 
 interface Review {
   author_name: string
-  profile_photo_url: string
   rating: number
   text: string
+  profile_photo_url: string
 }
 
-interface GoogleMapsReviewsProps {
-  placeId: string
-  apiKey: string
+interface PlaceReview {
+  author_name: string
+  rating?: number
+  text: string
+  profile_photo_url: string
 }
 
-const GoogleMapsReviews: React.FC<GoogleMapsReviewsProps> = ({ placeId, apiKey }) => {
+const GoogleMapsReviews: React.FC = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    const fetchReviews = async () => {
-      try {
-        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-        const response = await fetch(`${proxyUrl}https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,reviews&key=${apiKey}`);
-        const data = await response.json();
-        const reviewsData = data.result.reviews;
-        const filteredReviews = reviewsData.filter((review: { rating: number }) => review.rating > 2);
+    function fetchReviews () {
+      const placeId = 'ChIJsTBPxPfCD0cRI_ThCFA8R_o'; // Replace with your place ID
+      const apiKey = 'API_KEY'; // Replace with your Google API key
+      const request = {
+        placeId,
+        fields: ['reviews']
+      };
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        setReviews(filteredReviews);
-      } catch (error) {
-        console.error('Error fetching reviews: ', error);
-      }
-    };
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
+      script.defer = true;
+      script.onload = () => {
+        const service = new google.maps.places.PlacesService(document.createElement('div'));
+        service.getDetails(request, (place, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK && place && place.reviews) {
+            const formattedReviews: Review[] = place.reviews
+              .filter((review: PlaceReview) => review.rating && review.rating > 2) // Filter reviews with rating greater than 2
+              .map((review: PlaceReview) => ({
+                author_name: review.author_name,
+                rating: review.rating || 0,
+                text: review.text,
+                profile_photo_url: review.profile_photo_url
+              }));
+            setReviews(formattedReviews);
+          } else {
+            console.error('Error fetching reviews:', status);
+          }
+        });
+      };
+      document.body.appendChild(script);
+    }
 
-    void fetchReviews();
-  }, [placeId, apiKey]);
+    fetchReviews();
+  }, []);
 
-  // Settings for the slider
   const settings = {
     dots: true,
     infinite: true,
