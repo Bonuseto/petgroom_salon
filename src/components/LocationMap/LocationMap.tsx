@@ -1,12 +1,11 @@
 import React, { type ReactElement } from 'react';
-import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps';
 import Button from '@mui/material/Button';
 import DirectionIcon from '@mui/icons-material/Directions';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useTranslation } from 'react-i18next';
-import './LocationMap.module.css';
 import { styled } from '@mui/material';
 
 const salonPosition = { lat: 51.083752458581884, lng: 17.038425091441333 };
@@ -42,8 +41,9 @@ const LocationMap: React.FC = (): ReactElement => {
               gestureHandling="greedy"
               draggableCursor="default"
               draggingCursor="move"
+              mapId={'MapID'}
             >
-              <Marker position={salonPosition} />
+              <AdvancedMarker position={salonPosition} />
             </Map>
           </APIProvider>
         </Box>
