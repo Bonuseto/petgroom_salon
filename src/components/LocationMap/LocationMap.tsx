@@ -27,6 +27,12 @@ const openGoogleMaps = (): void => {
 
 const LocationMap: React.FC = (): ReactElement => {
   const { t } = useTranslation();
+  const apiKey = process.env.REACT_APP_API_KEY;
+
+  if (apiKey === undefined || apiKey === null) {
+    throw new Error('REACT_APP_API_KEY is not defined. Please check your environment variables.');
+  }
+
   return (
     <Container>
       <Box sx={{ my: 4, textAlign: 'center' }}>
@@ -34,7 +40,7 @@ const LocationMap: React.FC = (): ReactElement => {
             {t('howToFindUs')}
         </Typography>
         <Box sx={{ height: '450px', mb: 2 }}>
-          <APIProvider apiKey={'YOUR_API_KEY'}>
+          <APIProvider apiKey={apiKey}>
             <Map
               defaultCenter={cityCenterPosition}
               defaultZoom={13}

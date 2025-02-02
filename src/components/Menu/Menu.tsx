@@ -18,13 +18,15 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
+import logo from './logo.png';
+
 interface Props {
   window?: () => Window
 }
 
 const drawerWidth = 240;
 
-const salonName = 'BEST DOG STUDIO';
+const salonName = 'BEST GROOM STUDIO';
 // const LocationMap: React.FC = (): ReactElement => {
 // : React.FC = (): ReactElement
 const DrawerAppBar: React.FC = (props: Props): ReactElement => {
@@ -53,9 +55,9 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        { salonName }
-      </Typography>
+      <Box sx={{ my: 2 }}>
+        <img src={logo} alt="Salon Logo" style={{ height: 60 }} />
+      </Box>
       <Divider />
       <List>
         {navItems.map((item) => (

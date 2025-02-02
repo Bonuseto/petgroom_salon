@@ -1,0 +1,103 @@
+/* HeaderComponent.css */
+
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1{
+  font-family: 'CamptonBook', sans-serif;
+  font-size: var(--heading--xsmall);
+}
+
+.headerElements{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.paddingHeader{
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.shapeBgVideo{
+  width: 100%;
+  max-width: 36rem;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 461 498' preserveAspectRatio='xMidYMid slice'><path d='M286.288 22.733C472.124 83.327 476.202 127.983 446.155 283.518C416.107 439.054 403.147 576.315 169.514 444.495C-64.1198 312.675 -82.1239 -97.392 286.288 22.733Z' fill='white'/></svg>");
+}
+
+.headerImageWrapper{
+  width: 100%;
+  max-width: 36rem;
+  justify-self: end;
+}
+
+.headerContent {
+  text-align: left;
+}
+
+.shapeImage{
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 461 498" preserveAspectRatio="xMidYMid slice"><path d="M286.288 22.733C472.124 83.327 476.202 127.983 446.155 283.518C416.107 439.054 403.147 576.315 169.514 444.495C-64.1198 312.675 -82.1239 -97.392 286.288 22.733Z" fill="white"/></svg>');
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 461 498" preserveAspectRatio="xMidYMid slice"><path d="M286.288 22.733C472.124 83.327 476.202 127.983 446.155 283.518C416.107 439.054 403.147 576.315 169.514 444.495C-64.1198 312.675 -82.1239 -97.392 286.288 22.733Z" fill="black"/></svg>');
+  mask-repeat: no-repeat;
+}
+
+/* .shapeImageShape{
+  border: 0;
+    vertical-align: middle;
+    max-width: 100%;
+    display: inline-block;
+    position: absolute;
+    inset: 28% 2.5rem -43% auto;
+    background-attachment: scroll !important;
+} */
+
+.headerSecondText{
+  font-family: 'CamptonBook', sans-serif;
+}
+
+.button {
+  grid-column-gap: .5rem;
+  /* border: 2px solid black; */
+  border-radius: 2.5rem;;
+  background-color: #0ABA;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: .675rem 2rem .55rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: border-color .2s,color .2s,background-color .2s;
+  display: flex;
+  font-family: 'CamptonBook', sans-serif;
+}
+
+.headerButtonGroup{
+  grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    flex-flow: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    padding-top: 3rem;
+}
+
+.headerMainText{
+  font-size: 3.75rem;
+  margin-bottom: .75rem;
+  line-height: 1.2;
+  font-family: 'Recoleta', sans-serif;
+}
+

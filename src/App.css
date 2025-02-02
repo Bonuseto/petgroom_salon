@@ -42,3 +42,21 @@
   height: auto;
   width: 100%;
 }
+
+@font-face{
+  font-family: Recoleta;
+  src: url('./fonts/Recoleta.otf') format(opentype);
+  font-weight: bold;
+}
+
+@font-face{
+  font-family: CamptonBold;
+  src: url('./fonts/CamptonBold.otf') format(opentype);
+  font-weight: bold;
+}
+
+@font-face{
+  font-family: CamptonBook;
+  src: url('./fonts/CamptonBook.otf') format(opentype);
+  font-weight: normal;
+}

@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/prefer-optional-chain */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -27,7 +28,7 @@ const GoogleMapsReviews: React.FC = () => {
   useEffect(() => {
     function fetchReviews () {
       const placeId = 'ChIJsTBPxPfCD0cRI_ThCFA8R_o'; // Replace with your place ID
-      const apiKey = 'API_KEY'; // Replace with your Google API key
+      const apiKey = process.env.REACT_APP_API_KEY; // Replace with your Google API key
       const request = {
         placeId,
         fields: ['reviews']
