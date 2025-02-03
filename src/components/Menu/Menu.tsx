@@ -18,6 +18,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import logo from './logo.png';
+import Button from '@mui/material/Button';
 
 interface Props {
   window?: () => Window
@@ -41,7 +42,6 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
   const handleDrawerToggle = (): void => {
     setMobileOpen((prevState) => !prevState);
   };
-
   const scrollTo = (id: string): void => {
     const element = document.getElementById(id);
     if (element != null) {
@@ -93,10 +93,20 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
             variant="h6"
             component="div"
             fontFamily={'JalalLTBold, sans-serif'}
-            sx={{ flexGrow: 1, textAlign: 'center' }}
+            sx={{ flexGrow: 1, textAlign: 'center', paddingTop: '0.5rem' }}
           >
             {salonName}
           </Typography>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            {navItems.map((item) => (
+              <Button
+                key={item.text}
+                sx={{ color: '#fff', fontFamily: 'CamptonBook' }}
+                onClick={() => { scrollTo(item.id); }}>
+                {item.text}
+              </Button>
+            ))}
+          </Box>
           <IconButton
             color="inherit"
             aria-label="open drawer"
