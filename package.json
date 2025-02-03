@@ -63,6 +63,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/react-slick": "^0.23.13",
     "eslint": "^8.57.0",
     "eslint-plugin-css": "^0.9.2",
