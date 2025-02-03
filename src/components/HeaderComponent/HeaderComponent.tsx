@@ -30,7 +30,7 @@ function HeaderComponent (): JSX.Element {
               </div>
             </div>
             <div className={classes.headerImageWrapper}>
-              <div className="shape-image-graphic">
+              <div className={classes.shapeImageGraphic}>
                 <div className={classes.shapeImage}>
                   <video
                     muted
@@ -48,15 +48,15 @@ function HeaderComponent (): JSX.Element {
                     />
                   </video>
                 </div>
-                {/* <img
-                  src="https://cdn.prod.website-files.com/649972ec5905003f83dfde15/64a2b204575efcffe6fd477b_UpperHound_BG-element-01.svg"
-                  loading="eager"
-                  width="346"
-                  height="401"
-                  alt="Green undefined shape."
-                  className={classes.shapeImageShape}
-                /> */}
               </div>
+            </div>
+            <div className={classes.headerMobileButtonGroup}>
+              <a className={classes.button} href="/appointments">
+                Book appointment
+              </a>
+              <a className={classes.button} href="/dog-grooming">
+                Grooming services
+              </a>
             </div>
           </div>
         </div>

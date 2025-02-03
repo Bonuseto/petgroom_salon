@@ -1,30 +1,36 @@
 /* HeaderComponent.css */
 
-
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-h1{
+h1 {
   font-family: 'CamptonBook', sans-serif;
   font-size: var(--heading--xsmall);
 }
 
-.headerElements{
+.headerElements {
+  z-index: 4;
+  grid-column-gap: 5rem;
+  grid-row-gap: 2rem;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr minmax(1rem, .75fr);
+  grid-auto-columns: 1fr;
+  align-items: start;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  position: relative;
 }
 
-.paddingHeader{
+.paddingHeader {
   padding-top: 6rem;
   padding-bottom: 6rem;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
 
-.shapeBgVideo{
+.shapeBgVideo {
   width: 100%;
   max-width: 36rem;
   -webkit-mask-repeat: no-repeat;
@@ -32,7 +38,7 @@ h1{
   mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 461 498' preserveAspectRatio='xMidYMid slice'><path d='M286.288 22.733C472.124 83.327 476.202 127.983 446.155 283.518C416.107 439.054 403.147 576.315 169.514 444.495C-64.1198 312.675 -82.1239 -97.392 286.288 22.733Z' fill='white'/></svg>");
 }
 
-.headerImageWrapper{
+.headerImageWrapper {
   width: 100%;
   max-width: 36rem;
   justify-self: end;
@@ -42,30 +48,23 @@ h1{
   text-align: left;
 }
 
-.shapeImage{
+.shapeImageGraphic {
+  /* No change here */
+}
+
+.shapeImage {
   -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 461 498" preserveAspectRatio="xMidYMid slice"><path d="M286.288 22.733C472.124 83.327 476.202 127.983 446.155 283.518C416.107 439.054 403.147 576.315 169.514 444.495C-64.1198 312.675 -82.1239 -97.392 286.288 22.733Z" fill="white"/></svg>');
   mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 461 498" preserveAspectRatio="xMidYMid slice"><path d="M286.288 22.733C472.124 83.327 476.202 127.983 446.155 283.518C416.107 439.054 403.147 576.315 169.514 444.495C-64.1198 312.675 -82.1239 -97.392 286.288 22.733Z" fill="black"/></svg>');
   mask-repeat: no-repeat;
 }
 
-/* .shapeImageShape{
-  border: 0;
-    vertical-align: middle;
-    max-width: 100%;
-    display: inline-block;
-    position: absolute;
-    inset: 28% 2.5rem -43% auto;
-    background-attachment: scroll !important;
-} */
-
-.headerSecondText{
+.headerSecondText {
   font-family: 'CamptonBook', sans-serif;
 }
 
 .button {
   grid-column-gap: .5rem;
-  /* border: 2px solid black; */
-  border-radius: 2.5rem;;
+  border-radius: 2.5rem;
   background-color: #0ABA;
   color: white;
   text-align: center;
@@ -76,28 +75,130 @@ h1{
   font-weight: 500;
   line-height: 1.5;
   text-decoration: none;
-  transition: border-color .2s,color .2s,background-color .2s;
+  transition: border-color .2s, color .2s, background-color .2s;
   display: flex;
   font-family: 'CamptonBook', sans-serif;
 }
 
-.headerButtonGroup{
+.headerButtonGroup {
   grid-column-gap: 1rem;
-    grid-row-gap: 1rem;
-    flex-flow: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    width: 60%;
-    display: flex;
-    flex-wrap: wrap;
-    width: auto;
-    padding-top: 3rem;
+  grid-row-gap: 1rem;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 3rem;
 }
 
-.headerMainText{
+.headerMobileButtonGroup {
+  display: none;
+  flex-direction: column;
+}
+
+.headerMainText {
   font-size: 3.75rem;
   margin-bottom: .75rem;
   line-height: 1.2;
   font-family: 'Recoleta', sans-serif;
 }
 
+/* ---- Responsive Design with Media Queries ---- */
+
+/* For small devices like mobile */
+@media (max-width: 767px) {
+  .headerElements {
+    grid-template-columns: 1fr;
+  }
+
+  .shapeImageGraphic {
+    grid-column: span 1;
+  }
+
+  /* Show the mobile buttons only on small devices */
+  .headerMobileButtonGroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+    grid-row-gap: 1rem;
+  }
+
+  /* Hide the desktop buttons on mobile */
+  .headerButtonGroup {
+    display: none;
+  }
+
+  .headerMainText {
+    font-size: 2rem;
+  }
+
+  .paddingHeader {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .shapeBgVideo {
+    max-width: 100%;
+  }
+
+  .shapeImage {
+    width: 100%;
+  }
+}
+
+/* For tablets and small screens */
+@media (min-width: 768px) and (max-width: 991px) {
+  .headerElements {
+  }
+
+  .headerMainText {
+    font-size: 2.5rem;
+  }
+
+  .headerButtonGroup {
+    width: 70%;
+    justify-content: center;
+  }
+
+  .headerMobileButtonGroup {
+    display: none; /* Hide mobile buttons on tablets */
+    grid-row-gap: 1rem;
+  }
+
+  .paddingHeader {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* For larger screens (small laptops to desktops) */
+@media (min-width: 992px) {
+  .headerElements {
+  }
+
+  .headerMainText {
+    font-size: 3rem;
+  }
+
+  .headerButtonGroup {
+    width: 60%;
+    justify-content: flex-start;
+  }
+
+  .headerMobileButtonGroup {
+    display: none; /* Hide mobile buttons on large screens */
+  }
+
+  .paddingHeader {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}

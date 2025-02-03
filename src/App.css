@@ -60,3 +60,12 @@
   src: url('./fonts/CamptonBook.otf') format(opentype);
   font-weight: normal;
 }
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
