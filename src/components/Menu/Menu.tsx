@@ -15,7 +15,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import LanguageSwitch from '../LanguageSwitch/LanguageSwitch';
 import i18n from '../../i18n';
 import { useState } from 'react';
-import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import logo from './logo.png';
@@ -33,9 +32,6 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
   const { t } = useTranslation();
 
   const navItems = [
-    { text: `${t('aboutUs')}`, id: 'aboutUsId' },
-    { text: `${t('services')}`, id: 'servicesId' },
-    { text: `${t('prices')}`, id: 'pricesId' },
     { text: `${t('reviews')}`, id: 'reviewsId' },
     { text: `${t('map')}`, id: 'howToFindId' }];
 
@@ -85,45 +81,31 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
   };
 
   return (
-    <Box sx={{
-      display: 'flex',
-      justifyContent: 'flex-end', // Align items to the right
-      p: 1, // Padding around the container for some space
-      mb: '49px'
-    }}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar component="nav" sx={{ backgroundColor: '#0ABAB5' }}>
-        <Toolbar>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <LanguageSwitch
             icon={require('./globe.png')}
             onSelectLanguage={handleLanguageSelect}
           />
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' }, marginLeft: 'auto' }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            fontFamily={'JalalLTBold, sans-serif'}
+            sx={{ flexGrow: 1, textAlign: 'center' }}
           >
-            { salonName }
+            {salonName}
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Button
-                key={item.text}
-                sx={{ color: '#fff' }}
-                onClick={() => { scrollTo(item.id); }}>
-                {item.text}
-              </Button>
-            ))}
-          </Box>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="end"
+            onClick={handleDrawerToggle}
+            sx={{ display: { sm: 'none' }, marginLeft: 'auto' }}
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <nav>
@@ -144,9 +126,6 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
           {drawer}
         </Drawer>
       </nav>
-      {/* <Box id='MAINBOX' component="main" sx={{ p: 3 }}>
-        <Toolbar />
-      </Box> */}
     </Box>
   );
 };

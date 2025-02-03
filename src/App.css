@@ -61,6 +61,12 @@
   font-weight: normal;
 }
 
+@font-face{
+  font-family: JalalLTBold;
+  src: url('./fonts/JalalLTBold.ttf') format(opentype);
+  font-weight: bold;
+}
+
 html, body {
   width: 100%;
   overflow-x: hidden;
