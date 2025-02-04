@@ -1,6 +1,8 @@
+/* eslint-disable */
 import React from 'react';
 import classes from './HeaderComponent.module.css'; // Import CSS module
 import previewVideo from './preview.mp4';
+import { Link } from "react-router-dom";
 
 function HeaderComponent (): JSX.Element {
   return (
@@ -20,14 +22,12 @@ function HeaderComponent (): JSX.Element {
                   Bringing out the best in every Wroclaw pet.
                 </p>
               </div>
-              <div className={classes.headerButtonGroup}>
-                <a className={classes.button} href="/appointments">
-                  Book appointment
-                </a>
-                <a className={classes.button} href="/dog-grooming">
-                  Grooming services
-                </a>
-              </div>
+              <Link className={classes.button} to="/appointments">
+  Book appointment
+</Link>
+<Link className={classes.button} to="/dog-grooming">
+  Grooming services
+</Link>
             </div>
             <div className={classes.headerImageWrapper}>
               <div className={classes.shapeImageGraphic}>
