@@ -1,4 +1,5 @@
-import React, { type ReactElement } from 'react';
+/* eslint-disable */
+import React, { type ReactElement, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -14,18 +15,17 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import LanguageSwitch from '../LanguageSwitch/LanguageSwitch';
 import i18n from '../../i18n';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import logo from './logo.png';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 interface Props {
-  window?: () => Window
+  window?: () => Window;
 }
 
 const drawerWidth = 240;
-
 const salonName = 'BEST GROOM STUDIO';
 // const LocationMap: React.FC = (): ReactElement => {
 // : React.FC = (): ReactElement
@@ -74,7 +74,6 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>('en');
-
   const handleLanguageSelect = (language: string): void => {
     setSelectedLanguage(language);
     void i18n.changeLanguage(language);
@@ -84,38 +83,54 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar component="nav" sx={{ backgroundColor: '#0ABAB5' }}>
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <LanguageSwitch
-            icon={require('./globe.png')}
-            onSelectLanguage={handleLanguageSelect}
-          />
-          <Typography
-            variant="h6"
-            component="div"
-            fontFamily={'JalalLTBold, sans-serif'}
-            sx={{ flexGrow: 1, textAlign: 'center', paddingTop: '0.5rem' }}
-          >
-            {salonName}
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Button
-                key={item.text}
-                sx={{ color: '#fff', fontFamily: 'CamptonBook' }}
-                onClick={() => { scrollTo(item.id); }}>
-                {item.text}
-              </Button>
-            ))}
+        <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          {/* Left: Language Switch */}
+          <Box sx={{ display: 'flex', alignItems: 'center', minWidth: '50px' }}>
+            <LanguageSwitch
+              icon={require('./globe.png')}
+              onSelectLanguage={handleLanguageSelect}
+            />
           </Box>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
-            onClick={handleDrawerToggle}
-            sx={{ display: { sm: 'none' }, marginLeft: 'auto' }}
-          >
-            <MenuIcon />
-          </IconButton>
+
+          {/* Center: Salon Name */}
+          <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
+            <Link
+              to="/"
+              style={{
+                fontFamily: 'JalalLTBold, sans-serif',
+                fontSize: '1.5rem',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                color: 'inherit', // Ensures it inherits the text color
+                textDecoration: 'none', // Removes the underline
+              }}
+            >
+              {salonName}
+            </Link>
+          </Box>
+
+          {/* Right: Nav items (desktop) / Hamburger Menu (mobile) */}
+          <Box sx={{ display: 'flex', alignItems: 'center', minWidth: '50px', justifyContent: 'flex-end' }}>
+            {/* Desktop nav buttons */}
+            <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+              {navItems.map((item) => (
+                <Button
+                  key={item.text}
+                  sx={{ color: '#fff', fontFamily: 'CamptonBook' }}
+                  onClick={() => scrollTo(item.id)}
+                >
+                  {item.text}
+                </Button>
+              ))}
+            </Box>
+            {/* Mobile hamburger */}
+            <Box sx={{ display: { xs: 'flex', sm: 'none' } }}>
+              <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle}>
+                <MenuIcon />
+              </IconButton>
+            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
       <nav>

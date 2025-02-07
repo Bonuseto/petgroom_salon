@@ -22,12 +22,14 @@ function HeaderComponent (): JSX.Element {
                   Bringing out the best in every Wroclaw pet.
                 </p>
               </div>
-              <Link className={classes.button} to="/appointments">
-  Book appointment
-</Link>
-<Link className={classes.button} to="/dog-grooming">
-  Grooming services
-</Link>
+              <div className={classes.headerButtonGroup}>
+                <Link className={classes.button} to="/appointments">
+                  Book appointment
+                </Link>
+                <Link className={classes.button} to="/dog-grooming">
+                  Grooming services
+                </Link>
+              </div>
             </div>
             <div className={classes.headerImageWrapper}>
               <div className={classes.shapeImageGraphic}>
@@ -51,12 +53,12 @@ function HeaderComponent (): JSX.Element {
               </div>
             </div>
             <div className={classes.headerMobileButtonGroup}>
-              <a className={classes.button} href="/appointments">
+              <Link className={classes.button} to="/appointments">
                 Book appointment
-              </a>
-              <a className={classes.button} href="/dog-grooming">
+              </Link>
+              <Link className={classes.button} to="/dog-grooming">
                 Grooming services
-              </a>
+              </Link>
             </div>
           </div>
         </div>
