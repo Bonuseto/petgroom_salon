@@ -5,16 +5,16 @@ import LocationMap from "../LocationMap/LocationMap";
 import GoogleMapsReviews from "../Reviews/GoogleMapsReviews";
 import HeaderComponent from "../HeaderComponent/HeaderComponent";
 
-const HomePage: React.FC = () => {
+const HomePage: React.FC<{ isLoaded: boolean }> = ({ isLoaded }) => {
   return (
     <div>
       <Menu />
       <HeaderComponent />
       <div id="reviewsId">
-        <GoogleMapsReviews />
+      <GoogleMapsReviews isLoaded={isLoaded} />
       </div>
       <div id="howToFindId">
-        <LocationMap />
+      <LocationMap isLoaded={isLoaded} />
       </div>
     </div>
   );
