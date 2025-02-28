@@ -1,115 +1,407 @@
-.paddingSectionHeader {
-  padding-top: 12rem;
-  padding-bottom: 6rem;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
+.pageWrapper {
+  width: 100%;
+  background-color: #f9f7f2;
+  min-height: 100vh;
+  padding: 40px 20px;
   position: relative;
 }
 
-.containerMedium {
+.formContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
 
+.headerSection {
+  text-align: center;
+  padding: 40px 20px 20px;
+  background-color: #f9f7f2;
+}
+
+.mainHeading {
+  font-size: 38px;
+  color: #4d5937;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.formContent {
+  padding: 30px 40px 40px;
+}
+
+.formSection {
+  margin-bottom: 30px;
+}
+
+.sectionHeading {
+  font-size: 24px;
+  color: #4d5937;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.subHeading {
+  font-size: 20px;
+  color: #4d5937;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* Service selection styling */
+.serviceOptions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.serviceOption {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e2e2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+  min-height: 160px;
+}
+
+.serviceOption:hover {
+  transform: translateY(-4px);
+  border-color: #c2c9b6;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.serviceOption:has(.hiddenRadio:checked) {
+  background: rgba(77, 89, 55, 0.05);
+  border-color: #0ABAB5;
+  box-shadow: 0 4px 12px rgba(77, 89, 55, 0.12);
+}
+
+.serviceIcon {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease;
+}
+
+.serviceOption:hover .serviceIcon {
+  transform: scale(1.1);
+}
+
+.serviceLabel {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.3s ease;
+  text-align: center;
+}
+
+.hiddenRadio:checked ~ .serviceLabel {
+  color: #0ABAB5;
+  font-weight: 600;
 }
 
 /* Hide the default radio button */
 .hiddenRadio {
   opacity: 0;
   position: absolute;
-  z-index: -1;
+  width: 0;
+  height: 0;
 }
 
-/* Styling for the custom radio button */
+/* Custom radio button */
 .customRadio {
-  width: 16px;
-  height: 16px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 22px;
+  height: 22px;
   border: 2px solid #d4d4d4;
   border-radius: 50%;
   background: white;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  transition: background 0.3s, border 0.3s;
+  transition: all 0.2s ease;
 }
 
-/* Checked state - adds a dot inside */
+/* Checked state */
 .hiddenRadio:checked + .customRadio {
-  background: #0ABA;
-  border-color: #0ABA;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  background: #0ABAB5;
+  border-color: #0ABAB5;
+  box-shadow: 0 0 0 2px rgba(77, 89, 55, 0.2);
 }
 
 /* Checked state - adds a white dot */
 .hiddenRadio:checked + .customRadio::after {
   content: "";
   display: block;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   background: white;
   border-radius: 50%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  animation: fadeIn 0.2s ease-out;
 }
 
-.contactForm {
-  grid-template-rows: auto auto;
-  grid-column-gap: 1.25rem;
-  grid-template-columns: 1fr;
-  grid-auto-columns: 1fr;
-  display: grid;
-  grid-row-gap: 2rem;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
-.primaryTreatments {
-  grid-row-gap: 1.25rem;
-  flex-flow: column;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-auto-columns: 1fr;
-  justify-content: flex-start;
+/* Form fields styling */
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 10px;
+}
+
+.sectionDivider {
+  height: 1px;
+  background-color: #e5e5e5;
+  margin: 30px 0;
+  width: 100%;
+}
+
+.formRow {
+  display: flex;
+  gap: 20px;
+}
+
+.formGroup {
+  flex: 1;
+  min-width: 0; /* Prevents flex items from overflowing */
+}
+
+.inputLabel {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.textInput,
+.textareaInput,
+.selectInput {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+
+.textInput:focus,
+.textareaInput:focus,
+.selectInput:focus {
+  border-color: #4d5937;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(77, 89, 55, 0.1);
+}
+
+.textInput::placeholder,
+.textareaInput::placeholder {
+  color: #aaa;
+  font-size: 15px;
+}
+
+.textareaInput {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.selectInput {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+/* Radio buttons styling */
+.radioGroup {
+  display: flex;
+  gap: 20px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radioInput {
+  margin-right: 8px;
+  accent-color: #4d5937;
+}
+
+.radioText {
+  font-size: 16px;
+}
+
+/* Checkbox styling */
+.checkboxGroup {
+  margin-bottom: 16px;
+}
+
+.checkboxContainer {
+  display: flex;
   align-items: flex-start;
-  margin-top: .75rem;
-  display: grid;
-  grid-column-gap: 1.25rem;
+  cursor: pointer;
+  margin-bottom: 8px;
 }
 
-/* Service option container */
-.serviceOption {
-  background: #f9f8f6;
-  padding: 20px;
-  border-radius: 12px;
+.checkboxInput {
+  margin-right: 10px;
+  margin-top: 3px;
+  accent-color: #4d5937;
+}
+
+.checkboxText {
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.termsLink {
+  color: #4d5937;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.termsLink:hover {
+  text-decoration: none;
+}
+
+/* Days of week checkboxes */
+.daysCheckboxGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.dayOption {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
-  border: 2px solid #d4d4d4;
-  width: 100%;
-  height: 100%;
-  position: relative;
+  width: calc(16.666% - 14px);
 }
 
-/* On hover */
-.serviceOption:hover {
-  background: #eaeaea;
-  border-color: #0ABA;
+.dayLabel {
+  margin-top: 6px;
+  font-size: 14px;
 }
 
-/* Selected effect */
-.hiddenRadio:checked + .customRadio + img + span {
-  font-weight: bold;
-  color: #0ABA;
+/* Submit button */
+.submitButtonContainer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
 }
 
-.serviceOption img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 10px;
-}
-
-.serviceOption span {
+.submitButton {
+  background-color: #4d5937;
+  color: white;
+  font-weight: 500;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 8px;
   font-size: 16px;
-  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
+.submitButton:hover {
+  background-color: #3a4429;
+  transform: translateY(-2px);
+}
+
+.submitButton:disabled {
+  background-color: #c5c5c5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .headerSection {
+    padding: 30px 15px 15px;
+  }
+  
+  .mainHeading {
+    font-size: 28px;
+  }
+  
+  .formContent {
+    padding: 20px;
+  }
+  
+  .formRow {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .serviceOptions {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+  }
+  
+  .serviceOption {
+    min-height: 140px;
+    padding: 15px;
+  }
+  
+  .serviceIcon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .daysCheckboxGroup {
+    justify-content: space-between;
+  }
+  
+  .dayOption {
+    width: calc(33.333% - 12px);
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .serviceOptions {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .radioGroup {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .dayOption {
+    width: calc(50% - 8px);
+  }
+}
