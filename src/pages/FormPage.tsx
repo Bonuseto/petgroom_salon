@@ -43,8 +43,8 @@ const services = [
     image: "https://cdn.prod.website-files.com/649972ec5905003f83dfde15/65a8f1cb712368d0a1f92fce_Puppy_On_Chair_Illustration.svg",
   },
   {
-    id: "Teeth-Cleaning",
-    label: "Teeth Cleaning",
+    id: "Nail-Clipping",
+    label: "Nail Clipping",
     image: "https://cdn.prod.website-files.com/649972ec5905003f83dfde15/6509c05d3c76a1ae50cc6117_paw.svg",
   },
 ];
