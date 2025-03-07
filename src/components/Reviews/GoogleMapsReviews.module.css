@@ -1,0 +1,124 @@
+/* General styling for the reviews section */
+.reviews-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Heading styling */
+  .reviews-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Slider container to ensure proper spacing */
+  .reviews-slider-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Individual review slide */
+  .review-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Styling for the review card */
+  .review-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  /* Review content wrapper */
+  .review-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+/* User profile picture */
+.author-photo {
+    width: 40px;  /* Smaller size */
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto; /* Center the image */
+  }
+  
+  
+  /* Wrapper for text-related content */
+  .review-text-content {
+    flex: 1;
+  }
+  
+  /* Author name styling */
+  .author-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 5px;
+  }
+  
+  /* Stars container for rating */
+  .stars-container {
+    color: #f4b400;
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
+  /* Styling for star icons */
+  .star {
+    color: #ddd;
+    font-size: 18px;
+  }
+  
+  .star.filled {
+    color: #f4b400;
+  }
+  
+  /* Review text styling */
+  .review-text {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+  }
+  
+  /* Slick carousel customizations */
+  .slick-dots li button:before {
+    color: #888 !important;
+    font-size: 10px;
+  }
+  
+  .slick-dots li.slick-active button:before {
+    color: #333 !important;
+    font-size: 12px;
+  }
+  
+  /* Adjustments for responsiveness */
+  @media (max-width: 768px) {
+    .review-card {
+      padding: 15px;
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .review-content {
+      flex-direction: column;
+    }
+  
+    .author-photo {
+      margin-bottom: 10px;
+    }
+  }
+  
