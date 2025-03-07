@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import classes from './HeaderComponent.module.css';
 import previewVideo from './preview.mp4';
+import previewSnapshotVideo from './previewSnapshot.png';
 import { Link } from 'react-router-dom';
 
 function HeaderComponent (): JSX.Element {
@@ -55,7 +56,7 @@ function HeaderComponent (): JSX.Element {
                     muted
                     loop
                     className={classes.shapeBgVideo}
-                    poster="https://cdn.prod.website-files.com/649972ec5905003f83dfde15/65c096691fc24121af14d1eb_upper-hound-home-poster.webp"
+                    poster={previewSnapshotVideo}
                     preload="auto"
                     playsInline
                     autoPlay
