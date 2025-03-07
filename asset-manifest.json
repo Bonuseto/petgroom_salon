@@ -1,9 +1,10 @@
 {
   "files": {
     "main.css": "/petgroom_salon/static/css/main.32b8122a.css",
-    "main.js": "/petgroom_salon/static/js/main.9a1163d0.js",
+    "main.js": "/petgroom_salon/static/js/main.df601b7b.js",
     "static/js/453.fa767267.chunk.js": "/petgroom_salon/static/js/453.fa767267.chunk.js",
     "static/media/preview.mp4": "/petgroom_salon/static/media/preview.792e34461fd9df3c9e28.mp4",
+    "static/media/previewSnapshot.png": "/petgroom_salon/static/media/previewSnapshot.190bcc0c32d63e9b9a6b.png",
     "static/media/Recoleta.otf": "/petgroom_salon/static/media/Recoleta.fd9bfd35d1085b5c6511.otf",
     "static/media/JalalLTBold.ttf": "/petgroom_salon/static/media/JalalLTBold.c8d5044a051280f47e72.ttf",
     "static/media/logo.png": "/petgroom_salon/static/media/logo.c65514accfd86215f4ce.png",
@@ -16,11 +17,11 @@
     "static/media/slick.woff": "/petgroom_salon/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/petgroom_salon/index.html",
     "main.32b8122a.css.map": "/petgroom_salon/static/css/main.32b8122a.css.map",
-    "main.9a1163d0.js.map": "/petgroom_salon/static/js/main.9a1163d0.js.map",
+    "main.df601b7b.js.map": "/petgroom_salon/static/js/main.df601b7b.js.map",
     "453.fa767267.chunk.js.map": "/petgroom_salon/static/js/453.fa767267.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.32b8122a.css",
-    "static/js/main.9a1163d0.js"
+    "static/js/main.df601b7b.js"
   ]
 }
