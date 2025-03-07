@@ -1,10 +1,26 @@
-/* eslint-disable */
-import React from 'react';
-import classes from './HeaderComponent.module.css'; // Import CSS module
+import React, { useEffect, useRef } from 'react';
+import classes from './HeaderComponent.module.css';
 import previewVideo from './preview.mp4';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function HeaderComponent (): JSX.Element {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (videoElement != null) {
+      videoElement.addEventListener('error', (e) => {
+        console.error('Video error:', e);
+      });
+
+      videoElement.addEventListener('loadeddata', () => {
+        videoElement.play().catch((err) => {
+          console.warn('Auto-play was prevented:', err);
+        });
+      });
+    }
+  }, []);
+
   return (
     <header>
       <div className={classes.paddingHeader}>
@@ -35,19 +51,16 @@ function HeaderComponent (): JSX.Element {
               <div className={classes.shapeImageGraphic}>
                 <div className={classes.shapeImage}>
                   <video
+                    ref={videoRef}
                     muted
                     loop
                     className={classes.shapeBgVideo}
                     poster="https://cdn.prod.website-files.com/649972ec5905003f83dfde15/65c096691fc24121af14d1eb_upper-hound-home-poster.webp"
-                    preload="none"
-                    autoPlay
+                    preload="auto"
                     playsInline
+                    autoPlay
                   >
-                    <source
-                      data-src="./preview.mp4"
-                      src={previewVideo}
-                      type="video/mp4"
-                    />
+                    <source src={previewVideo} type="video/mp4" />
                   </video>
                 </div>
               </div>
