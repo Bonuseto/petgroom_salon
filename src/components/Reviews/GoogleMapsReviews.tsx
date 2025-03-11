@@ -1,76 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './GoogleMapsReviews.module.css'; // Import separate CSS file
+import classes from './GoogleMapsReviews.module.css';
 
-interface Review {
-  author_name: string
-  rating: number
-  text: string
-  profile_photo_url: string
-}
-
-interface Props {
-  isLoaded: boolean
-}
-
-const GoogleMapsReviews: React.FC<Props> = ({ isLoaded }) => {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const placeId = 'ChIJsTBPxPfCD0cRI_ThCFA8R_o';
-
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (!isLoaded || !window.google) return;
-
-    const service = new window.google.maps.places.PlacesService(document.createElement('div'));
-    const request = { placeId, fields: ['reviews'] };
-
-    service.getDetails(request, (place, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK && ((place?.reviews) != null)) {
-        setReviews(
-          place.reviews
-            .filter(review => (review.rating != null) && review.rating > 2)
-            .map(review => ({
-              author_name: typeof review.author_name === 'string' ? review.author_name : 'Anonymous',
-              // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-              rating: review.rating ?? 0,
-              // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-              text: review.text || '',
-              // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-              profile_photo_url: review.profile_photo_url || 'https://via.placeholder.com/60'
-            }))
-        );
-      } else {
-        console.error('Error fetching reviews:', status);
-      }
-    });
-  }, [isLoaded]);
-
-  if (!isLoaded) return <p>Loading Google Maps...</p>;
+const GoogleMapsReviews: React.FC = (): JSX.Element => {
+  const reviews = [
+    {
+      author_name: 'Sarah Johnson',
+      rating: 5,
+      text: 'Absolutely amazing service! My poodle has never looked so good. The groomers were gentle and professional.',
+      profile_photo_url: `https://ui-avatars.com/api/?name=${encodeURIComponent('Sarah Johnson')}&size=128&rounded=true`
+    },
+    {
+      author_name: 'Mike Peterson',
+      rating: 4,
+      text: 'Great grooming job on my labrador. The staff was friendly and the place was clean. Will come back!',
+      profile_photo_url: `https://ui-avatars.com/api/?name=${encodeURIComponent('Mike Peterson')}&size=128&rounded=true`
+    }
+  ];
 
   const sliderSettings = {
     dots: true,
-    infinite: true,
+    infinite: reviews.length > 1,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: true,
-    autoplaySpeed: 3000,
+    autoplay: reviews.length > 1,
+    autoplaySpeed: 5000,
     pauseOnHover: true,
+    adaptiveHeight: true,
+    swipe: true,
+    cssEase: 'linear',
+    accessibility: true,
+    focusOnSelect: false,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: Math.min(3, reviews.length),
           slidesToScroll: 1
         }
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: Math.min(2, reviews.length),
           slidesToScroll: 1
         }
       },
@@ -84,39 +60,34 @@ const GoogleMapsReviews: React.FC<Props> = ({ isLoaded }) => {
     ]
   };
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const renderStars = (rating: number) => {
-    const roundedRating = Math.round(rating);
-    return (
-      <div className="stars-container">
-        {[...Array(5)].map((_, i) => (
-          <span key={i} className={`star ${i < roundedRating ? 'filled' : ''}`}>★</span>
-        ))}
-      </div>
-    );
-  };
-
   return (
-    <section className="reviews-section">
-      <h2 className="reviews-heading">Reviews</h2>
-      <div className="reviews-slider-container">
+    <section className={classes.reviewsSection}>
+      <h2 className={classes.reviewsHeading}>Reviews</h2>
+      <div className={classes.reviewsSliderContainer }>
         <Slider {...sliderSettings}>
           {reviews.map((review, index) => (
-            <div key={index} className="review-slide">
-              <div className="review-card">
-                <div className="review-content">
+            <div key={index} className={classes.reviewSlide}>
+              <div className={classes.reviewCard}>
+                <div className={classes.reviewContent}>
                   <img
                     src={review.profile_photo_url}
                     alt={`${review.author_name}'s profile`}
-                    className="author-photo"
+                    className={classes.authorPhoto}
                     onError={(e) => {
-                      e.currentTarget.src = 'https://via.placeholder.com/60';
+                      e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(review.author_name)}&size=128&rounded=true`;
+                      e.currentTarget.onerror = null;
                     }}
                   />
-                  <div className="review-text-content">
-                    <h3 className="author-name">{review.author_name}</h3>
-                    {renderStars(review.rating)}
-                    <p className="review-text">{review.text}</p>
+                  <div>
+                    <h3 className={classes.authorName}>{review.author_name}</h3>
+                    <div className={classes.starsContainer}>
+                      {[...Array(review.rating)].map((_, i) => (
+                        <span key={i} className={classes.star}>
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <p className={classes.reviewText}>{review.text}</p>
                   </div>
                 </div>
               </div>

@@ -1,20 +1,18 @@
-/* eslint-disable */
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useJsApiLoader } from "@react-google-maps/api";
-import "./App.css";
-import HomePage from "./components/HomePage/HomePage"; // Import the new HomePage
-import FormPage from "./pages/FormPage";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useJsApiLoader } from '@react-google-maps/api';
+import './App.css';
+import HomePage from './components/HomePage/HomePage';
+import FormPage from './pages/FormPage';
 
-// Google Maps API Key (Make sure it's set in .env)
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const apiKey = process.env.REACT_APP_API_KEY!;
-const libraries: ('places' | 'maps')[] = ['places', 'maps']; // Load both libraries at once
+const libraries: Array<'places' | 'marker'> = ['places', 'marker'];
 
-function App(): JSX.Element {
-  // Load Google Maps API once for the whole app
+function App (): JSX.Element {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: apiKey,
-    libraries,
+    libraries
   });
 
   return (

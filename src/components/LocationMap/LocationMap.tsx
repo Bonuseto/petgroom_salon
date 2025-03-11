@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
+import { GoogleMap } from '@react-google-maps/api';
 import Button from '@mui/material/Button';
 import DirectionIcon from '@mui/icons-material/Directions';
 import Box from '@mui/material/Box';
@@ -15,6 +15,7 @@ interface Props {
 
 const salonPosition = { lat: 51.083752, lng: 17.038425 };
 const cityCenterPosition = { lat: 51.095876, lng: 17.032726 };
+const MAP_ID = '30c8f8aa0ac1d97e';
 
 const DirectionButton = styled(Button)({
   backgroundColor: '#f10f8f',
@@ -43,9 +44,18 @@ const LocationMap: React.FC<Props> = ({ isLoaded }) => {
             mapContainerStyle={{ width: '100%', height: '100%' }}
             center={cityCenterPosition}
             zoom={13}
-          >
-            <Marker position={salonPosition} />
-          </GoogleMap>
+            options={{ mapId: MAP_ID } as google.maps.MapOptions}
+            onLoad={(map) => {
+              if (!google.maps.marker) {
+                console.error('Marker library not loaded');
+                return;
+              }
+              const marker = new google.maps.marker.AdvancedMarkerElement({
+                position: salonPosition,
+                map: map,
+              });
+            }}
+          />
         </Box>
         <DirectionButton variant="contained" startIcon={<DirectionIcon />} onClick={openGoogleMaps} sx={{ m: 1 }}>
           al. Armii Krajowej 6c/4, 50-541
