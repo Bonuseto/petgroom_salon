@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/petgroom_salon/static/css/main.bdfe3205.css",
+    "main.js": "/petgroom_salon/static/js/main.1b7c14d8.js",
+    "static/js/453.fa767267.chunk.js": "/petgroom_salon/static/js/453.fa767267.chunk.js",
+    "static/media/preview.mp4": "/petgroom_salon/static/media/preview.792e34461fd9df3c9e28.mp4",
+    "static/media/previewSnapshot.png": "/petgroom_salon/static/media/previewSnapshot.190bcc0c32d63e9b9a6b.png",
+    "static/media/Recoleta.otf": "/petgroom_salon/static/media/Recoleta.fd9bfd35d1085b5c6511.otf",
+    "static/media/JalalLTBold.ttf": "/petgroom_salon/static/media/JalalLTBold.c8d5044a051280f47e72.ttf",
+    "static/media/logo.png": "/petgroom_salon/static/media/logo.c65514accfd86215f4ce.png",
+    "static/media/CamptonBold.otf": "/petgroom_salon/static/media/CamptonBold.e4a2f1da59e29aab7524.otf",
+    "static/media/CamptonBook.otf": "/petgroom_salon/static/media/CamptonBook.a2d81bc56a7afdbfbca8.otf",
+    "static/media/globe.png": "/petgroom_salon/static/media/globe.d26c4c2f3e261e2ddfbb.png",
+    "static/media/slick.svg": "/petgroom_salon/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/petgroom_salon/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/petgroom_salon/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/petgroom_salon/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/petgroom_salon/index.html",
+    "main.bdfe3205.css.map": "/petgroom_salon/static/css/main.bdfe3205.css.map",
+    "main.1b7c14d8.js.map": "/petgroom_salon/static/js/main.1b7c14d8.js.map",
+    "453.fa767267.chunk.js.map": "/petgroom_salon/static/js/453.fa767267.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bdfe3205.css",
+    "static/js/main.1b7c14d8.js"
+  ]
+}
