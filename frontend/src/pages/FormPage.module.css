@@ -405,3 +405,27 @@
     width: calc(50% - 8px);
   }
 }
+
+.successMessage {
+  background-color: #e7f5ea;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.errorMessage {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}

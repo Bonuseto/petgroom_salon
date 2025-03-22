@@ -1,4 +1,3 @@
-/* FormPage.tsx */
 /* eslint-disable */
 /* FormPage.tsx */
 import React, { useState } from "react";
@@ -70,6 +69,9 @@ const FormPage: React.FC = () => {
     termsRead: false,
     termsAgreed: false,
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const handleServiceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, service: e.target.value });
@@ -85,7 +87,7 @@ const FormPage: React.FC = () => {
     setFormData({ ...formData, [name]: checked });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Simple validation
@@ -94,9 +96,75 @@ const FormPage: React.FC = () => {
       return;
     }
     
-    console.log("Form submitted:", formData);
-    // Here you would typically send the data to your server
-    alert("Booking request submitted successfully!");
+    setIsSubmitting(true);
+    setSubmitError(null);
+    
+    try {
+      // Prepare the data in the format the backend expects
+      const appointmentData = {
+        customerName: `${formData.firstName} ${formData.lastName}`,
+        customerEmail: formData.email,
+        petName: formData.dogName,
+        service: formData.service,
+        appointmentDate: new Date().toISOString(), // You might want to add a date picker in your form
+        additionalNotes: `
+          Breed: ${formData.breed}
+          Age: ${formData.dogAge}
+          Matting: ${formData.matting}
+          Comfortable being groomed: ${formData.comfortable}
+          Last groom: ${formData.lastGroom}
+          Health issues: ${formData.healthIssues}
+          Customer type: ${formData.customerType}
+          Phone: ${formData.phoneNumber}
+          Preferred days: ${formData.preferredDays.join(', ')}
+          Notes: ${formData.notes}
+          Interested in discounted grooming: ${formData.discountedGrooming ? 'Yes' : 'No'}
+        `
+      };
+      
+      const response = await fetch('http://localhost:5000/api/appointments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appointmentData)
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setSubmitSuccess(true);
+        // Reset form
+        setFormData({
+          service: "",
+          breed: "",
+          dogName: "",
+          dogAge: "",
+          matting: "No",
+          comfortable: "Yes",
+          lastGroom: "1 - 4 weeks ago",
+          healthIssues: "No",
+          customerType: "",
+          firstName: "",
+          lastName: "",
+          email: "",
+          phoneNumber: "",
+          preferredDays: [],
+          notes: "",
+          discountedGrooming: false,
+          termsRead: false,
+          termsAgreed: false,
+        });
+        window.scrollTo(0, 0);
+      } else {
+        setSubmitError('Failed to send booking request. Please try again later.');
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitError('An error occurred while sending your booking request. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -106,6 +174,18 @@ const FormPage: React.FC = () => {
         <div className={classes.formContainer}>
           <div className={classes.headerSection}>
             <h1 className={classes.mainHeading}>Schedule your dog's next grooming appointment</h1>
+            
+            {submitSuccess && (
+              <div className={classes.successMessage}>
+                <p>Thank you for your booking request! We'll be in touch with you shortly.</p>
+              </div>
+            )}
+            
+            {submitError && (
+              <div className={classes.errorMessage}>
+                <p>{submitError}</p>
+              </div>
+            )}
           </div>
           
           <div className={classes.formContent}>
@@ -437,9 +517,9 @@ const FormPage: React.FC = () => {
                   <button 
                     type="submit" 
                     className={classes.submitButton}
-                    disabled={!formData.termsAgreed || !formData.termsRead}
+                    disabled={!formData.termsAgreed || !formData.termsRead || isSubmitting}
                   >
-                    Send booking request
+                    {isSubmitting ? 'Sending...' : 'Send booking request'}
                   </button>
                 </div>
               </div>
