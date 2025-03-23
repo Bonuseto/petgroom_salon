@@ -15,10 +15,10 @@ import ListItemButton from '@mui/material/ListItemButton';
 import LanguageSwitch from '../LanguageSwitch/LanguageSwitch';
 import i18n from '../../i18n';
 import { useTranslation } from 'react-i18next';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import logo from './logo.png';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
 
 interface Props {
   window?: () => Window;
@@ -30,6 +30,8 @@ const salonName = 'BEST GROOM STUDIO';
 const DrawerAppBar: React.FC = (props: Props): ReactElement => {
   const { t } = useTranslation();
   const { window: windowProp } = props;
+  const navigate = useNavigate();
+  const location = useLocation();
   
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>('en');
@@ -40,9 +42,16 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
   };
   
   const scrollTo = (id: string): void => {
-    const element = document.getElementById(id);
-    if (element != null) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // Check if we're on the home page
+    if (location.pathname !== '/') {
+      // If not on home page, navigate to home page with hash
+      navigate(`/#${id}`);
+    } else {
+      // If already on home page, just scroll to the element
+      const element = document.getElementById(id);
+      if (element != null) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
   
