@@ -70,8 +70,48 @@
 html, body {
   width: 100%;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: 'CamptonBook', sans-serif;
+  color: #333;
+  background-color: #f9f7f2;
+}
+
+body {
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+/* Section styling for wave divider integration */
+section {
+  position: relative;
+  width: 100%;
+  padding: 3rem 0;
+  margin: 0;
+}
+
+section.light {
+  background-color: #ffffff;
+}
+
+section.cream {
+  background-color: #f9f7f2;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 2rem 0;
+  }
 }

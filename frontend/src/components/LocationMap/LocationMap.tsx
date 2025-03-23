@@ -1,13 +1,11 @@
 /* eslint-disable */
 import React from 'react';
 import { GoogleMap } from '@react-google-maps/api';
-import Button from '@mui/material/Button';
-import DirectionIcon from '@mui/icons-material/Directions';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useTranslation } from 'react-i18next';
-import { styled } from '@mui/material';
+import styles from './LocationMap.module.css';
 
 interface Props {
   isLoaded: boolean;
@@ -16,11 +14,6 @@ interface Props {
 const salonPosition = { lat: 51.083752, lng: 17.038425 };
 const cityCenterPosition = { lat: 51.095876, lng: 17.032726 };
 const MAP_ID = '30c8f8aa0ac1d97e';
-
-const DirectionButton = styled(Button)({
-  backgroundColor: '#f10f8f',
-  '&:hover': { backgroundColor: '#0ABA' },
-});
 
 const openGoogleMaps = () => {
   const url =
@@ -35,11 +28,11 @@ const LocationMap: React.FC<Props> = ({ isLoaded }) => {
 
   return (
     <Container>
-      <Box sx={{ my: 4, textAlign: 'center' }}>
-        <Typography variant="h6" component="div" sx={{ mb: 2 }}>
+      <Box className={styles.mapSection}>
+        <Typography variant="h6" component="div" className={styles.mapTitle}>
           {t('howToFindUs')}
         </Typography>
-        <Box sx={{ height: '450px', mb: 2 }}>
+        <div className={styles.mapContainer}>
           <GoogleMap
             mapContainerStyle={{ width: '100%', height: '100%' }}
             center={cityCenterPosition}
@@ -56,10 +49,19 @@ const LocationMap: React.FC<Props> = ({ isLoaded }) => {
               });
             }}
           />
-        </Box>
-        <DirectionButton variant="contained" startIcon={<DirectionIcon />} onClick={openGoogleMaps} sx={{ m: 1 }}>
+        </div>
+        <button 
+          onClick={openGoogleMaps} 
+          className={styles.directionButton}
+        >
+          <span className={styles.directionIcon}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 12h-6l-2 3h-4l-2-3H2"/>
+              <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
+            </svg>
+          </span>
           al. Armii Krajowej 6c/4, 50-541
-        </DirectionButton>
+        </button>
       </Box>
     </Container>
   );

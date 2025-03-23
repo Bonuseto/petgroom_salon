@@ -23,32 +23,30 @@ function HeaderComponent (): JSX.Element {
   }, []);
 
   return (
-    <header>
-      <div className={classes.paddingHeader}>
-        <div className="container-large">
+    <header className={classes.headerContainer}>
+      <div className={classes.heroBackground}>
+        <div className={classes.container}>
           <div className={classes.headerElements}>
             <div className={classes.headerContent}>
               <h1 className={classes.headerSecondText}>
-                Trusted Grooming Services in Wroclaw
+                Trusted Dog Grooming Services in Wroclaw
               </h1>
-              <div>
+              <div className={classes.titleContainer}>
                 <h2 className={classes.headerMainText}>
-                  Pet grooming <em>with&nbsp;heart</em>
+                  Pet grooming <em className={classes.withHeart}>with&nbsp;heart</em>
                 </h2>
                 <p className={classes.headerSecondText}>
                   Bringing out the best in every Wroclaw pet.
                 </p>
               </div>
               <div className={classes.headerButtonGroup}>
-                <Link className={classes.button} to="/appointments">
+                <Link className={classes.primaryButton} to="/appointments">
                   Book appointment
-                </Link>
-                <Link className={classes.button} to="/dog-grooming">
-                  Grooming services
                 </Link>
               </div>
             </div>
             <div className={classes.headerImageWrapper}>
+              <div className={classes.shapeBgElement}></div>
               <div className={classes.shapeImageGraphic}>
                 <div className={classes.shapeImage}>
                   <video
@@ -65,14 +63,6 @@ function HeaderComponent (): JSX.Element {
                   </video>
                 </div>
               </div>
-            </div>
-            <div className={classes.headerMobileButtonGroup}>
-              <Link className={classes.button} to="/appointments">
-                Book appointment
-              </Link>
-              <Link className={classes.button} to="/dog-grooming">
-                Grooming services
-              </Link>
             </div>
           </div>
         </div>
