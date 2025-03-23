@@ -1,6 +1,5 @@
-Webpage created for pet grooming salon
-
-[---Demo webpage---](https://github.com/facebook/create-react-app)
+Business page for [Best Groom studio]((https://www.google.com/maps/place/BEST+GROOM+STUDIO/@51.0837168,17.0384186,19z/data=!3m1!4b1!4m6!3m5!1s0x470fc2f7c44f30b1:0xfa473c5008e1f423!8m2!3d51.0837168!4d17.0384186!16s%2Fg%2F11f01qx71q?hl=ru-RU&entry=ttu&g_ep=EgoyMDI1MDMxOS4yIKXMDSoASAFQAw%3D%3D))
+[Bestgroom.pl]((https://bonuseto.github.io/petgroom_salon/))
 
 ![Image Alt Text](salonpic.png)
 ![Image Alt Text](mapcomp.png)
