@@ -77,7 +77,12 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Box sx={{ my: 2 }}>
-        <img src={logo} alt="Salon Logo" style={{ height: 60 }} />
+        <Box 
+          component="img" 
+          src={logo} 
+          alt="Salon Logo" 
+          sx={{ height: '60px' }} 
+        />
       </Box>
       <Divider />
       <List>
@@ -109,8 +114,8 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
           boxShadow: scrolled ? '0px 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
           transition: 'all 0.3s ease',
           backdropFilter: 'blur(5px)',
-          pb: 1,
-          pt: 1
+          pb: { xs: scrolled ? 0.5 : 0.75, sm: 1 },
+          pt: { xs: scrolled ? 0.5 : 0.75, sm: 1 }
         }}
       >
         <Toolbar sx={{ 
@@ -119,16 +124,27 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
           justifyContent: 'space-between',
           maxWidth: 1200,
           width: '100%',
-          margin: '0 auto'
+          margin: '0 auto',
+          p: { xs: '4px 8px', sm: '8px 16px' }
         }}>
           {/* Left: Logo */}
           <Box sx={{ display: 'flex', alignItems: 'center'}}>
             <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-              <img src={logo} alt="Salon Logo" style={{ height: 45 }} />
+              <Box 
+                component="img" 
+                src={logo} 
+                alt="Salon Logo" 
+                sx={{ 
+                  height: {
+                    xs: '35px',
+                    sm: '45px'
+                  }
+                }} 
+              />
               <Box sx={{ 
-                ml: 2, 
+                ml: { xs: 1, sm: 2 }, 
                 fontFamily: 'Recoleta, serif',
-                fontSize: '1.4rem',
+                fontSize: { xs: '1.1rem', sm: '1.4rem' },
                 fontWeight: 600,
                 color: scrolled ? 'white' : '#333',
                 transition: 'color 0.3s ease'
@@ -167,13 +183,46 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
           {/* Right: Call-to-action button and menu */}
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
             {/* Language Selector */}
-            <Box sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
-              <LanguageSwitch
-                icon={require('./globe.png')}
-                onSelectLanguage={handleLanguageSelect}
-              />
+            <Box sx={{ 
+              mr: { xs: 1, sm: 3 }, 
+              display: 'flex', 
+              alignItems: 'center'
+            }}>
+              <Box sx={{ 
+                '.MuiSvgIcon-root': { 
+                  color: scrolled ? 'white' : '#333',
+                  fontSize: { xs: '22px', sm: 'inherit' }
+                },
+                button: { 
+                  color: scrolled ? 'white' : '#333',
+                  borderColor: scrolled ? 'white' : '#0ABAB5',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }
+              }}>
+                <LanguageSwitch
+                  onSelectLanguage={handleLanguageSelect}
+                />
+              </Box>
             </Box>
             
+            {/* Mobile hamburger */}
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: { xs: 0, sm: 1 } }}>
+              <IconButton 
+                color="inherit" 
+                aria-label="open drawer" 
+                onClick={handleDrawerToggle}
+                sx={{ 
+                  color: scrolled ? 'white' : '#333', 
+                  transition: 'color 0.3s ease',
+                  p: { xs: 0.75, sm: 1 }
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
+
             {/* Desktop - Book now button */}
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               <Button
@@ -182,31 +231,21 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
                 sx={{
                   backgroundColor: scrolled ? '#088F8A' : '#0ABAB5',
                   color: 'white',
-                  padding: '10px 20px',
+                  padding: '9px 24px',
                   borderRadius: '30px',
                   fontFamily: 'CamptonBook, sans-serif',
-                  fontSize: '0.9rem',
+                  fontSize: '0.95rem',
+                  fontWeight: 500,
                   textTransform: 'none',
                   transition: 'background-color 0.3s ease',
                   '&:hover': {
                     backgroundColor: '#099A9A'
-                  }
+                  },
+                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
                 }}
               >
                 Book now
               </Button>
-            </Box>
-            
-            {/* Mobile hamburger */}
-            <Box sx={{ display: { xs: 'flex', md: 'none' }, ml: 2 }}>
-              <IconButton 
-                color="inherit" 
-                aria-label="open drawer" 
-                onClick={handleDrawerToggle}
-                sx={{ color: scrolled ? 'white' : '#333', transition: 'color 0.3s ease' }}
-              >
-                <MenuIcon />
-              </IconButton>
             </Box>
           </Box>
         </Toolbar>

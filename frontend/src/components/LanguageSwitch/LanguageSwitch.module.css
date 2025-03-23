@@ -1,29 +1,25 @@
-/* LanguageSwitch.css */
+/* LanguageSwitch.module.css */
 
-/* Container for language switch */
 .languageSwitch {
   display: flex;
   align-items: center;
-  margin-right: 10px;
   position: relative;
 }
 
-/* Icon for language switch */
 .languageSwitchIcon {
-  height: 42px;
-  width: 42px;
-  border-radius: 50%;
-  background-color: #0ABAB5;
-  padding: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 18px;
+  width: 18px;
+  margin-right: 6px;
+  color: #0ABAB5;
+  flex-shrink: 0;
 }
 
-/* Dropdown for language selection */
+
 .languageSwitchDropdown {
   position: absolute;
-  top: calc(100% + 5px);
+  top: calc(100% + 8px);
   right: 0;
-  min-width: 80px;
+  min-width: 100px;
   background-color: white;
   border: 1px solid #eee;
   border-radius: 8px;
@@ -32,33 +28,88 @@
   overflow: hidden;
 }
 
-/* Button for language switch */
+
 .languageSwitchButton {
   background-color: transparent;
-  border: none;
+  border: 1.5px solid #0ABAB5;
   cursor: pointer;
-  padding: 0;
-  border-radius: 50%;
+  padding: 9px 24px;
+  border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s;
+  color: #0ABAB5;
+  font-size: 0.95rem;
+  font-weight: 500;
+  min-width: 80px;
+  box-sizing: border-box;
+  height: 40px;
+  font-family: 'CamptonBook', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1;
 }
 
-.languageSwitchButton:hover .languageSwitchIcon {
-  background-color: #099A9A;
+.languageSwitchButton:hover {
+  background-color: rgba(10, 186, 181, 0.08);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Options for language selection */
+.languageSwitchButton span {
+  line-height: 1;
+  vertical-align: middle;
+}
+
+
 .languageOption {
   padding: 10px 15px;
   cursor: pointer;
   color: #333;
   font-weight: 500;
   transition: background-color 0.2s;
-  text-align: center;
+  text-align: left;
+  display: flex;
+  align-items: center;
 }
 
 .languageOption:hover {
   background-color: rgba(10, 186, 181, 0.1);
   color: #0ABAB5;
+}
+
+.languageOptionActive {
+  background-color: rgba(10, 186, 181, 0.05);
+  color: #0ABAB5;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .languageSwitchButton {
+    padding: 4px;
+    height: 28px;
+    width: 28px;
+    font-size: 0.8rem;
+    min-width: unset;
+    border-width: 0;
+    border-radius: 50%;
+    background-color: transparent;
+  }
+  
+  .languageSwitchIcon {
+    height: 20px;
+    width: 20px;
+    margin-right: 0;
+  }
+
+  .languageSwitchDropdown {
+    top: calc(100% + 5px);
+    right: -20px;
+    min-width: 80px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  }
+  
+  .languageOption {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
 }

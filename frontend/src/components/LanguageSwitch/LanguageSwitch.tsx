@@ -1,32 +1,77 @@
 // LanguageSwitch.tsx
-import React, { useState } from 'react';
-import classes from './LanguageSwitch.module.css'; // Import CSS module
+import React, { useState, useEffect } from 'react';
+import classes from './LanguageSwitch.module.css';
+import i18n from '../../i18n';
+import LanguageIcon from '@mui/icons-material/Language';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface LanguageSwitchProps {
-  icon: string // Path to the icon image
-  onSelectLanguage: (language: string) => void // Function to handle language selection
+  onSelectLanguage: (language: string) => void
 }
 
-const LanguageSwitch: React.FC<LanguageSwitchProps> = ({ icon, onSelectLanguage }) => {
+const DEFAULT_LANGUAGE = 'en';
+
+const LanguageSwitch: React.FC<LanguageSwitchProps> = ({ onSelectLanguage }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useMediaQuery('(max-width:768px)');
+
+  const getInitialLanguage = (): string => {
+    return typeof i18n.language === 'string' && i18n.language.length > 0
+      ? i18n.language
+      : DEFAULT_LANGUAGE;
+  };
+
+  const [currentLanguage, setCurrentLanguage] = useState<string>(getInitialLanguage());
+
+  useEffect(() => {
+    setCurrentLanguage(getInitialLanguage());
+  }, [i18n.language]);
 
   const handleLanguageSelect = (language: string): void => {
     onSelectLanguage(language);
+    setCurrentLanguage(language);
     setIsOpen(false);
   };
 
+  const languageNames: Record<string, string> = {
+    en: 'EN',
+    pl: 'PL',
+    ua: 'UA',
+    ru: 'RU'
+  };
+
   return (
-    <div className={classes.languageSwitch}> {/* Use CSS module class */}
+    <div className={classes.languageSwitch}>
       <button className={classes.languageSwitchButton} onClick={() => { setIsOpen(!isOpen); }}>
-        <img src={icon} alt="Language icon" className={classes.languageSwitchIcon} /> {/* Use CSS module class */}
+        <LanguageIcon className={classes.languageSwitchIcon} />
+        {!isMobile && <span>{languageNames[currentLanguage]}</span>}
       </button>
       {isOpen && (
-        <div className={classes.languageSwitchDropdown}> {/* Use CSS module class */}
-          <div className={classes.languageOption} onClick={() => { handleLanguageSelect('en'); }}>EN</div> {/* Use CSS module class */}
-          <div className={classes.languageOption} onClick={() => { handleLanguageSelect('pl'); }}>PL</div> {/* Use CSS module class */}
-          <div className={classes.languageOption} onClick={() => { handleLanguageSelect('ua'); }}>UA</div> {/* Use CSS module class */}
-          <div className={classes.languageOption} onClick={() => { handleLanguageSelect('ru'); }}>RU</div> {/* Use CSS module class */}
-          {/* Add more language options as needed */}
+        <div className={classes.languageSwitchDropdown}>
+          <div
+            className={`${classes.languageOption} ${currentLanguage === 'en' ? classes.languageOptionActive : ''}`}
+            onClick={() => { handleLanguageSelect('en'); }}
+          >
+            EN
+          </div>
+          <div
+            className={`${classes.languageOption} ${currentLanguage === 'pl' ? classes.languageOptionActive : ''}`}
+            onClick={() => { handleLanguageSelect('pl'); }}
+          >
+            PL
+          </div>
+          <div
+            className={`${classes.languageOption} ${currentLanguage === 'ua' ? classes.languageOptionActive : ''}`}
+            onClick={() => { handleLanguageSelect('ua'); }}
+          >
+            UA
+          </div>
+          <div
+            className={`${classes.languageOption} ${currentLanguage === 'ru' ? classes.languageOptionActive : ''}`}
+            onClick={() => { handleLanguageSelect('ru'); }}
+          >
+            RU
+          </div>
         </div>
       )}
     </div>
