@@ -28,5 +28,91 @@
     "review3": "Bardzo dobra obsługa, piękny i pachnący pies, polecam.",
     "review4": "Świetne miejsce, zespół i doskonała obsługa. Bonnie uwielbia tam chodzić",
     "review5": "Najlepszy fryzjer dla psów. Polecam w 100%."
+  },
+  "form": {
+    "mainHeading": "Zarezerwuj wizytę dla Twojego psa",
+    "serviceSection": "Wybierz usługę",
+    "services": {
+      "fullGroom": "Pełna pielęgnacja",
+      "bathAndBrush": "Kąpiel i szczotkowanie",
+      "puppyGroom": "Pielęgnacja szczeniaka",
+      "handStripping": "Trymowanie ręczne",
+      "pawTrim": "Pielęgnacja łap"
+    },
+    "dogInfo": {
+      "heading": "Informacje o psie",
+      "breedLabel": "Rasa psa",
+      "breedPlaceholder": "Wpisz rasę psa",
+      "nameLabel": "Imię psa",
+      "namePlaceholder": "Wpisz imię psa",
+      "ageLabel": "Wiek psa",
+      "agePlaceholder": "Wpisz wiek psa"
+    },
+    "groomingHistory": {
+      "heading": "Historia pielęgnacji",
+      "mattingLabel": "Czy pies ma kołtuny?",
+      "mattingOptions": {
+        "yes": "Tak",
+        "no": "Nie",
+        "unsure": "Nie wiem"
+      },
+      "comfortableLabel": "Czy pies czuje się komfortowo podczas pielęgnacji?",
+      "comfortableOptions": {
+        "yes": "Tak",
+        "no": "Nie",
+        "unsure": "Pierwszy raz"
+      },
+      "lastGroomLabel": "Ostatnia pielęgnacja?",
+      "lastGroomOptions": {
+        "recent": "1 - 4 tygodnie temu",
+        "moderate": "1 - 2 miesiące temu",
+        "long": "3+ miesięcy temu",
+        "firstTime": "Pierwszy raz"
+      },
+      "lastGroomPlaceholder": "np. 2 miesiące temu",
+      "healthIssuesLabel": "Czy pies ma problemy zdrowotne?",
+      "healthIssuesPlaceholder": "np. problemy skórne, problemy ze stawami"
+    },
+    "customerInfo": {
+      "heading": "Informacje o kliencie",
+      "customerTypeLabel": "Czy jesteś stałym klientem?",
+      "customerTypeOptions": {
+        "returning": "Stały klient",
+        "new": "Nowy klient"
+      },
+      "firstNameLabel": "Imię",
+      "firstNamePlaceholder": "Wpisz swoje imię",
+      "lastNameLabel": "Nazwisko",
+      "lastNamePlaceholder": "Wpisz swoje nazwisko",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Wpisz swój adres email",
+      "phoneLabel": "Numer telefonu",
+      "phonePlaceholder": "Wpisz swój numer telefonu"
+    },
+    "preferredDays": {
+      "heading": "Preferowane dni",
+      "description": "Wybierz preferowane dni na wizytę",
+      "monday": "Poniedziałek",
+      "tuesday": "Wtorek",
+      "wednesday": "Środa",
+      "thursday": "Czwartek",
+      "friday": "Piątek",
+      "saturday": "Sobota"
+    },
+    "additionalInfo": {
+      "heading": "Dodatkowe informacje",
+      "notesLabel": "Notatki dla groomera",
+      "notesPlaceholder": "Wszelkie specjalne prośby lub dodatkowe informacje",
+      "discountLabel": "Jestem zainteresowany/a zniżkową usługą pielęgnacji"
+    },
+    "terms": {
+      "readLabel": "Przeczytałem/am i rozumiem zasady pielęgnacji",
+      "agreeLabel": "Wysyłając tę prośbę, potwierdzasz, że zgadzasz się z",
+      "termsLink": "Warunkami korzystania z usług"
+    },
+    "submit": {
+      "sending": "Wysyłanie...",
+      "send": "Wyślij prośbę o rezerwację"
+    }
   }
 }

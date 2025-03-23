@@ -28,5 +28,91 @@
     "review3": "Very good service, a beautiful and fragrant dog, I recommend it.",
     "review4": "Great place, team and awesome service. Bonnie loves going there",
     "review5": "The best dog hairdresser. I recommend it 100%."
+  },
+  "form": {
+    "mainHeading": "Book your dog grooming appointment",
+    "serviceSection": "Select your service",
+    "services": {
+      "fullGroom": "Full Groom",
+      "bathAndBrush": "Bath & Brush",
+      "puppyGroom": "Puppy Groom",
+      "handStripping": "Hand Stripping",
+      "pawTrim": "Paw Trim"
+    },
+    "dogInfo": {
+      "heading": "Dog information",
+      "breedLabel": "Dog Breed",
+      "breedPlaceholder": "Enter your dog's breed",
+      "nameLabel": "Dog's Name",
+      "namePlaceholder": "Enter your dog's name",
+      "ageLabel": "Dog's Age",
+      "agePlaceholder": "Enter your dog's age"
+    },
+    "groomingHistory": {
+      "heading": "Grooming history",
+      "mattingLabel": "Does your dog have any matting?",
+      "mattingOptions": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Not sure"
+      },
+      "comfortableLabel": "Is your dog comfortable with grooming?",
+      "comfortableOptions": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "First time"
+      },
+      "lastGroomLabel": "When was the last grooming?",
+      "lastGroomOptions": {
+        "recent": "1 - 4 weeks ago",
+        "moderate": "1 - 2 months ago",
+        "long": "3+ months ago",
+        "firstTime": "First time"
+      },
+      "lastGroomPlaceholder": "e.g., 2 months ago",
+      "healthIssuesLabel": "Any health issues we should know about?",
+      "healthIssuesPlaceholder": "e.g., skin sensitivities, joint issues"
+    },
+    "customerInfo": {
+      "heading": "Customer information",
+      "customerTypeLabel": "Are you a returning customer?",
+      "customerTypeOptions": {
+        "returning": "Returning customer",
+        "new": "New customer"
+      },
+      "firstNameLabel": "First Name",
+      "firstNamePlaceholder": "Enter your first name",
+      "lastNameLabel": "Last Name",
+      "lastNamePlaceholder": "Enter your last name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email address",
+      "phoneLabel": "Phone Number",
+      "phonePlaceholder": "Enter your phone number"
+    },
+    "preferredDays": {
+      "heading": "Preferred days",
+      "description": "Please select your preferred days for appointment",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    },
+    "additionalInfo": {
+      "heading": "Additional information",
+      "notesLabel": "Notes for the groomer",
+      "notesPlaceholder": "Any special requests or additional information",
+      "discountLabel": "I am interested in discounted grooming services"
+    },
+    "terms": {
+      "readLabel": "I have read and understand the grooming policies",
+      "agreeLabel": "By sending this request, you are confirming that you agree with the",
+      "termsLink": "Terms and Conditions"
+    },
+    "submit": {
+      "sending": "Sending...",
+      "send": "Send booking request"
+    }
   }
 }

@@ -28,5 +28,91 @@
     "review3": "Очень хорошее обслуживание, красивая и ароматная собака, рекомендую.",
     "review4": "Отличное место, команда и великолепный сервис. Бонни обожает туда ходить",
     "review5": "Лучший грумер для собак. Рекомендую на 100%."
+  },
+  "form": {
+    "mainHeading": "Забронируйте встречу для груминга вашей собаки",
+    "serviceSection": "Выберите услугу",
+    "services": {
+      "fullGroom": "Полный груминг",
+      "bathAndBrush": "Купание и расчесывание",
+      "puppyGroom": "Груминг щенков",
+      "handStripping": "Ручной стриппинг",
+      "pawTrim": "Стрижка лап"
+    },
+    "dogInfo": {
+      "heading": "Информация о собаке",
+      "breedLabel": "Порода собаки",
+      "breedPlaceholder": "Введите породу собаки",
+      "nameLabel": "Имя собаки",
+      "namePlaceholder": "Введите имя собаки",
+      "ageLabel": "Возраст собаки",
+      "agePlaceholder": "Введите возраст собаки"
+    },
+    "groomingHistory": {
+      "heading": "История груминга",
+      "mattingLabel": "Есть ли у собаки колтуны?",
+      "mattingOptions": {
+        "yes": "Да",
+        "no": "Нет",
+        "unsure": "Не уверен"
+      },
+      "comfortableLabel": "Комфортно ли собаке во время груминга?",
+      "comfortableOptions": {
+        "yes": "Да",
+        "no": "Нет",
+        "unsure": "Впервые"
+      },
+      "lastGroomLabel": "Последний груминг?",
+      "lastGroomOptions": {
+        "recent": "1 - 4 недели назад",
+        "moderate": "1 - 2 месяца назад",
+        "long": "3+ месяца назад",
+        "firstTime": "Впервые"
+      },
+      "lastGroomPlaceholder": "например, 2 месяца назад",
+      "healthIssuesLabel": "Есть ли проблемы со здоровьем?",
+      "healthIssuesPlaceholder": "например, проблемы с кожей, суставами"
+    },
+    "customerInfo": {
+      "heading": "Информация о клиенте",
+      "customerTypeLabel": "Вы постоянный клиент?",
+      "customerTypeOptions": {
+        "returning": "Постоянный клиент",
+        "new": "Новый клиент"
+      },
+      "firstNameLabel": "Имя",
+      "firstNamePlaceholder": "Введите ваше имя",
+      "lastNameLabel": "Фамилия",
+      "lastNamePlaceholder": "Введите вашу фамилию",
+      "emailLabel": "Электронная почта",
+      "emailPlaceholder": "Введите вашу электронную почту",
+      "phoneLabel": "Номер телефона",
+      "phonePlaceholder": "Введите ваш номер телефона"
+    },
+    "preferredDays": {
+      "heading": "Предпочтительные дни",
+      "description": "Выберите предпочтительные дни для встречи",
+      "monday": "Понедельник",
+      "tuesday": "Вторник",
+      "wednesday": "Среда",
+      "thursday": "Четверг",
+      "friday": "Пятница",
+      "saturday": "Суббота"
+    },
+    "additionalInfo": {
+      "heading": "Дополнительная информация",
+      "notesLabel": "Заметки для грумера",
+      "notesPlaceholder": "Любые особые запросы или дополнительная информация",
+      "discountLabel": "Меня интересуют услуги груминга со скидкой"
+    },
+    "terms": {
+      "readLabel": "Я прочитал и понимаю правила груминга",
+      "agreeLabel": "Отправляя этот запрос, вы подтверждаете, что согласны с",
+      "termsLink": "Условиями и положениями"
+    },
+    "submit": {
+      "sending": "Отправка...",
+      "send": "Отправить запрос на бронирование"
+    }
   }
 }

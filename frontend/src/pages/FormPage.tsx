@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Menu from "../components/Menu/Menu";
 import classes from "./FormPage.module.css";
+import { useTranslation } from "react-i18next";
 
 interface FormData {
   service: string;
@@ -20,35 +21,34 @@ interface FormData {
   phoneNumber: string;
   preferredDays: string[];
   notes: string;
-  discountedGrooming: boolean;
-  termsRead: boolean;
-  termsAgreed: boolean;
 }
 
-const services = [
-  {
-    id: "Full-Groom",
-    label: "Full Groom",
-    image: "https://cdn.prod.website-files.com/649972ec5905003f83dfde15/6509c23c0d0afd36f440b19e_dog.svg",
-  },
-  {
-    id: "Bath-and-brush",
-    label: "Bath & Brush",
-    image: "https://cdn.prod.website-files.com/649972ec5905003f83dfde15/6509c05d0f8df0e1b4eb6549_combe-shampoo.svg",
-  },
-  {
-    id: "Puppy-Groom",
-    label: "Puppy Groom",
-    image: "https://cdn.prod.website-files.com/649972ec5905003f83dfde15/65a8f1cb712368d0a1f92fce_Puppy_On_Chair_Illustration.svg",
-  },
-  {
-    id: "Nail-Clipping",
-    label: "Nail Clipping",
-    image: "https://cdn.prod.website-files.com/649972ec5905003f83dfde15/6509c05d3c76a1ae50cc6117_paw.svg",
-  },
-];
-
 const FormPage: React.FC = () => {
+  const { t } = useTranslation();
+  
+  const services = [
+    {
+      id: "Full-Groom",
+      label: t("form.services.fullGroom"),
+      image: "https://cdn.prod.website-files.com/649972ec5905003f83dfde15/6509c23c0d0afd36f440b19e_dog.svg",
+    },
+    {
+      id: "Bath-and-brush",
+      label: t("form.services.bathAndBrush"),
+      image: "https://cdn.prod.website-files.com/649972ec5905003f83dfde15/6509c05d0f8df0e1b4eb6549_combe-shampoo.svg",
+    },
+    {
+      id: "Puppy-Groom",
+      label: t("form.services.puppyGroom"),
+      image: "https://cdn.prod.website-files.com/649972ec5905003f83dfde15/65a8f1cb712368d0a1f92fce_Puppy_On_Chair_Illustration.svg",
+    },
+    {
+      id: "Hand-Stripping",
+      label: t("form.services.handStripping"),
+      image: "https://cdn.prod.website-files.com/649972ec5905003f83dfde15/6509c05d3c76a1ae50cc6117_paw.svg",
+    }
+  ];
+  
   const [formData, setFormData] = useState<FormData>({
     service: "",
     breed: "",
@@ -65,9 +65,6 @@ const FormPage: React.FC = () => {
     phoneNumber: "",
     preferredDays: [],
     notes: "",
-    discountedGrooming: false,
-    termsRead: false,
-    termsAgreed: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -85,6 +82,15 @@ const FormPage: React.FC = () => {
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     setFormData({ ...formData, [name]: checked });
+  };
+
+  const handleDaysChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+    const newPreferredDays = checked
+      ? [...formData.preferredDays, value]
+      : formData.preferredDays.filter(day => day !== value);
+    
+    setFormData({ ...formData, preferredDays: newPreferredDays });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -118,7 +124,6 @@ const FormPage: React.FC = () => {
           Phone: ${formData.phoneNumber}
           Preferred days: ${formData.preferredDays.join(', ')}
           Notes: ${formData.notes}
-          Interested in discounted grooming: ${formData.discountedGrooming ? 'Yes' : 'No'}
         `
       };
       
@@ -151,9 +156,6 @@ const FormPage: React.FC = () => {
           phoneNumber: "",
           preferredDays: [],
           notes: "",
-          discountedGrooming: false,
-          termsRead: false,
-          termsAgreed: false,
         });
         window.scrollTo(0, 0);
       } else {
@@ -167,13 +169,22 @@ const FormPage: React.FC = () => {
     }
   };
 
+  const days = [
+    { id: "monday", label: t("form.preferredDays.monday") },
+    { id: "tuesday", label: t("form.preferredDays.tuesday") },
+    { id: "wednesday", label: t("form.preferredDays.wednesday") },
+    { id: "thursday", label: t("form.preferredDays.thursday") },
+    { id: "friday", label: t("form.preferredDays.friday") },
+    { id: "saturday", label: t("form.preferredDays.saturday") },
+  ];
+
   return (
     <div>
       <Menu />
       <div className={classes.pageWrapper}>
         <div className={classes.formContainer}>
           <div className={classes.headerSection}>
-            <h1 className={classes.mainHeading}>Schedule your dog's next grooming appointment</h1>
+            <h1 className={classes.mainHeading}>{t("form.mainHeading")}</h1>
             
             {submitSuccess && (
               <div className={classes.successMessage}>
@@ -191,7 +202,7 @@ const FormPage: React.FC = () => {
           <div className={classes.formContent}>
             <form onSubmit={handleSubmit}>
               <div className={classes.formSection}>
-                <h2 className={classes.sectionHeading}>Choose service</h2>
+                <h2 className={classes.sectionHeading}>{t("form.serviceSection")}</h2>
                 
                 <div className={classes.serviceOptions}>
                   {services.map((service) => (
@@ -216,12 +227,12 @@ const FormPage: React.FC = () => {
               <div className={classes.sectionDivider}></div>
               
               <div className={classes.formSection}>
-                <h2 className={classes.sectionHeading}>About your dog...</h2>
+                <h2 className={classes.sectionHeading}>{t("form.dogInfo.heading")}</h2>
                 
                 <div className={classes.formFields}>
                   <div className={classes.formRow}>
                     <div className={classes.formGroup}>
-                      <label htmlFor="breed" className={classes.inputLabel}>Breed</label>
+                      <label htmlFor="breed" className={classes.inputLabel}>{t("form.dogInfo.breedLabel")}</label>
                       <input
                         type="text"
                         id="breed"
@@ -229,13 +240,13 @@ const FormPage: React.FC = () => {
                         value={formData.breed}
                         onChange={handleInputChange}
                         className={classes.textInput}
-                        placeholder="e.g. Cockapoo"
+                        placeholder={t("form.dogInfo.breedPlaceholder")}
                         required
                       />
                     </div>
                     
                     <div className={classes.formGroup}>
-                      <label htmlFor="dogName" className={classes.inputLabel}>Dog's name</label>
+                      <label htmlFor="dogName" className={classes.inputLabel}>{t("form.dogInfo.nameLabel")}</label>
                       <input
                         type="text"
                         id="dogName"
@@ -243,7 +254,7 @@ const FormPage: React.FC = () => {
                         value={formData.dogName}
                         onChange={handleInputChange}
                         className={classes.textInput}
-                        placeholder="e.g. Buster"
+                        placeholder={t("form.dogInfo.namePlaceholder")}
                         required
                       />
                     </div>
@@ -251,7 +262,7 @@ const FormPage: React.FC = () => {
                   
                   <div className={classes.formRow}>
                     <div className={classes.formGroup}>
-                      <label htmlFor="dogAge" className={classes.inputLabel}>Dog's age</label>
+                      <label htmlFor="dogAge" className={classes.inputLabel}>{t("form.dogInfo.ageLabel")}</label>
                       <input
                         type="text"
                         id="dogAge"
@@ -259,13 +270,13 @@ const FormPage: React.FC = () => {
                         value={formData.dogAge}
                         onChange={handleInputChange}
                         className={classes.textInput}
-                        placeholder="e.g. 3 years"
+                        placeholder={t("form.dogInfo.agePlaceholder")}
                         required
                       />
                     </div>
                 
                     <div className={classes.formGroup}>
-                      <label htmlFor="matting" className={classes.inputLabel}>Matting?</label>
+                      <label htmlFor="matting" className={classes.inputLabel}>{t("form.groomingHistory.mattingLabel")}</label>
                       <select
                         id="matting"
                         name="matting"
@@ -273,15 +284,16 @@ const FormPage: React.FC = () => {
                         onChange={handleInputChange}
                         className={classes.selectInput}
                       >
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
+                        <option value="No">{t("form.groomingHistory.mattingOptions.no")}</option>
+                        <option value="Yes">{t("form.groomingHistory.mattingOptions.yes")}</option>
+                        <option value="Unsure">{t("form.groomingHistory.mattingOptions.unsure")}</option>
                       </select>
                     </div>
                   </div>
 
                   <div className={classes.formRow}>
                     <div className={classes.formGroup}>
-                      <label htmlFor="comfortable" className={classes.inputLabel}>Comfortable being groomed?</label>
+                      <label htmlFor="comfortable" className={classes.inputLabel}>{t("form.groomingHistory.comfortableLabel")}</label>
                       <select
                         id="comfortable"
                         name="comfortable"
@@ -289,13 +301,14 @@ const FormPage: React.FC = () => {
                         onChange={handleInputChange}
                         className={classes.selectInput}
                       >
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
+                        <option value="Yes">{t("form.groomingHistory.comfortableOptions.yes")}</option>
+                        <option value="No">{t("form.groomingHistory.comfortableOptions.no")}</option>
+                        <option value="First time">{t("form.groomingHistory.comfortableOptions.unsure")}</option>
                       </select>
                     </div>
 
                     <div className={classes.formGroup}>
-                      <label htmlFor="lastGroom" className={classes.inputLabel}>Last groom?</label>
+                      <label htmlFor="lastGroom" className={classes.inputLabel}>{t("form.groomingHistory.lastGroomLabel")}</label>
                       <select
                         id="lastGroom"
                         name="lastGroom"
@@ -303,16 +316,16 @@ const FormPage: React.FC = () => {
                         onChange={handleInputChange}
                         className={classes.selectInput}
                       >
-                        <option value="1 - 4 weeks ago">1 - 4 weeks ago</option>
-                        <option value="1 - 2 months ago">1 - 2 months ago</option>
-                        <option value="3+ months ago">3+ months ago</option>
-                        <option value="First time">First time</option>
+                        <option value="1 - 4 weeks ago">{t("form.groomingHistory.lastGroomOptions.recent")}</option>
+                        <option value="1 - 2 months ago">{t("form.groomingHistory.lastGroomOptions.moderate")}</option>
+                        <option value="3+ months ago">{t("form.groomingHistory.lastGroomOptions.long")}</option>
+                        <option value="First time">{t("form.groomingHistory.lastGroomOptions.firstTime")}</option>
                       </select>
                     </div>
                   </div>
                   
                   <div className={classes.formGroup}>
-                    <label htmlFor="healthIssues" className={classes.inputLabel}>Any dog health issues?</label>
+                    <label htmlFor="healthIssues" className={classes.inputLabel}>{t("form.groomingHistory.healthIssuesLabel")}</label>
                     <select
                       id="healthIssues"
                       name="healthIssues"
@@ -320,8 +333,8 @@ const FormPage: React.FC = () => {
                       onChange={handleInputChange}
                       className={classes.selectInput}
                     >
-                      <option value="No">No</option>
-                      <option value="Yes">Yes</option>
+                      <option value="No">{t("form.groomingHistory.mattingOptions.no")}</option>
+                      <option value="Yes">{t("form.groomingHistory.mattingOptions.yes")}</option>
                     </select>
                   </div>
                 </div>
@@ -330,41 +343,43 @@ const FormPage: React.FC = () => {
               <div className={classes.sectionDivider}></div>
               
               <div className={classes.formSection}>
-                <h2 className={classes.sectionHeading}>About you...</h2>
+                <h2 className={classes.sectionHeading}>{t("form.customerInfo.heading")}</h2>
                 
                 <div className={classes.formFields}>
-                  <div className={classes.formGroup}>
-                    <p className={classes.inputLabel}>Are you a new customer or an existing customer?</p>
-                    <div className={classes.radioGroup}>
-                      <label className={classes.radioLabel}>
-                        <input
-                          type="radio"
-                          name="customerType"
-                          value="New"
-                          checked={formData.customerType === "New"}
-                          onChange={handleInputChange}
-                          className={classes.radioInput}
-                          required
-                        />
-                        <span className={classes.radioText}>New customer</span>
-                      </label>
-                      <label className={classes.radioLabel}>
-                        <input
-                          type="radio"
-                          name="customerType"
-                          value="Existing"
-                          checked={formData.customerType === "Existing"}
-                          onChange={handleInputChange}
-                          className={classes.radioInput}
-                        />
-                        <span className={classes.radioText}>Existing customer</span>
-                      </label>
+                  <div className={classes.formRow}>
+                    <div className={classes.formGroup}>
+                      <label className={classes.inputLabel}>{t("form.customerInfo.customerTypeLabel")}</label>
+                      <div className={classes.radioGroup}>
+                        <label className={classes.radioLabel}>
+                          <input
+                            type="radio"
+                            name="customerType"
+                            value="New"
+                            checked={formData.customerType === "New"}
+                            onChange={handleInputChange}
+                            className={classes.radioInput}
+                            required
+                          />
+                          <span className={classes.radioText}>{t("form.customerInfo.customerTypeOptions.new")}</span>
+                        </label>
+                        <label className={classes.radioLabel}>
+                          <input
+                            type="radio"
+                            name="customerType"
+                            value="Existing"
+                            checked={formData.customerType === "Existing"}
+                            onChange={handleInputChange}
+                            className={classes.radioInput}
+                          />
+                          <span className={classes.radioText}>{t("form.customerInfo.customerTypeOptions.returning")}</span>
+                        </label>
+                      </div>
                     </div>
                   </div>
               
                   <div className={classes.formRow}>
                     <div className={classes.formGroup}>
-                      <label htmlFor="firstName" className={classes.inputLabel}>First name</label>
+                      <label htmlFor="firstName" className={classes.inputLabel}>{t("form.customerInfo.firstNameLabel")}</label>
                       <input
                         type="text"
                         id="firstName"
@@ -372,13 +387,13 @@ const FormPage: React.FC = () => {
                         value={formData.firstName}
                         onChange={handleInputChange}
                         className={classes.textInput}
-                        placeholder="e.g. Maggie"
+                        placeholder={t("form.customerInfo.firstNamePlaceholder")}
                         required
                       />
                     </div>
                     
                     <div className={classes.formGroup}>
-                      <label htmlFor="lastName" className={classes.inputLabel}>Last name</label>
+                      <label htmlFor="lastName" className={classes.inputLabel}>{t("form.customerInfo.lastNameLabel")}</label>
                       <input
                         type="text"
                         id="lastName"
@@ -386,7 +401,7 @@ const FormPage: React.FC = () => {
                         value={formData.lastName}
                         onChange={handleInputChange}
                         className={classes.textInput}
-                        placeholder="e.g. Smith"
+                        placeholder={t("form.customerInfo.lastNamePlaceholder")}
                         required
                       />
                     </div>
@@ -394,7 +409,7 @@ const FormPage: React.FC = () => {
                   
                   <div className={classes.formRow}>
                     <div className={classes.formGroup}>
-                      <label htmlFor="email" className={classes.inputLabel}>Email</label>
+                      <label htmlFor="email" className={classes.inputLabel}>{t("form.customerInfo.emailLabel")}</label>
                       <input
                         type="email"
                         id="email"
@@ -402,13 +417,13 @@ const FormPage: React.FC = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         className={classes.textInput}
-                        placeholder="you@address.com"
+                        placeholder={t("form.customerInfo.emailPlaceholder")}
                         required
                       />
                     </div>
                     
                     <div className={classes.formGroup}>
-                      <label htmlFor="phoneNumber" className={classes.inputLabel}>Phone number</label>
+                      <label htmlFor="phoneNumber" className={classes.inputLabel}>{t("form.customerInfo.phoneLabel")}</label>
                       <input
                         type="tel"
                         id="phoneNumber"
@@ -416,7 +431,7 @@ const FormPage: React.FC = () => {
                         value={formData.phoneNumber}
                         onChange={handleInputChange}
                         className={classes.textInput}
-                        placeholder="e.g. 01352 543..."
+                        placeholder={t("form.customerInfo.phonePlaceholder")}
                         required
                       />
                     </div>
@@ -427,25 +442,21 @@ const FormPage: React.FC = () => {
               <div className={classes.sectionDivider}></div>
               
               <div className={classes.formSection}>
-                <h2 className={classes.sectionHeading}>Which days generally work best?</h2>
+                <h2 className={classes.sectionHeading}>{t("form.preferredDays.heading")}</h2>
+                <p className={classes.subHeading}>{t("form.preferredDays.description")}</p>
                 <div className={classes.daysCheckboxGroup}>
-                  {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => (
-                    <div key={day} className={classes.dayOption}>
-                      <label className={classes.checkboxContainer}>
+                  {days.map(day => (
+                    <div key={day.id} className={classes.dayOption}>
+                      <label className={classes.dayLabel}>
                         <input
                           type="checkbox"
                           name="preferredDays"
-                          value={day}
-                          checked={formData.preferredDays.includes(day)}
-                          onChange={() => {
-                            const updatedDays = formData.preferredDays.includes(day)
-                              ? formData.preferredDays.filter(d => d !== day)
-                              : [...formData.preferredDays, day];
-                            setFormData({ ...formData, preferredDays: updatedDays });
-                          }}
+                          value={day.id}
+                          checked={formData.preferredDays.includes(day.id)}
+                          onChange={handleDaysChange}
                           className={classes.checkboxInput}
                         />
-                        <span className={classes.dayLabel}>{day}</span>
+                        <span className={classes.checkboxText}>{day.label}</span>
                       </label>
                     </div>
                   ))}
@@ -455,71 +466,30 @@ const FormPage: React.FC = () => {
               <div className={classes.sectionDivider}></div>
               
               <div className={classes.formSection}>
-                <h2 className={classes.sectionHeading}>Notes for the groomer</h2>
-                <div className={classes.formGroup}>
-                  <textarea
-                    id="notes"
-                    name="notes"
-                    value={formData.notes}
-                    onChange={handleInputChange}
-                    className={classes.textareaInput}
-                    placeholder="Type your message"
-                    rows={4}
-                  />
-                </div>
-              </div>
-              
-              <div className={classes.sectionDivider}></div>
-              
-              <div className={classes.formSection}>
-                <div className={classes.checkboxGroup}>
-                  <label className={classes.checkboxContainer}>
-                    <input
-                      type="checkbox"
-                      name="discountedGrooming"
-                      checked={formData.discountedGrooming}
-                      onChange={handleCheckboxChange}
-                      className={classes.checkboxInput}
-                    />
-                    <span className={classes.checkboxText}>Yes, I'd like my dog to be considered for discounted grooming services at your training centre.</span>
-                  </label>
-                </div>
+                <h2 className={classes.sectionHeading}>{t("form.additionalInfo.heading")}</h2>
                 
-                <div className={classes.checkboxGroup}>
-                  <label className={classes.checkboxContainer}>
-                    <input
-                      type="checkbox"
-                      name="termsRead"
-                      checked={formData.termsRead}
-                      onChange={handleCheckboxChange}
-                      className={classes.checkboxInput}
-                      required
+                <div className={classes.formFields}>
+                  <div className={classes.formGroup}>
+                    <label htmlFor="notes" className={classes.inputLabel}>{t("form.additionalInfo.notesLabel")}</label>
+                    <textarea
+                      id="notes"
+                      name="notes"
+                      value={formData.notes}
+                      onChange={handleInputChange}
+                      className={classes.textareaInput}
+                      placeholder={t("form.additionalInfo.notesPlaceholder")}
+                      rows={4}
                     />
-                    <span className={classes.checkboxText}>Please confirm you have read and understood our <a href="#" className={classes.termsLink}>Booking Terms and Conditions</a></span>
-                  </label>
-                </div>
-                
-                <div className={classes.checkboxGroup}>
-                  <label className={classes.checkboxContainer}>
-                    <input
-                      type="checkbox"
-                      name="termsAgreed"
-                      checked={formData.termsAgreed}
-                      onChange={handleCheckboxChange}
-                      className={classes.checkboxInput}
-                      required
-                    />
-                    <span className={classes.checkboxText}>By sending this request, you are confirming that you agree with the <a href="#" className={classes.termsLink}>Terms and Conditions</a></span>
-                  </label>
+                  </div>
                 </div>
                 
                 <div className={classes.submitButtonContainer}>
                   <button 
                     type="submit" 
                     className={classes.submitButton}
-                    disabled={!formData.termsAgreed || !formData.termsRead || isSubmitting}
+                    disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Sending...' : 'Send booking request'}
+                    {isSubmitting ? t("form.submit.sending") : t("form.submit.send")}
                   </button>
                 </div>
               </div>

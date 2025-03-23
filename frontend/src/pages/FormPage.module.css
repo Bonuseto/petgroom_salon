@@ -23,7 +23,7 @@
 
 .mainHeading {
   font-size: 38px;
-  color: #4d5937;
+  color: #0ABAB5;
   font-weight: 600;
   margin: 0;
   line-height: 1.2;
@@ -41,14 +41,14 @@
 
 .sectionHeading {
   font-size: 24px;
-  color: #4d5937;
+  color: #0ABAB5;
   margin-bottom: 20px;
   font-weight: 500;
 }
 
 .subHeading {
   font-size: 20px;
-  color: #4d5937;
+  color: #0ABAB5;
   margin-bottom: 10px;
   font-weight: 500;
 }
@@ -84,9 +84,9 @@
 }
 
 .serviceOption:has(.hiddenRadio:checked) {
-  background: rgba(77, 89, 55, 0.05);
+  background: rgba(10, 186, 181, 0.05);
   border-color: #0ABAB5;
-  box-shadow: 0 4px 12px rgba(77, 89, 55, 0.12);
+  box-shadow: 0 4px 12px rgba(10, 186, 181, 0.12);
 }
 
 .serviceIcon {
@@ -138,7 +138,7 @@
 .hiddenRadio:checked + .customRadio {
   background: #0ABAB5;
   border-color: #0ABAB5;
-  box-shadow: 0 0 0 2px rgba(77, 89, 55, 0.2);
+  box-shadow: 0 0 0 2px rgba(10, 186, 181, 0.2);
 }
 
 /* Checked state - adds a white dot */
@@ -215,9 +215,9 @@
 .textInput:focus,
 .textareaInput:focus,
 .selectInput:focus {
-  border-color: #4d5937;
+  border-color: #0ABAB5;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(77, 89, 55, 0.1);
+  box-shadow: 0 0 0 3px rgba(10, 186, 181, 0.1);
 }
 
 .textInput::placeholder,
@@ -287,12 +287,14 @@
 }
 
 .termsLink {
-  color: #4d5937;
+  color: #0ABAB5;
   text-decoration: underline;
   font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .termsLink:hover {
+  color: #089692;
   text-decoration: none;
 }
 
@@ -325,26 +327,28 @@
 }
 
 .submitButton {
-  background-color: #4d5937;
+  padding: 14px 30px;
+  background-color: #0ABAB5;
   color: white;
-  font-weight: 500;
-  padding: 14px 40px;
   border: none;
   border-radius: 8px;
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(10, 186, 181, 0.1);
 }
 
 .submitButton:hover {
-  background-color: #3a4429;
+  background-color: #089692;
   transform: translateY(-2px);
 }
 
 .submitButton:disabled {
-  background-color: #c5c5c5;
+  background-color: #cccccc;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
 /* Responsive adjustments */
