@@ -1,11 +1,25 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classes from './HeaderComponent.module.css';
 import previewVideo from './preview.mp4';
 import previewSnapshotVideo from './previewSnapshot.png';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function HeaderComponent (): JSX.Element {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { t, i18n } = useTranslation();
+  const [currentLang, setCurrentLang] = useState(i18n.language);
+
+  useEffect(() => {
+    const handleLanguageChange = (): void => {
+      setCurrentLang(i18n.language);
+    };
+
+    i18n.on('languageChanged', handleLanguageChange);
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
 
   useEffect(() => {
     const videoElement = videoRef.current;
@@ -29,19 +43,30 @@ function HeaderComponent (): JSX.Element {
           <div className={classes.headerElements}>
             <div className={classes.headerContent}>
               <h1 className={classes.headerSecondText}>
-                Trusted Dog Grooming Services in Wroclaw
+                {t('header.trustedServices')}
               </h1>
               <div className={classes.titleContainer}>
-                <h2 className={classes.headerMainText}>
-                  Pet grooming <em className={classes.withHeart}>with&nbsp;heart</em>
-                </h2>
+                {currentLang === 'pl'
+                  ? (
+                  <h2 className={`${classes.headerMainText} ${classes.polishText}`}>
+                    Pielęgnacja zwierząt{' '}
+                    <span className={`${classes.withHeart} ${classes.polishText}`}>
+                      z sercem
+                    </span>
+                  </h2>
+                    )
+                  : (
+                  <h2 className={classes.headerMainText}>
+                    {t('header.petGrooming')}&nbsp;<span className={classes.withHeart}>{t('header.withHeart')}</span>
+                  </h2>
+                    )}
                 <p className={classes.headerSecondText}>
-                  Bringing out the best in every Wroclaw pet.
+                  {t('header.bringingBest')}
                 </p>
               </div>
               <div className={classes.headerButtonGroup}>
                 <Link className={classes.primaryButton} to="/appointments">
-                  Book appointment
+                  {t('header.bookAppointment')}
                 </Link>
               </div>
             </div>

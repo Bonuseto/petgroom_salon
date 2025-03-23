@@ -1,5 +1,4 @@
 {
-  "pageTitle": "Witaj w Mojej Aplikacji",
   "howToFindUs": "JAK NAS ZNALEŹĆ",
   "language": {
     "english": "EN",
@@ -11,5 +10,23 @@
   "services": "Usługi",
   "prices": "Ceny",
   "reviews": "Recenzje",
-  "map": "Mapa"
+  "map": "Mapa",
+  "header": {
+    "trustedServices": "Zaufane usługi strzyżenia psów we Wrocławiu",
+    "petGrooming": "Pielęgnacja zwierząt",
+    "withHeart": "z sercem",
+    "bringingBest": "Wydobywamy to, co najlepsze w każdym zwierzaku we Wrocławiu.",
+    "bookAppointment": "Umów wizytę"
+  },
+  "buttons": {
+    "bookNow": "Umów teraz",
+    "openGoogleMaps": "Otwórz Mapy Google"
+  },
+  "reviewsSection": {
+    "review1": "Świetnie jak zawsze. Moje psy są tu strzyżone od lat",
+    "review2": "Moja żona jest zachwycona wyglądem swojego pupila po wizycie w tym salonie",
+    "review3": "Bardzo dobra obsługa, piękny i pachnący pies, polecam.",
+    "review4": "Świetne miejsce, zespół i doskonała obsługa. Bonnie uwielbia tam chodzić",
+    "review5": "Najlepszy fryzjer dla psów. Polecam w 100%."
+  }
 }

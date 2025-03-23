@@ -3,8 +3,11 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import classes from './GoogleMapsReviews.module.css';
+import { useTranslation } from 'react-i18next';
 
 const GoogleMapsReviews: React.FC = (): JSX.Element => {
+  const { t } = useTranslation();
+
   interface Review {
     name: string
     rating: number
@@ -12,19 +15,19 @@ const GoogleMapsReviews: React.FC = (): JSX.Element => {
     profilePhotoUrl: string
   };
 
-  const createReview = (name: string, rating: number, text: string, profilePhotoUrl: string): Review => ({
+  const createReview = (name: string, rating: number, textKey: string, profilePhotoUrl: string): Review => ({
     name,
     rating,
-    text,
+    text: t(textKey),
     profilePhotoUrl
   });
 
   const reviews = [
-    createReview('Magdalena Piprek', 5, 'Great as always. My dogs have been groomed here for years', 'https://lh3.googleusercontent.com/a/ACg8ocKCRD30ljGYOtLW2SvQRaFjXZwA-XpFSMPqfUYqDfLROhT82A=w75-h75-p-rp-mo-ba3-br100'),
-    createReview('Robert Ch.', 4, "My wife is delighted with her pet's appearance after visiting this salon", 'https://lh3.googleusercontent.com/a-/ALV-UjU2bKrvJMq0iG4SRcA7ygMay9a_HB-R8vf6XsByAYn1ZtSbYS5e=w75-h75-p-rp-mo-ba5-br100'),
-    createReview('Anna Klodowska', 5, 'Very good service, a beautiful and fragrant dog, I recommend it.', 'https://lh3.googleusercontent.com/a/ACg8ocKH7Zfyai7MyJ0XMGNWwC_iqmSXYSgCvbA-U56BVFtOkKUO=w75-h75-p-rp-mo-br100'),
-    createReview('Pedro Augusto', 5, 'Great place, team and awesome service. Bonnie loves going there', 'https://lh3.googleusercontent.com/a/ACg8ocIbJmpgqJg4vbtD7-VwIker7Y-YVc1HRj4JDd6wVeSajhqeGg=w180-h180-p-rp-mo-ba2-br100'),
-    createReview('Grzegorz Joniec', 5, 'The best dog hairdresser. I recommend it 100%.', 'https://lh3.googleusercontent.com/a-/ALV-UjWgOfXI3kJaxZAVIFHbntukD-aTpMD7D_D_og3BPPQUhyNm3NY8=w75-h75-p-rp-mo-br100')
+    createReview('Magdalena Piprek', 5, 'reviewsSection.review1', 'https://lh3.googleusercontent.com/a/ACg8ocKCRD30ljGYOtLW2SvQRaFjXZwA-XpFSMPqfUYqDfLROhT82A=w75-h75-p-rp-mo-ba3-br100'),
+    createReview('Robert Ch.', 4, 'reviewsSection.review2', 'https://lh3.googleusercontent.com/a-/ALV-UjU2bKrvJMq0iG4SRcA7ygMay9a_HB-R8vf6XsByAYn1ZtSbYS5e=w75-h75-p-rp-mo-ba5-br100'),
+    createReview('Anna Klodowska', 5, 'reviewsSection.review3', 'https://lh3.googleusercontent.com/a/ACg8ocKH7Zfyai7MyJ0XMGNWwC_iqmSXYSgCvbA-U56BVFtOkKUO=w75-h75-p-rp-mo-br100'),
+    createReview('Pedro Augusto', 5, 'reviewsSection.review4', 'https://lh3.googleusercontent.com/a/ACg8ocIbJmpgqJg4vbtD7-VwIker7Y-YVc1HRj4JDd6wVeSajhqeGg=w180-h180-p-rp-mo-ba2-br100'),
+    createReview('Grzegorz Joniec', 5, 'reviewsSection.review5', 'https://lh3.googleusercontent.com/a-/ALV-UjWgOfXI3kJaxZAVIFHbntukD-aTpMD7D_D_og3BPPQUhyNm3NY8=w75-h75-p-rp-mo-br100')
   ];
 
   const sliderSettings = {
@@ -75,8 +78,8 @@ const GoogleMapsReviews: React.FC = (): JSX.Element => {
   };
 
   return (
-    <section className={classes.reviewsSection} aria-label="Customer Reviews">
-      <h2 className={classes.reviewsHeading}>Reviews</h2>
+    <section className={classes.reviewsSection} aria-label="Customer Reviews" id="reviewsId">
+      <h2 className={classes.reviewsHeading}>{t('reviews')}</h2>
       <div className={classes.reviewsSliderContainer}>
         <Slider {...sliderSettings}>
           {reviews.map((review, index) => (

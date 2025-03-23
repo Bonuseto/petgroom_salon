@@ -1,5 +1,4 @@
 {
-  "pageTitle": "Welcome to My App",
   "howToFindUs": "HOW TO FIND US",
   "language": {
     "english": "EN",
@@ -11,5 +10,23 @@
   "services": "Services",
   "prices": "Prices",
   "reviews": "Reviews",
-  "map": "How to find us"
+  "map": "How to find us",
+  "header": {
+    "trustedServices": "Trusted Dog Grooming Services in Wroclaw",
+    "petGrooming": "Pet grooming",
+    "withHeart": "with heart",
+    "bringingBest": "Bringing out the best in every Wroclaw pet.",
+    "bookAppointment": "Book appointment"
+  },
+  "buttons": {
+    "bookNow": "Book now",
+    "openGoogleMaps": "Open Google Maps"
+  },
+  "reviewsSection": {
+    "review1": "Great as always. My dogs have been groomed here for years",
+    "review2": "My wife is delighted with her pet's appearance after visiting this salon",
+    "review3": "Very good service, a beautiful and fragrant dog, I recommend it.",
+    "review4": "Great place, team and awesome service. Bonnie loves going there",
+    "review5": "The best dog hairdresser. I recommend it 100%."
+  }
 }

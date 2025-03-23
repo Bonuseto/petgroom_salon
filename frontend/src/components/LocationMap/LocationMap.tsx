@@ -60,7 +60,7 @@ const LocationMap: React.FC<Props> = ({ isLoaded }) => {
               <circle cx="12" cy="10" r="3"/>
             </svg>
           </span>
-          Open Google Maps
+          {t('buttons.openGoogleMaps')}
         </button>
       </Box>
     </Container>
