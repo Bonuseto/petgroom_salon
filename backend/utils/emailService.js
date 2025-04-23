@@ -65,7 +65,7 @@ const getCustomerEmailHtml = (appointmentData) => {
           </p>
           
           <p style="color: #17b5a6; font-size: 18px; font-weight: bold; text-align: center; margin: 20px 0;">
-            +420 776 406 043
+            +48 574 516 116
           </p>
           
           <div style="margin-top: 30px; text-align: center;">
