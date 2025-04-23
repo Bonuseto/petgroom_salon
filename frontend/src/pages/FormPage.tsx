@@ -126,14 +126,11 @@ const FormPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    setServiceFieldTouched(true);
-    
     if (!formData.service) {
-      e.stopPropagation(); // Prevent form submission
+      setServiceFieldTouched(true);
       return;
     }
     
-    // Validate GDPR consent
     if (!formData.gdprConsent) {
       alert(t('gdpr.error', 'Please accept the data processing consent to proceed.'));
       return;
@@ -179,7 +176,7 @@ const FormPage: React.FC = () => {
       
       if (data.success) {
         setSubmitSuccess(true);
-        // Reset form
+        // Reset form and touched state
         setFormData({
           service: "",
           breed: "",
@@ -198,6 +195,7 @@ const FormPage: React.FC = () => {
           notes: "",
           gdprConsent: false,
         });
+        setServiceFieldTouched(false); // Reset the touched state
         window.scrollTo(0, 0);
       } else {
         setSubmitError(t('form.errors.submitFailed', 'Failed to send booking request. Please try again later or contact us directly.'));
