@@ -93,6 +93,22 @@ const getTeamEmailHtml = (appointmentData, serviceFormatted) => {
   const translations = loadTranslations('pl');
   const t = translations.teamEmail;
 
+  // Helper function to get value from nested or flat structure
+  const getValue = (obj, directKey, nestedPath) => {
+    // Try nested path first as it's the new structure
+    if (nestedPath) {
+      const [section, field] = nestedPath.split('.');
+      if (obj[section]?.[field] !== undefined && obj[section][field] !== null) {
+        return obj[section][field];
+      }
+    }
+    // Fall back to direct access for backward compatibility
+    if (obj[directKey] !== undefined && obj[directKey] !== null) {
+      return obj[directKey];
+    }
+    return '';
+  };
+
   return `
   <!DOCTYPE html>
   <html lang="pl">
@@ -122,23 +138,22 @@ const getTeamEmailHtml = (appointmentData, serviceFormatted) => {
           
           <div style="margin-bottom: 20px; border-left: 4px solid #17b5a6; padding-left: 15px;">
             <h3 style="color: #333; margin-top: 0; margin-bottom: 10px; font-size: 18px;">${t.customerSection.heading}</h3>
-            <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.customerSection.fullName}:</strong> ${appointmentData.customerName}</p>
-            <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.customerSection.email}:</strong> ${appointmentData.customerEmail}</p>
+            <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.customerSection.fullName}:</strong> ${getValue(appointmentData, 'customerName', '')}</p>
+            <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.customerSection.email}:</strong> ${getValue(appointmentData, 'customerEmail', '')}</p>
           </div>
           
           <div style="margin-bottom: 20px; border-left: 4px solid #17b5a6; padding-left: 15px;">
             <h3 style="color: #333; margin-top: 0; margin-bottom: 10px; font-size: 18px;">${t.petSection.heading}</h3>
-            <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.petSection.name}:</strong> ${appointmentData.petName}</p>
+            <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.petSection.name}:</strong> ${getValue(appointmentData, 'petName', '')}</p>
             <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.petSection.service}:</strong> ${serviceFormatted}</p>
             
             ${(() => {
-              let petDetails = appointmentData.petDetails || {};
-              let breed = petDetails.breed || '';
-              let age = petDetails.age || '';
-              let matting = petDetails.matting || '';
-              let comfortGrooming = petDetails.comfortable || '';
-              let lastGroom = petDetails.lastGroom || '';
-              let healthIssues = petDetails.healthIssues || '';
+              const breed = getValue(appointmentData, 'breed', 'petDetails.breed');
+              const age = getValue(appointmentData, 'dogAge', 'petDetails.age');
+              const matting = getValue(appointmentData, 'matting', 'petDetails.matting');
+              const comfortGrooming = getValue(appointmentData, 'comfortable', 'petDetails.comfortable');
+              const lastGroom = getValue(appointmentData, 'lastGroom', 'petDetails.lastGroom');
+              const healthIssues = getValue(appointmentData, 'healthIssues', 'petDetails.healthIssues');
                             
               return `
                 <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px;">
@@ -169,10 +184,9 @@ const getTeamEmailHtml = (appointmentData, serviceFormatted) => {
             <h3 style="color: #333; margin-top: 0; margin-bottom: 10px; font-size: 18px;">${t.preferencesSection.heading}</h3>
             
             ${(() => {
-              let customerDetails = appointmentData.customerDetails || {};
-              let customerType = customerDetails.customerType || '';
-              let phone = customerDetails.phoneNumber || '';
-              let preferredDays = customerDetails.preferredDays || '';
+              const customerType = getValue(appointmentData, 'customerType', 'customerDetails.customerType');
+              const phone = getValue(appointmentData, 'phoneNumber', 'customerDetails.phoneNumber');
+              const preferredDays = getValue(appointmentData, 'preferredDays', 'customerDetails.preferredDays');
               
               return `
                 <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px;">
@@ -191,7 +205,7 @@ const getTeamEmailHtml = (appointmentData, serviceFormatted) => {
           <!-- Notes section -->
           <div style="margin-top: 20px; background-color: #f0f0f0; border-radius: 10px; padding: 15px;">
             <h3 style="color: #333; margin-top: 0; margin-bottom: 10px; font-size: 18px;">${t.notesSection.heading}</h3>
-            <p style="color: #333; margin: 0; font-size: 14px;">${appointmentData.customerDetails?.notes || t.notesSection.noNotes}</p>
+            <p style="color: #333; margin: 0; font-size: 14px;">${getValue(appointmentData, 'notes', 'customerDetails.notes') || t.notesSection.noNotes}</p>
           </div>
         </div>
       </div>

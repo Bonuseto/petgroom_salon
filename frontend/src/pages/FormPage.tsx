@@ -146,20 +146,22 @@ const FormPage: React.FC = () => {
         customerEmail: formData.email,
         petName: formData.dogName,
         service: formData.service,
-        appointmentDate: new Date().toISOString(), // You might want to add a date picker in your form
-        language: i18n.language, // Add current language
-        additionalNotes: `
-          Breed: ${formData.breed}
-          Age: ${formData.dogAge}
-          Matting: ${formData.matting}
-          Comfortable being groomed: ${formData.comfortable}
-          Last groom: ${formData.lastGroom}
-          Health issues: ${formData.healthIssues}
-          Customer type: ${formData.customerType}
-          Phone: ${formData.phoneNumber}
-          Preferred days: ${formData.preferredDays.join(', ')}
-          Notes: ${formData.notes}
-        `,
+        appointmentDate: new Date().toISOString(),
+        language: i18n.language,
+        petDetails: {
+          breed: formData.breed,
+          age: formData.dogAge,
+          matting: formData.matting,
+          comfortable: formData.comfortable,
+          lastGroom: formData.lastGroom,
+          healthIssues: formData.healthIssues
+        },
+        customerDetails: {
+          customerType: formData.customerType,
+          phoneNumber: formData.phoneNumber,
+          preferredDays: formData.preferredDays.join(', '),
+          notes: formData.notes
+        },
         gdprConsent: formData.gdprConsent
       };
       
