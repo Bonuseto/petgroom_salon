@@ -39,6 +39,9 @@
       "handStripping": "Hand Stripping",
       "pawTrim": "Paw Trim"
     },
+    "errors": {
+      "serviceRequired": "Please select a service to continue"
+    },
     "dogInfo": {
       "heading": "Dog information",
       "breedLabel": "Dog Breed",
@@ -46,7 +49,9 @@
       "nameLabel": "Dog's Name",
       "namePlaceholder": "Enter your dog's name",
       "ageLabel": "Dog's Age",
-      "agePlaceholder": "Enter your dog's age"
+      "agePlaceholder": "Select your dog's age",
+      "ageMonths": "months",
+      "ageYears": "years"
     },
     "groomingHistory": {
       "heading": "Grooming history",
@@ -56,12 +61,14 @@
         "no": "No",
         "unsure": "Not sure"
       },
+      "mattingPlaceholder": "Select if your dog has matting",
       "comfortableLabel": "Is your dog comfortable with grooming?",
       "comfortableOptions": {
         "yes": "Yes",
         "no": "No",
         "unsure": "First time"
       },
+      "comfortablePlaceholder": "Select comfort level",
       "lastGroomLabel": "When was the last grooming?",
       "lastGroomOptions": {
         "recent": "1 - 4 weeks ago",
@@ -113,6 +120,35 @@
     "submit": {
       "sending": "Sending...",
       "send": "Send booking request"
+    }
+  },
+  "gdpr": {
+    "title": "According to Article 13 of the General Data Protection Regulation of the European Parliament and of the Council (EU) 2016/679 on the protection of personal data of April 27, 2016 (EU Journal of Laws L 119 of 04.05.2016), I inform that:",
+    "administrator": "The administrator of your personal data is Pracownia Cztery Łapy Patrycja Wojciechowska ul. Obodrzycka 1A, 51-112 Wrocław, NIP 8951864454, REGON 365379235",
+    "dataProcessing": "Your personal data will be processed:",
+    "processingPurpose": {
+      "marketing": "on the basis of Art. 6(1)(a) of the European Parliament and of the Council EU 2016/679 Regulation for: marketing of own products and services, contact by telephone and by electronic mail, transfer of data to other entities - cooperating with the Administrator;",
+      "legitimate": "on the basis of Art. 6(1)(f) of the European Parliament and of the Council EU 2016/679 Regulation, as necessary for purposes arising from legitimate interests pursued by the administrator (marketing of own products and services, telephone and email contact);",
+      "legal": "on the basis of Art. 6(3)(c) of the European Parliament and of the Council EU 2016/679 Regulation to comply with a legal obligation requiring processing under European Union or Polish law, to which the Administrator is subject, to the extent that processing is necessary, including the Accounting Act and the Labor Code;",
+      "claims": "on the basis of Art. 6(3)(e) of the European Parliament and of the Council EU 2016/679 Regulation for the establishment, investigation or defense of claims, to the extent that processing is necessary;"
+    },
+    "retentionPeriod": "Your personal data will be processed until the consent for their processing is withdrawn or until their processing for business planning purposes ceases, subject to data processed on the basis of Art. 6(3)(c) and Art. 6(3)(f) of the European Parliament and of the Council EU 2016/679 Regulation, i.e. when required by applicable law or they cease to be necessary for the establishment, investigation or defense of claims.",
+    "rights": "You have the right to request from the administrator access to personal data, the right to rectify, delete or limit processing, the right to withdraw consent, the right to object to processing and the right to data portability. Withdrawal of consent does not affect the lawfulness of processing based on consent before its withdrawal. You also have the right to lodge a complaint with the supervisory authority.",
+    "voluntary": "Providing personal data is voluntary, however, failure to provide data results in the inability to receive marketing offers.",
+    "accept": "ACCEPT",
+    "consentText": "By checking this box, I consent to Best Groom Studio collecting and processing my personal data and information about my pet for the purpose of scheduling and managing grooming appointments. I understand that: My data will be stored securely and only used for appointment-related communication; My information will be retained for 6 months from my last appointment; I have the right to access, correct, or request deletion of my data at any time; I can withdraw my consent at any time by contacting team@bestgroomstudio.pl.",
+    "error": "Please accept the data processing consent to proceed.",
+    "understand": "I understand that:",
+    "moreInfo": "More information",
+    "simpleConsent": {
+      "title": "GDPR Consent",
+      "text": "By checking this box, I consent to Best Groom Studio collecting and processing my personal data.",
+      "bulletPoints": {
+        "storage": "My data will be stored securely and only used for appointment-related communication",
+        "retention": "My information will be retained for 6 months from my last appointment",
+        "rights": "I have the right to access, correct, or request deletion of my data at any time",
+        "withdrawal": "I can withdraw my consent at any time by contacting team@bestgroomstudio.pl"
+      }
     }
   }
 }

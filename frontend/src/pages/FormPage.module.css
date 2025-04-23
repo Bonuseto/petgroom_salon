@@ -200,6 +200,31 @@
   margin-bottom: 8px;
 }
 
+.textInput[type="tel"] {
+  direction: ltr;
+  text-align: left;
+  padding-left: 30px;
+}
+
+.textInput[type="tel"]::placeholder {
+  direction: ltr;
+  text-align: left;
+}
+
+.phoneInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.phonePrefix {
+  position: absolute;
+  left: 16px;
+  color: #333;
+  font-size: 16px;
+  pointer-events: none;
+}
+
 .textInput,
 .textareaInput,
 .selectInput {
@@ -256,7 +281,7 @@
 
 .radioInput {
   margin-right: 8px;
-  accent-color: #4d5937;
+  accent-color: #0ABAB5;
 }
 
 .radioText {
@@ -278,7 +303,7 @@
 .checkboxInput {
   margin-right: 10px;
   margin-top: 3px;
-  accent-color: #4d5937;
+  accent-color: #0ABAB5;
 }
 
 .checkboxText {
@@ -319,9 +344,14 @@
   font-size: 14px;
 }
 
+/* GDPR Container */
+.gdprContainer {
+  margin: 25px 0 15px;
+}
+
 /* Submit button */
 .submitButtonContainer {
-  margin-top: 30px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 }
@@ -349,6 +379,31 @@
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+}
+
+/* Success and error messages */
+.successMessage {
+  background-color: #e7f5ea;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.errorMessage {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
 }
 
 /* Responsive adjustments */
@@ -408,28 +463,4 @@
   .dayOption {
     width: calc(50% - 8px);
   }
-}
-
-.successMessage {
-  background-color: #e7f5ea;
-  border: 1px solid #c3e6cb;
-  color: #155724;
-  padding: 16px 20px;
-  border-radius: 8px;
-  margin-top: 20px;
-  font-size: 16px;
-  text-align: center;
-  animation: fadeIn 0.3s ease;
-}
-
-.errorMessage {
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  color: #721c24;
-  padding: 16px 20px;
-  border-radius: 8px;
-  margin-top: 20px;
-  font-size: 16px;
-  text-align: center;
-  animation: fadeIn 0.3s ease;
 }

@@ -233,7 +233,7 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
             </Box>
 
             {/* Desktop - Book now button */}
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            {/* <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               <Button
                 component={Link}
                 to="/appointments"
@@ -255,7 +255,7 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
               >
                 {t('buttons.bookNow')}
               </Button>
-            </Box>
+            </Box> */}
           </Box>
         </Toolbar>
       </AppBar>

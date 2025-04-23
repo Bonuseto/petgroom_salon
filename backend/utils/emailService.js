@@ -1,46 +1,212 @@
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
+const path = require('path');
+const fs = require('fs');
 
-// Create a transporter based on environment variables
-const createTransporter = () => {
-  console.log('Email service:', process.env.EMAIL_SERVICE);
-  console.log('Email user:', process.env.EMAIL_USER);
-  console.log('Business email:', process.env.BUSINESS_EMAIL);
-  
-  // For Gmail
-  if (process.env.EMAIL_SERVICE === 'gmail') {
-    console.log('Using Gmail transport');
-    return nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD
-      }
-    });
-  }
-  
-  // For custom SMTP server
-  console.log('Using custom SMTP transport');
-  console.log('SMTP Host:', process.env.EMAIL_HOST || 'smtp.example.com');
-  console.log('SMTP Port:', process.env.EMAIL_PORT || 587);
-  return nodemailer.createTransport({
-    host: process.env.EMAIL_HOST || 'smtp.example.com',
-    port: process.env.EMAIL_PORT || 587,
-    secure: process.env.EMAIL_SECURE === 'true',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD
-    }
-  });
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+console.log('SendGrid configured');
+
+const getLanguageDisplay = (lang) => {
+  const languages = {
+    'en': 'English',
+    'pl': 'Polish',
+    'ru': 'Russian',
+    'ua': 'Ukrainian'
+  };
+  return languages[lang] || lang;
 };
 
-// Create the transporter here
-let transporter;
-try {
-  transporter = createTransporter();
-  console.log('Transporter created successfully');
-} catch (error) {
-  console.error('Error creating transporter:', error);
-}
+const loadTranslations = (language) => {
+  try {
+    const filePath = path.join(__dirname, `../locales/${language}/emails.json`);
+    const rawData = fs.readFileSync(filePath, 'utf8');
+    return JSON.parse(rawData);
+  } catch (error) {
+    console.error(`Failed to load translations for ${language}, falling back to English`);
+    const defaultPath = path.join(__dirname, '../locales/en/emails.json');
+    const rawData = fs.readFileSync(defaultPath, 'utf8');
+    return JSON.parse(rawData);
+  }
+};
+
+const getCustomerEmailHtml = (appointmentData) => {
+  // Load translations for customer's language
+  const language = appointmentData.language?.toLowerCase()?.substring(0, 2) || 'en';
+  const translations = loadTranslations(language);
+  const t = translations.customerEmail;
+
+  return `
+  <!DOCTYPE html>
+  <html lang="${language}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${t.subject}</title>
+  </head>
+  <body style="margin: 0; padding: 0; font-family: Arial, sans-serif;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #f7f7f2;">
+      <!-- Header with logo and teal background -->
+      <div style="background-color: #17b5a6; padding: 20px; text-align: center;">
+        <h1 style="color: white; margin: 0; font-size: 24px;">BEST GROOM STUDIO</h1>
+      </div>
+      
+      <!-- Main content -->
+      <div style="padding: 40px 30px; background-color: #f7f7f2;">
+        <div style="background-color: white; border-radius: 20px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <h2 style="color: #17b5a6; margin-top: 0; margin-bottom: 20px; font-size: 22px;">
+            ${t.thankYou}
+          </h2>
+          
+          <p style="color: #333; font-size: 16px; line-height: 1.5; margin-bottom: 25px;">
+            ${t.confirmationMessage.replace('{{customerName}}', appointmentData.customerName).replace('{{petName}}', appointmentData.petName)}
+          </p>
+          
+          <p style="color: #333; font-size: 16px; line-height: 1.5; margin-top: 25px;">
+            ${t.speedUpProcess}
+          </p>
+          
+          <p style="color: #17b5a6; font-size: 18px; font-weight: bold; text-align: center; margin: 20px 0;">
+            +420 776 406 043
+          </p>
+          
+          <div style="margin-top: 30px; text-align: center;">
+            <a href="https://bestgroomstudio.com" style="background-color: #17b5a6; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; font-weight: bold; display: inline-block;">
+              ${t.visitWebsite}
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div style="background-color: #17b5a6; padding: 20px; text-align: center;">
+        <p style="color: white; margin: 0; font-size: 14px;">
+          ${t.footer}
+        </p>
+      </div>
+    </div>
+  </body>
+  </html>
+`;
+};
+
+const getTeamEmailHtml = (appointmentData, serviceFormatted) => {
+  // Always use Polish for team emails
+  const translations = loadTranslations('pl');
+  const t = translations.teamEmail;
+
+  return `
+  <!DOCTYPE html>
+  <html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${t.newRequest}</title>
+  </head>
+  <body style="margin: 0; padding: 0; font-family: Arial, sans-serif;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #f7f7f2;">
+      <!-- Header with logo and teal background -->
+      <div style="background-color: #17b5a6; padding: 20px; text-align: center;">
+        <h1 style="color: white; margin: 0; font-size: 24px;">BEST GROOM STUDIO</h1>
+      </div>
+      
+      <!-- Language Information -->
+      <div style="padding: 10px 30px; background-color: #f0f8f7; text-align: center;">
+        <p style="color: #17b5a6; margin: 0; font-size: 16px;">
+          <strong>${t.languageInfo}:</strong> ${getLanguageDisplay(appointmentData.language || 'en')}
+        </p>
+      </div>
+      
+      <!-- Main content -->
+      <div style="padding: 30px; background-color: #f7f7f2;">
+        <div style="background-color: white; border-radius: 20px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <h2 style="color: #17b5a6; margin-top: 0; margin-bottom: 20px; font-size: 22px;">${t.newRequest}</h2>
+          
+          <div style="margin-bottom: 20px; border-left: 4px solid #17b5a6; padding-left: 15px;">
+            <h3 style="color: #333; margin-top: 0; margin-bottom: 10px; font-size: 18px;">${t.customerSection.heading}</h3>
+            <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.customerSection.fullName}:</strong> ${appointmentData.customerName}</p>
+            <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.customerSection.email}:</strong> ${appointmentData.customerEmail}</p>
+          </div>
+          
+          <div style="margin-bottom: 20px; border-left: 4px solid #17b5a6; padding-left: 15px;">
+            <h3 style="color: #333; margin-top: 0; margin-bottom: 10px; font-size: 18px;">${t.petSection.heading}</h3>
+            <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.petSection.name}:</strong> ${appointmentData.petName}</p>
+            <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.petSection.service}:</strong> ${serviceFormatted}</p>
+            
+            ${(() => {
+              let petDetails = appointmentData.petDetails || {};
+              let breed = petDetails.breed || '';
+              let age = petDetails.age || '';
+              let matting = petDetails.matting || '';
+              let comfortGrooming = petDetails.comfortable || '';
+              let lastGroom = petDetails.lastGroom || '';
+              let healthIssues = petDetails.healthIssues || '';
+                            
+              return `
+                <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px;">
+                  <tr>
+                    <td style="padding: 6px 10px; background-color: #f0f8f7; width: 50%;"><strong>${t.petSection.details.breed}:</strong> ${breed || t.petSection.details.notSpecified}</td>
+                    <td style="padding: 6px 10px; background-color: #f0f8f7; width: 50%;"><strong>${t.petSection.details.age}:</strong> ${age || t.petSection.details.notSpecified}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 10px;"><strong>${t.petSection.details.matting}:</strong> ${matting || t.petSection.details.notSpecified}</td>
+                    <td style="padding: 6px 10px;"><strong>${t.petSection.details.comfortGrooming}:</strong> ${comfortGrooming || t.petSection.details.notSpecified}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 10px; background-color: #f0f8f7;"><strong>${t.petSection.details.lastGroom}:</strong> ${lastGroom || t.petSection.details.notSpecified}</td>
+                    <td style="padding: 6px 10px; background-color: #f0f8f7;"><strong>${t.petSection.details.healthIssues}:</strong> ${healthIssues || t.petSection.details.notSpecified}</td>
+                  </tr>
+                </table>
+              `;
+            })()}
+          </div>
+          
+          <div style="margin-bottom: 20px; border-left: 4px solid #17b5a6; padding-left: 15px;">
+            <h3 style="color: #333; margin-top: 0; margin-bottom: 10px; font-size: 18px;">${t.appointmentSection.heading}</h3>
+            <p style="color: #333; margin: 5px 0; font-size: 16px;"><strong>${t.appointmentSection.requestDate}:</strong> ${new Date(appointmentData.appointmentDate).toLocaleString('pl-PL')}</p>
+          </div>
+          
+          <!-- Customer preferences section -->
+          <div style="margin-bottom: 20px; border-left: 4px solid #17b5a6; padding-left: 15px; margin-top: 20px;">
+            <h3 style="color: #333; margin-top: 0; margin-bottom: 10px; font-size: 18px;">${t.preferencesSection.heading}</h3>
+            
+            ${(() => {
+              let customerDetails = appointmentData.customerDetails || {};
+              let customerType = customerDetails.customerType || '';
+              let phone = customerDetails.phoneNumber || '';
+              let preferredDays = customerDetails.preferredDays || '';
+              
+              return `
+                <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px;">
+                  <tr>
+                    <td style="padding: 6px 10px; background-color: #f0f8f7;"><strong>${t.preferencesSection.customerType}:</strong> ${customerType || t.petSection.details.notSpecified}</td>
+                    <td style="padding: 6px 10px; background-color: #f0f8f7;"><strong>${t.preferencesSection.phone}:</strong> ${phone || t.petSection.details.notSpecified}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 10px;" colspan="2"><strong>${t.preferencesSection.preferredDays}:</strong> ${preferredDays || t.petSection.details.notSpecified}</td>
+                  </tr>
+                </table>
+              `;
+            })()}
+          </div>
+          
+          <!-- Notes section -->
+          <div style="margin-top: 20px; background-color: #f0f0f0; border-radius: 10px; padding: 15px;">
+            <h3 style="color: #333; margin-top: 0; margin-bottom: 10px; font-size: 18px;">${t.notesSection.heading}</h3>
+            <p style="color: #333; margin: 0; font-size: 14px;">${appointmentData.customerDetails?.notes || t.notesSection.noNotes}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div style="background-color: #17b5a6; padding: 15px; text-align: center;">
+        <p style="color: white; margin: 0; font-size: 14px;">
+          ${t.footer}
+        </p>
+      </div>
+    </div>
+  </body>
+  </html>
+`;
+};
 
 const sendAppointmentEmail = async (appointmentData) => {
   // Format the service name to be more readable
@@ -48,42 +214,29 @@ const sendAppointmentEmail = async (appointmentData) => {
     .replace(/-/g, ' ')
     .replace(/\b\w/g, l => l.toUpperCase());
 
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: process.env.BUSINESS_EMAIL,
-    subject: 'New Grooming Appointment Request',
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e4e4e4; border-radius: 5px;">
-        <h2 style="color: #4d5937; text-align: center; margin-bottom: 20px;">New Appointment Request</h2>
-        <div style="margin-bottom: 15px;">
-          <p style="font-weight: bold; margin-bottom: 5px;">Customer Information:</p>
-          <p style="margin: 0 0 5px 10px;"><strong>Name:</strong> ${appointmentData.customerName}</p>
-          <p style="margin: 0 0 5px 10px;"><strong>Email:</strong> ${appointmentData.customerEmail}</p>
-        </div>
-        <div style="margin-bottom: 15px;">
-          <p style="font-weight: bold; margin-bottom: 5px;">Pet Information:</p>
-          <p style="margin: 0 0 5px 10px;"><strong>Pet Name:</strong> ${appointmentData.petName}</p>
-          <p style="margin: 0 0 5px 10px;"><strong>Service Requested:</strong> ${serviceFormatted}</p>
-        </div>
-        <div style="margin-bottom: 15px;">
-          <p style="font-weight: bold; margin-bottom: 5px;">Appointment Details:</p>
-          <p style="margin: 0 0 5px 10px;"><strong>Date Requested:</strong> ${new Date(appointmentData.appointmentDate).toLocaleString()}</p>
-        </div>
-        <div style="margin-top: 20px; padding: 10px; background-color: #f9f9f9; border-left: 4px solid #4d5937;">
-          <p style="font-weight: bold; margin-bottom: 5px;">Additional Notes:</p>
-          <p style="white-space: pre-line; margin: 0;">${appointmentData.additionalNotes || 'None'}</p>
-        </div>
-      </div>
-    `
+  // Customer confirmation email - in customer's language
+  const customerMsg = {
+    to: appointmentData.customerEmail,
+    from: 'team@bestgroomstudio.pl',
+    subject: loadTranslations(appointmentData.language || 'en').customerEmail.subject,
+    html: getCustomerEmailHtml(appointmentData)
   };
-
+  
+  // Team notification email - in Polish
+  const teamMsg = {
+    to: 'team@bestgroomstudio.pl',
+    cc: 'bonuseto@gmail.com',
+    from: 'team@bestgroomstudio.pl',
+    subject: loadTranslations('pl').teamEmail.subject.replace('{{petName}}', appointmentData.petName).replace('{{service}}', serviceFormatted),
+    html: getTeamEmailHtml(appointmentData, serviceFormatted)
+  };
+  
   try {
-    console.log('Attempting to send email to:', process.env.BUSINESS_EMAIL);
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent: %s', info.messageId);
-    return info;
+    // Send emails
+    await sgMail.send(customerMsg);
+    await sgMail.send(teamMsg);
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Error sending emails:', error);
     throw error;
   }
 };

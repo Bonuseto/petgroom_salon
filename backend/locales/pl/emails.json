@@ -1,0 +1,49 @@
+{
+  "customerEmail": {
+    "subject": "Dziękujemy za prośbę o wizytę - Best Groom Studio",
+    "thankYou": "Dziękujemy za prośbę o wizytę",
+    "confirmationMessage": "{{customerName}}, dziękujemy za prośbę o wizytę dla {{petName}}. Skontaktujemy się wkrótce, aby ustalić termin wizyty.",
+    "speedUpProcess": "Jeśli chcesz przyspieszyć proces, możesz się z nami skontaktować telefonicznie:",
+    "visitWebsite": "Odwiedź naszą stronę",
+    "footer": "Pielęgnacja zwierząt z sercem - Wydobywamy to, co najlepsze w każdym zwierzaku we Wrocławiu"
+  },
+  "teamEmail": {
+    "subject": "Nowa wizyta: {{petName}} - {{service}}",
+    "newRequest": "Nowa prośba o wizytę",
+    "languageInfo": "Język używany przez klienta",
+    "customerSection": {
+      "heading": "Informacje o kliencie",
+      "fullName": "Imię i nazwisko",
+      "email": "Email"
+    },
+    "petSection": {
+      "heading": "Informacje o zwierzęciu",
+      "name": "Imię",
+      "service": "Usługa",
+      "details": {
+        "breed": "Rasa",
+        "age": "Wiek",
+        "matting": "Kołtuny",
+        "comfortGrooming": "Komfort podczas pielęgnacji",
+        "lastGroom": "Ostatnia pielęgnacja",
+        "healthIssues": "Problemy zdrowotne",
+        "notSpecified": "Nie określono"
+      }
+    },
+    "appointmentSection": {
+      "heading": "Szczegóły wizyty",
+      "requestDate": "Data prośby"
+    },
+    "preferencesSection": {
+      "heading": "Preferencje klienta",
+      "customerType": "Typ klienta",
+      "phone": "Telefon",
+      "preferredDays": "Preferowane dni"
+    },
+    "notesSection": {
+      "heading": "Dodatkowe uwagi",
+      "noNotes": "Brak"
+    },
+    "footer": "Wewnętrzne powiadomienie zespołu"
+  }
+}

@@ -2,6 +2,8 @@
 /* FormPage.tsx */
 import React, { useState } from "react";
 import Menu from "../components/Menu/Menu";
+import GDPRPopup from "../components/GDPR/GDPRPopup";
+import GDPRConsent from "../components/GDPR/GDPRConsent";
 import classes from "./FormPage.module.css";
 import { useTranslation } from "react-i18next";
 
@@ -21,10 +23,11 @@ interface FormData {
   phoneNumber: string;
   preferredDays: string[];
   notes: string;
+  gdprConsent: boolean;
 }
 
 const FormPage: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   
   const services = [
     {
@@ -54,10 +57,10 @@ const FormPage: React.FC = () => {
     breed: "",
     dogName: "",
     dogAge: "",
-    matting: "No",
-    comfortable: "Yes",
-    lastGroom: "1 - 4 weeks ago",
-    healthIssues: "No",
+    matting: "",
+    comfortable: "",
+    lastGroom: "",
+    healthIssues: "",
     customerType: "",
     firstName: "",
     lastName: "",
@@ -65,23 +68,40 @@ const FormPage: React.FC = () => {
     phoneNumber: "",
     preferredDays: [],
     notes: "",
+    gdprConsent: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [showGdprPopup, setShowGdprPopup] = useState(false); // Changed to false - won't show on load
+  const [serviceFieldTouched, setServiceFieldTouched] = useState(false);
 
   const handleServiceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, service: e.target.value });
+    setServiceFieldTouched(true);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    if (name === 'phoneNumber') return; // Phone number has its own handler
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setFormData({ ...formData, [name]: checked });
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // Remove all non-digit characters
+    const cleaned = value.replace(/[^\d]/g, '');
+    
+    // Format the phone number
+    setFormData(prev => ({
+      ...prev,
+      phoneNumber: `+${cleaned}`
+    }));
+  };
+
+
+  const handleGdprConsentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, gdprConsent: e.target.checked });
   };
 
   const handleDaysChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,12 +113,29 @@ const FormPage: React.FC = () => {
     setFormData({ ...formData, preferredDays: newPreferredDays });
   };
 
+  // New function to open the GDPR popup when "More information" is clicked
+  const handleOpenGdprPopup = () => {
+    setShowGdprPopup(true);
+  };
+
+  // Close the GDPR popup
+  const handleGdprAccept = () => {
+    setShowGdprPopup(false);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simple validation
+    setServiceFieldTouched(true);
+    
     if (!formData.service) {
-      alert("Please select a service");
+      e.stopPropagation(); // Prevent form submission
+      return;
+    }
+    
+    // Validate GDPR consent
+    if (!formData.gdprConsent) {
+      alert(t('gdpr.error', 'Please accept the data processing consent to proceed.'));
       return;
     }
     
@@ -113,6 +150,7 @@ const FormPage: React.FC = () => {
         petName: formData.dogName,
         service: formData.service,
         appointmentDate: new Date().toISOString(), // You might want to add a date picker in your form
+        language: i18n.language, // Add current language
         additionalNotes: `
           Breed: ${formData.breed}
           Age: ${formData.dogAge}
@@ -124,9 +162,11 @@ const FormPage: React.FC = () => {
           Phone: ${formData.phoneNumber}
           Preferred days: ${formData.preferredDays.join(', ')}
           Notes: ${formData.notes}
-        `
+        `,
+        gdprConsent: formData.gdprConsent
       };
       
+      //const response = await fetch('http://104.248.133.52:5000/api/appointments', {
       const response = await fetch('http://localhost:5000/api/appointments', {
         method: 'POST',
         headers: {
@@ -145,10 +185,10 @@ const FormPage: React.FC = () => {
           breed: "",
           dogName: "",
           dogAge: "",
-          matting: "No",
-          comfortable: "Yes",
-          lastGroom: "1 - 4 weeks ago",
-          healthIssues: "No",
+          matting: "",
+          comfortable: "",
+          lastGroom: "",
+          healthIssues: "",
           customerType: "",
           firstName: "",
           lastName: "",
@@ -156,14 +196,15 @@ const FormPage: React.FC = () => {
           phoneNumber: "",
           preferredDays: [],
           notes: "",
+          gdprConsent: false,
         });
         window.scrollTo(0, 0);
       } else {
-        setSubmitError('Failed to send booking request. Please try again later.');
+        setSubmitError(t('form.errors.submitFailed', 'Failed to send booking request. Please try again later or contact us directly.'));
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setSubmitError('An error occurred while sending your booking request. Please try again later.');
+      setSubmitError(t('form.errors.submitError', 'An error occurred while sending your booking request. Please try again later or contact us directly.'));
     } finally {
       setIsSubmitting(false);
     }
@@ -181,6 +222,7 @@ const FormPage: React.FC = () => {
   return (
     <div>
       <Menu />
+      {showGdprPopup && <GDPRPopup onAccept={handleGdprAccept} />}
       <div className={classes.pageWrapper}>
         <div className={classes.formContainer}>
           <div className={classes.headerSection}>
@@ -188,7 +230,7 @@ const FormPage: React.FC = () => {
             
             {submitSuccess && (
               <div className={classes.successMessage}>
-                <p>Thank you for your booking request! We'll be in touch with you shortly.</p>
+                <p>{t("form.successMessage", "Thank you for your booking request! We'll be in touch with you shortly.")}</p>
               </div>
             )}
             
@@ -204,6 +246,12 @@ const FormPage: React.FC = () => {
               <div className={classes.formSection}>
                 <h2 className={classes.sectionHeading}>{t("form.serviceSection")}</h2>
                 
+                {serviceFieldTouched && !formData.service && (
+                  <div className={classes.errorMessage} style={{ marginBottom: '15px', color: '#dc3545', fontSize: '0.875rem' }}>
+                    {t("form.errors.serviceRequired")}
+                  </div>
+                )}
+
                 <div className={classes.serviceOptions}>
                   {services.map((service) => (
                     <label key={service.id} className={classes.serviceOption}>
@@ -215,6 +263,7 @@ const FormPage: React.FC = () => {
                         onChange={handleServiceChange}
                         className={classes.hiddenRadio}
                         required
+                        onBlur={() => setServiceFieldTouched(true)}
                       />
                       <div className={classes.customRadio}></div>
                       <img src={service.image} alt={service.label} className={classes.serviceIcon} />
@@ -232,20 +281,6 @@ const FormPage: React.FC = () => {
                 <div className={classes.formFields}>
                   <div className={classes.formRow}>
                     <div className={classes.formGroup}>
-                      <label htmlFor="breed" className={classes.inputLabel}>{t("form.dogInfo.breedLabel")}</label>
-                      <input
-                        type="text"
-                        id="breed"
-                        name="breed"
-                        value={formData.breed}
-                        onChange={handleInputChange}
-                        className={classes.textInput}
-                        placeholder={t("form.dogInfo.breedPlaceholder")}
-                        required
-                      />
-                    </div>
-                    
-                    <div className={classes.formGroup}>
                       <label htmlFor="dogName" className={classes.inputLabel}>{t("form.dogInfo.nameLabel")}</label>
                       <input
                         type="text"
@@ -258,21 +293,41 @@ const FormPage: React.FC = () => {
                         required
                       />
                     </div>
+                    
+                    <div className={classes.formGroup}>
+                      <label htmlFor="breed" className={classes.inputLabel}>{t("form.dogInfo.breedLabel")}</label>
+                      <input
+                        type="text"
+                        id="breed"
+                        name="breed"
+                        value={formData.breed}
+                        onChange={handleInputChange}
+                        className={classes.textInput}
+                        placeholder={t("form.dogInfo.breedPlaceholder")}
+                        required
+                      />
+                    </div>
                   </div>
                   
                   <div className={classes.formRow}>
                     <div className={classes.formGroup}>
                       <label htmlFor="dogAge" className={classes.inputLabel}>{t("form.dogInfo.ageLabel")}</label>
-                      <input
-                        type="text"
+                      <select
                         id="dogAge"
                         name="dogAge"
                         value={formData.dogAge}
                         onChange={handleInputChange}
-                        className={classes.textInput}
-                        placeholder={t("form.dogInfo.agePlaceholder")}
+                        className={classes.selectInput}
                         required
-                      />
+                      >
+                        <option value="">{t("form.dogInfo.agePlaceholder")}</option>
+                        <option value="0-6 months">0-6 {t("form.dogInfo.ageMonths")}</option>
+                        <option value="6-12 months">6-12 {t("form.dogInfo.ageMonths")}</option>
+                        <option value="1-2 years">1-2 {t("form.dogInfo.ageYears")}</option>
+                        <option value="2-5 years">2-5 {t("form.dogInfo.ageYears")}</option>
+                        <option value="5-8 years">5-8 {t("form.dogInfo.ageYears")}</option>
+                        <option value="8+ years">8+ {t("form.dogInfo.ageYears")}</option>
+                      </select>
                     </div>
                 
                     <div className={classes.formGroup}>
@@ -283,7 +338,9 @@ const FormPage: React.FC = () => {
                         value={formData.matting}
                         onChange={handleInputChange}
                         className={classes.selectInput}
+                        required
                       >
+                        <option value="">{t("form.groomingHistory.mattingPlaceholder", "Select an option")}</option>
                         <option value="No">{t("form.groomingHistory.mattingOptions.no")}</option>
                         <option value="Yes">{t("form.groomingHistory.mattingOptions.yes")}</option>
                         <option value="Unsure">{t("form.groomingHistory.mattingOptions.unsure")}</option>
@@ -300,7 +357,9 @@ const FormPage: React.FC = () => {
                         value={formData.comfortable}
                         onChange={handleInputChange}
                         className={classes.selectInput}
+                        required
                       >
+                        <option value="">{t("form.groomingHistory.comfortablePlaceholder", "Select an option")}</option>
                         <option value="Yes">{t("form.groomingHistory.comfortableOptions.yes")}</option>
                         <option value="No">{t("form.groomingHistory.comfortableOptions.no")}</option>
                         <option value="First time">{t("form.groomingHistory.comfortableOptions.unsure")}</option>
@@ -315,7 +374,9 @@ const FormPage: React.FC = () => {
                         value={formData.lastGroom}
                         onChange={handleInputChange}
                         className={classes.selectInput}
+                        required
                       >
+                        <option value="">{t("form.groomingHistory.lastGroomPlaceholder")}</option>
                         <option value="1 - 4 weeks ago">{t("form.groomingHistory.lastGroomOptions.recent")}</option>
                         <option value="1 - 2 months ago">{t("form.groomingHistory.lastGroomOptions.moderate")}</option>
                         <option value="3+ months ago">{t("form.groomingHistory.lastGroomOptions.long")}</option>
@@ -333,6 +394,7 @@ const FormPage: React.FC = () => {
                       onChange={handleInputChange}
                       className={classes.selectInput}
                     >
+                      <option value="">{t("form.groomingHistory.healthIssuesPlaceholder")}</option>
                       <option value="No">{t("form.groomingHistory.mattingOptions.no")}</option>
                       <option value="Yes">{t("form.groomingHistory.mattingOptions.yes")}</option>
                     </select>
@@ -343,10 +405,8 @@ const FormPage: React.FC = () => {
               <div className={classes.sectionDivider}></div>
               
               <div className={classes.formSection}>
-                <h2 className={classes.sectionHeading}>{t("form.customerInfo.heading")}</h2>
-                
                 <div className={classes.formFields}>
-                  <div className={classes.formRow}>
+                <div className={classes.formRow}>
                     <div className={classes.formGroup}>
                       <label className={classes.inputLabel}>{t("form.customerInfo.customerTypeLabel")}</label>
                       <div className={classes.radioGroup}>
@@ -370,6 +430,7 @@ const FormPage: React.FC = () => {
                             checked={formData.customerType === "Existing"}
                             onChange={handleInputChange}
                             className={classes.radioInput}
+                            required
                           />
                           <span className={classes.radioText}>{t("form.customerInfo.customerTypeOptions.returning")}</span>
                         </label>
@@ -424,16 +485,21 @@ const FormPage: React.FC = () => {
                     
                     <div className={classes.formGroup}>
                       <label htmlFor="phoneNumber" className={classes.inputLabel}>{t("form.customerInfo.phoneLabel")}</label>
-                      <input
-                        type="tel"
-                        id="phoneNumber"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
-                        onChange={handleInputChange}
-                        className={classes.textInput}
-                        placeholder={t("form.customerInfo.phonePlaceholder")}
-                        required
-                      />
+                      <div className={classes.phoneInputWrapper}>
+                        <span className={classes.phonePrefix}>+</span>
+                        <input
+                          type="tel"
+                          id="phoneNumber"
+                          name="phoneNumber"
+                          value={formData.phoneNumber.replace(/^\+/, '')}
+                          onChange={handlePhoneNumberChange}
+                          className={classes.textInput}
+                          placeholder="48 XXX XXX XXX"
+                          pattern="^\d{1,14}$"
+                          maxLength={14}
+                          required
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -483,6 +549,17 @@ const FormPage: React.FC = () => {
                   </div>
                 </div>
                 
+                {/* GDPR Consent */}
+                <div className={classes.gdprContainer}>
+                  <GDPRConsent 
+                    checked={formData.gdprConsent} 
+                    onChange={handleGdprConsentChange}
+                    onOpenPopup={handleOpenGdprPopup}
+                    required={true}
+                  />
+                </div>
+                
+                {/* Single Submit Button */}
                 <div className={classes.submitButtonContainer}>
                   <button 
                     type="submit" 

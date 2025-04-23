@@ -1,0 +1,49 @@
+{
+  "customerEmail": {
+    "subject": "Thank You For Your Appointment Request - Best Groom Studio",
+    "thankYou": "Thank You For Your Appointment Request",
+    "confirmationMessage": "{{customerName}}, thank you for your appointment request for {{petName}}. We will contact you shortly to schedule an appointment time.",
+    "speedUpProcess": "If you would like to speed up the process, you can contact us by calling:",
+    "visitWebsite": "Visit Our Website",
+    "footer": "Pet grooming with heart - Bringing out the best in every Wroclaw pet"
+  },
+  "teamEmail": {
+    "subject": "New appointment: {{petName}} - {{service}}",
+    "newRequest": "New Appointment Request",
+    "languageInfo": "Customer's language",
+    "customerSection": {
+      "heading": "Customer Information",
+      "fullName": "Full Name",
+      "email": "Email"
+    },
+    "petSection": {
+      "heading": "Pet Information",
+      "name": "Name",
+      "service": "Service",
+      "details": {
+        "breed": "Breed",
+        "age": "Age",
+        "matting": "Matting",
+        "comfortGrooming": "Comfort during grooming",
+        "lastGroom": "Last groom",
+        "healthIssues": "Health issues",
+        "notSpecified": "Not specified"
+      }
+    },
+    "appointmentSection": {
+      "heading": "Appointment Details",
+      "requestDate": "Request Date"
+    },
+    "preferencesSection": {
+      "heading": "Customer Preferences",
+      "customerType": "Customer Type",
+      "phone": "Phone",
+      "preferredDays": "Preferred Days"
+    },
+    "notesSection": {
+      "heading": "Additional Notes",
+      "noNotes": "None"
+    },
+    "footer": "Internal Team Notification"
+  }
+}

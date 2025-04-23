@@ -46,17 +46,21 @@
       "nameLabel": "Imię psa",
       "namePlaceholder": "Wpisz imię psa",
       "ageLabel": "Wiek psa",
-      "agePlaceholder": "Wpisz wiek psa"
+      "agePlaceholder": "Wybierz wiek psa",
+      "ageMonths": "miesięcy",
+      "ageYears": "lat"
     },
     "groomingHistory": {
       "heading": "Historia pielęgnacji",
       "mattingLabel": "Czy pies ma kołtuny?",
+      "mattingPlaceholder": "Wybierz, czy pies ma kołtuny",
       "mattingOptions": {
         "yes": "Tak",
         "no": "Nie",
         "unsure": "Nie wiem"
       },
       "comfortableLabel": "Czy pies czuje się komfortowo podczas pielęgnacji?",
+      "comfortablePlaceholder": "Wybierz poziom komfortu",
       "comfortableOptions": {
         "yes": "Tak",
         "no": "Nie",
@@ -113,6 +117,39 @@
     "submit": {
       "sending": "Wysyłanie...",
       "send": "Wyślij prośbę o rezerwację"
+    },
+    "errors": {
+      "serviceRequired": "Proszę wybrać usługę, aby kontynuować",
+      "gdprRequired": "Proszę zaakceptować warunki przetwarzania danych osobowych"
+    }
+  },
+  "gdpr": {
+    "title": "Informacja o przetwarzaniu danych osobowych",
+    "intro": "Stosownie do treści art. 13 ogólnego rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 o ochronie danych osobowych z dnia 27 kwietnia 2016 r. (Dz. Urz. UE L 119 z 04.05.2016) informuję, że:",
+    "administrator": "Administratorem Pani/Pana danych osobowych jest Pracownia Cztery Łapy Patrycja Wojciechowska ul. Obodrzycka 1A, 51-112 Wrocław, NIP 8951864454, REGON 365379235",
+    "dataProcessing": "Pani/Pana dane osobowe przetwarzane będą:",
+    "processingPurpose": {
+      "marketing": "na podstawie Art. 6 ust. 1 lit. a) rozporządzenia Parlamentu Europejskiego i Rady UE 2016/679 w celach: marketingu produktów i usług własnych, kontaktu drogą telefoniczną i za pomocą poczty elektronicznej, przekazania danych innym podmiotom - współpracującym z Administratorem;",
+      "legitimate": "na podstawie art. 6 ust. 1 lit. f) rozporządzenia Parlamentu Europejskiego i Rady UE 2016/679, jako niezbędne do celów wynikających z prawnie uzasadnionych interesów realizowanych przez administratora (marketing produktów i usług własnych, kontakt telefoniczny i mailowy);",
+      "legal": "na podstawie art. 6 ust. 3 lit. c) rozporządzenia Parlamentu Europejskiego i Rady UE 2016/679 do wywiązania się z prawnego obowiązku wymagającego przetwarzania na mocy prawa Unii Europejskiej lub polskiego, któremu podlega Administrator, w zakresie w jakim przetwarzanie jest niezbędne, w tym ustawy o rachunkowości i kodeksu pracy;",
+      "claims": "na podstawie art. 6 ust. 3 lit. e) rozporządzenia Parlamentu Europejskiego i Rady UE 2016/679 do ustalenia, dochodzenia lub obrony roszczeń, w zakresie w jakim przetwarzanie jest niezbędne;"
+    },
+    "retentionPeriod": "Pani/Pana dane osobowe przetwarzane będą do momentu odwołania zgody na ich przetwarzanie bądź ustania ich przetwarzania w celach planowania biznesowego.",
+    "rights": "Posiada Pani/Pan prawo do żądania od administratora dostępu do danych osobowych, prawo do ich sprostowania usunięcia lub ograniczenia przetwarzania, prawo do cofnięcia zgody oraz prawo do przenoszenia danych.",
+    "voluntary": "Podanie danych osobowych jest dobrowolne, jednakże niepodanie danych skutkuje niemożliwością realizacji usługi.",
+    "accept": "AKCEPTUJĘ",
+    "error": "Proszę zaakceptować zgodę na przetwarzanie danych osobowych, aby kontynuować.",
+    "understand": "Rozumiem, że:",
+    "moreInfo": "Więcej informacji",
+    "simpleConsent": {
+      "title": "Zgoda RODO",
+      "text": "Zaznaczając to pole, wyrażam zgodę na przetwarzanie moich danych osobowych przez Best Groom Studio.",
+      "bulletPoints": {
+        "storage": "Moje dane będą przechowywane bezpiecznie i wykorzystywane wyłącznie do komunikacji związanej z wizytą",
+        "retention": "Moje dane będą przechowywane przez 6 miesięcy od ostatniej wizyty",
+        "rights": "Mam prawo dostępu, poprawiania lub żądania usunięcia moich danych w dowolnym momencie",
+        "withdrawal": "Mogę wycofać zgodę w każdej chwili kontaktując się pod adresem team@bestgroomstudio.pl"
+      }
     }
   }
 }

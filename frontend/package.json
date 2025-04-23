@@ -1,7 +1,7 @@
 {
   "name": "salon",
   "version": "0.1.0",
-  "homepage": "https://bonuseto.github.io/petgroom_salon",
+  "homepage": "https://bestgroomstudio.pl",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.3",

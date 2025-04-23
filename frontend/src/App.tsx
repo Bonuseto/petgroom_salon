@@ -16,7 +16,7 @@ function App (): JSX.Element {
   });
 
   return (
-    <Router basename="/petgroom_salon">
+    <Router basename="/">
       <div className="App">
         <Routes>
           <Route path="/" element={<HomePage isLoaded={isLoaded} />} />
