@@ -69,7 +69,7 @@ const getCustomerEmailHtml = (appointmentData) => {
           </p>
           
           <div style="margin-top: 30px; text-align: center;">
-            <a href="https://bestgroomstudio.com" style="background-color: #17b5a6; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; font-weight: bold; display: inline-block;">
+            <a href="https://bestgroomstudio.pl" style="background-color: #17b5a6; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; font-weight: bold; display: inline-block;">
               ${t.visitWebsite}
             </a>
           </div>
