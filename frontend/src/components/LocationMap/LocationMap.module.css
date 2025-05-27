@@ -1,60 +1,66 @@
-/* LocationMap.css */
-
-.setDirection
-{  
-    background-color: #0ABAB5;
-}
-.setDirection:hover
-{  
-    text-decoration: none;
-    background-color: #099A9A;
-    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
-.mapContainer {
-  height: 450px;
-  margin-bottom: 16px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.addressWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.directionButton {
-  background-color: #0ABAB5;
-  color: white;
+.address {
+  color: #333;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.copyBtn {
+  background: none;
+  border: none;
+  color: #0abab5;
+  cursor: pointer;
+  font-family: "CamptonBook", sans-serif;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  text-transform: none;
+}
+
+.copyBtn:hover {
+  color: #099a9a;
+}
+
+.copyIcon {
+  margin-right: 4px;
+  font-size: 1rem;
+}
+
+.actionButton {
+  background-color: #0abab5;
+  color: #fff;
   padding: 10px 20px;
   border-radius: 30px;
-  font-family: 'CamptonBook', sans-serif;
+  font-family: "CamptonBook", sans-serif;
   font-size: 0.9rem;
   text-transform: none;
-  margin-top: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  min-width: 240px;
+  width: 260px;
   transition: background-color 0.3s ease;
   border: none;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.directionButton:hover {
-  background-color: #099A9A;
   text-decoration: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.mapSection {
-  margin: 32px 0;
-  text-align: center;
-}
-
-.mapTitle {
-  margin-bottom: 16px;
-  font-family: 'CamptonBook', sans-serif;
-  color: #333;
+.actionButton:hover {
+  background-color: #099a9a;
 }
 
 .directionIcon {
   margin-right: 8px;
+  font-size: 1.2rem;
 }
