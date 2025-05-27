@@ -48,16 +48,23 @@ function HeaderComponent (): JSX.Element {
               <div className={classes.titleContainer}>
                 {currentLang === 'pl'
                   ? (
-                  <h2 className={`${classes.headerMainText} ${classes.polishText}`}>
+                  <h2
+                    className={`${classes.headerMainText} ${classes.polishText}`}
+                  >
                     Pielęgnacja zwierząt{' '}
-                    <span className={`${classes.withHeart} ${classes.polishText}`}>
+                    <span
+                      className={`${classes.withHeart} ${classes.polishText}`}
+                    >
                       z sercem
                     </span>
                   </h2>
                     )
                   : (
                   <h2 className={classes.headerMainText}>
-                    {t('header.petGrooming')}&nbsp;<span className={classes.withHeart}>{t('header.withHeart')}</span>
+                    {t('header.petGrooming')}&nbsp;
+                    <span className={classes.withHeart}>
+                      {t('header.withHeart')}
+                    </span>
                   </h2>
                     )}
                 <p className={classes.headerSecondText}>
