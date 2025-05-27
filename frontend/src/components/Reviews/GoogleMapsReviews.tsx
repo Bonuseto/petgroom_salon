@@ -13,9 +13,14 @@ const GoogleMapsReviews: React.FC = (): JSX.Element => {
     rating: number
     text: string
     profilePhotoUrl: string
-  };
+  }
 
-  const createReview = (name: string, rating: number, textKey: string, profilePhotoUrl: string): Review => ({
+  const createReview = (
+    name: string,
+    rating: number,
+    textKey: string,
+    profilePhotoUrl: string
+  ): Review => ({
     name,
     rating,
     text: t(textKey),
@@ -23,11 +28,36 @@ const GoogleMapsReviews: React.FC = (): JSX.Element => {
   });
 
   const reviews = [
-    createReview('Magdalena Piprek', 5, 'reviewsSection.review1', 'https://lh3.googleusercontent.com/a/ACg8ocKCRD30ljGYOtLW2SvQRaFjXZwA-XpFSMPqfUYqDfLROhT82A=w75-h75-p-rp-mo-ba3-br100'),
-    createReview('Robert Ch.', 4, 'reviewsSection.review2', 'https://lh3.googleusercontent.com/a-/ALV-UjU2bKrvJMq0iG4SRcA7ygMay9a_HB-R8vf6XsByAYn1ZtSbYS5e=w75-h75-p-rp-mo-ba5-br100'),
-    createReview('Anna Klodowska', 5, 'reviewsSection.review3', 'https://lh3.googleusercontent.com/a/ACg8ocKH7Zfyai7MyJ0XMGNWwC_iqmSXYSgCvbA-U56BVFtOkKUO=w75-h75-p-rp-mo-br100'),
-    createReview('Pedro Augusto', 5, 'reviewsSection.review4', 'https://lh3.googleusercontent.com/a/ACg8ocIbJmpgqJg4vbtD7-VwIker7Y-YVc1HRj4JDd6wVeSajhqeGg=w180-h180-p-rp-mo-ba2-br100'),
-    createReview('Grzegorz Joniec', 5, 'reviewsSection.review5', 'https://lh3.googleusercontent.com/a-/ALV-UjWgOfXI3kJaxZAVIFHbntukD-aTpMD7D_D_og3BPPQUhyNm3NY8=w75-h75-p-rp-mo-br100')
+    createReview(
+      'Magdalena Piprek',
+      5,
+      'reviewsSection.review1',
+      'https://lh3.googleusercontent.com/a/ACg8ocKCRD30ljGYOtLW2SvQRaFjXZwA-XpFSMPqfUYqDfLROhT82A=w75-h75-p-rp-mo-ba3-br100'
+    ),
+    createReview(
+      'Robert Ch.',
+      4,
+      'reviewsSection.review2',
+      'https://lh3.googleusercontent.com/a-/ALV-UjU2bKrvJMq0iG4SRcA7ygMay9a_HB-R8vf6XsByAYn1ZtSbYS5e=w75-h75-p-rp-mo-ba5-br100'
+    ),
+    createReview(
+      'Anna Klodowska',
+      5,
+      'reviewsSection.review3',
+      'https://lh3.googleusercontent.com/a/ACg8ocKH7Zfyai7MyJ0XMGNWwC_iqmSXYSgCvbA-U56BVFtOkKUO=w75-h75-p-rp-mo-br100'
+    ),
+    createReview(
+      'Pedro Augusto',
+      5,
+      'reviewsSection.review4',
+      'https://lh3.googleusercontent.com/a/ACg8ocIbJmpgqJg4vbtD7-VwIker7Y-YVc1HRj4JDd6wVeSajhqeGg=w180-h180-p-rp-mo-ba2-br100'
+    ),
+    createReview(
+      'Grzegorz Joniec',
+      5,
+      'reviewsSection.review5',
+      'https://lh3.googleusercontent.com/a-/ALV-UjWgOfXI3kJaxZAVIFHbntukD-aTpMD7D_D_og3BPPQUhyNm3NY8=w75-h75-p-rp-mo-br100'
+    )
   ];
 
   const sliderSettings = {
@@ -73,17 +103,28 @@ const GoogleMapsReviews: React.FC = (): JSX.Element => {
   const handleImageError = (e: { currentTarget: HTMLImageElement }): void => {
     const target = e.currentTarget;
     const name = target.alt.replace(/'s profile$/, '');
-    target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&size=128&rounded=true`;
+    target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+      name
+    )}&size=128&rounded=true`;
     target.onerror = null;
   };
 
   return (
-    <section className={classes.reviewsSection} aria-label="Customer Reviews" id="reviewsId">
+    <section
+      className={classes.reviewsSection}
+      aria-label="Customer Reviews"
+      id="reviewsId"
+    >
       <h2 className={classes.reviewsHeading}>{t('reviews')}</h2>
       <div className={classes.reviewsSliderContainer}>
         <Slider {...sliderSettings}>
           {reviews.map((review, index) => (
-            <div key={index} className={classes.reviewSlide} role="group" aria-label={`Review ${index + 1} of ${reviews.length}`}>
+            <div
+              key={index}
+              className={classes.reviewSlide}
+              role="group"
+              aria-label={`Review ${index + 1} of ${reviews.length}`}
+            >
               <div className={classes.reviewCard}>
                 <div className={classes.reviewContent}>
                   <img
@@ -95,11 +136,16 @@ const GoogleMapsReviews: React.FC = (): JSX.Element => {
                   />
                   <div>
                     <h3 className={classes.authorName}>{review.name}</h3>
-                    <div className={classes.starsContainer} aria-label={`Rating: ${review.rating} out of 5 stars`}>
+                    <div
+                      className={classes.starsContainer}
+                      aria-label={`Rating: ${review.rating} out of 5 stars`}
+                    >
                       {[...Array(5)].map((_, i) => (
                         <span
                           key={i}
-                          className={i < review.rating ? classes.star : classes.emptyStar}
+                          className={
+                            i < review.rating ? classes.star : classes.emptyStar
+                          }
                           aria-hidden="true"
                         >
                           ★
