@@ -9,8 +9,10 @@
         "plugin:css/recommended",
         "plugin:css-modules/recommended"
     ],
+    "ignorePatterns": ["build/**", "dist/**", "node_modules/**"],
     "parserOptions": {
-        "project": "./tsconfig.json",
+        "project": ["tsconfig.json"],
+        "tsconfigRootDir": ".",
         "ecmaVersion": "latest",
         "sourceType": "module",
         "extraFileExtensions": [".module.css"]
@@ -24,5 +26,15 @@
     "rules": {
         "semi": ["error", "always"],
         "@typescript-eslint/semi": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "eslint.workingDirectories": [
+    {
+      "mode": "auto"
     }
+  ]
 }
