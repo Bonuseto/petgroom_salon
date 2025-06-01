@@ -1,6 +1,7 @@
 Webpage for petgroom studio
 
-[---Demo webpage---](https://bonuseto.github.io/petgroom_salon/)
+Available at:
+[bestgroomstudio.pl](https://bestgroomstudio.pl/)
 
 ![Image Alt Text](preview1.png)
 ![Image Alt Text](preview2.png)
