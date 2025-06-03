@@ -4,7 +4,7 @@
 
 <p align="center">
   Modern full-stack web app for pet-grooming salons.<br/>
-  <a href="https://bestgroomstudio.pl"><strong>🌐 Live&nbsp;demo</strong></a>
+  <a href="https://bestgroomstudio.pl"><strong>🌐 Visit the site</strong></a>
 </p>
 ---
 
@@ -12,7 +12,7 @@
 
 | Front page | Appointments |
 |------------|--------------|
-| <img src="https://ibb.co/v6L8bY9m" width="400" alt="Front page" /> | <img src="https://ibb.co/5XvbkFm2" width="400" alt="Appointments page" /> |
+| <img src="https://i.ibb.co/dwkySgZ6/bestgroomstudio-pl-1.png" width="400" alt="Front page" /> | <img src="https://i.ibb.co/xKGxYHW3/bestgroomstudio-pl-2.png" width="400" alt="Appointments page" /> |
 
 
 ---
