@@ -1,13 +1,42 @@
-Webpage for petgroom studio
+<!-- README.md -->
 
-Available at:
-[bestgroomstudio.pl](https://bestgroomstudio.pl/)
+<h1 align="center">🐾 Petgroom Studio</h1>
 
-![Image Alt Text](preview1.png)
-![Image Alt Text](preview2.png)
-![Image Alt Text](preview3.png)
-![Image Alt Text](preview4.png)
+<p align="center">
+  Modern full-stack web app for pet-grooming salons.<br/>
+  <a href="https://bestgroomstudio.pl"><strong>🌐 Live&nbsp;demo</strong></a>
+</p>
+---
 
-In the project "frontend" directory, you can run:
+## 📸 Screenshots
 
-### `npm start`
+| Front page | Appointments |
+|------------|--------------|
+| <img src="https://ibb.co/v6L8bY9m" width="400" alt="Front page" /> | <img src="https://ibb.co/5XvbkFm2" width="400" alt="Appointments page" /> |
+
+
+---
+
+## 🚀 Quick start (local)
+
+> **Prerequisites**  
+> • Node ≥ 18  
+> • npm ≥ 9 (or pnpm / yarn if you prefer)
+
+### 1. Front-end
+
+```bash
+# from repo root
+cd frontend
+npm install
+npm start      # ➜ http://localhost:3000
+```
+
+### 1. Back-end
+
+```bash
+# from repo root
+cd backend
+npm install    # if you have dependencies
+node server.js # ➜ http://localhost:5000 (default)
+```
