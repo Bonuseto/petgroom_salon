@@ -11,10 +11,10 @@
 ## 📸 Screenshots
 
 ### Front page
-<img src="docs/images/front.png" alt="Front page" width="700" />
+<img src="https://i.ibb.co/dwkySgZ6/bestgroomstudio-pl-1.png" alt="Front page" width="1000" />
 
 ### Appointments
-<img src="docs/images/appointments.png" alt="Appointments page" width="700" />
+<img src="https://i.ibb.co/xKGxYHW3/bestgroomstudio-pl-2.png" alt="Appointments page" width="1000" />
 
 
 
