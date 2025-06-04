@@ -1,11 +1,6 @@
 {
   "howToFindUs": "HOW TO FIND US",
-  "language": {
-    "english": "EN",
-    "polish": "PL",
-    "ukranian": "UA",
-    "russian": "RU"
-  },
+  "language":  "EN",
   "aboutUs": "About Us",
   "services": "Services",
   "prices": "Prices",

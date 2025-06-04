@@ -58,19 +58,6 @@ h1 {
   font-family: 'Recoleta', serif;
 }
 
-/* Special styling for Polish text to avoid font issues */
-.polishText {
-  font-family: 'Lato', sans-serif !important;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  transition: color 0.3s ease;
-}
-
-.polishText.withHeart {
-  font-style: italic;
-  font-weight: 400;
-}
-
 .withHeart {
   font-style: italic;
   color: #0ABAB5;

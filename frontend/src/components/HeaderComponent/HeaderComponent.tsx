@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './HeaderComponent.module.css';
 import previewVideo from './preview.mp4';
 import previewSnapshotVideo from './previewSnapshot.png';
@@ -7,19 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 function HeaderComponent (): JSX.Element {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { t, i18n } = useTranslation();
-  const [currentLang, setCurrentLang] = useState(i18n.language);
-
-  useEffect(() => {
-    const handleLanguageChange = (): void => {
-      setCurrentLang(i18n.language);
-    };
-
-    i18n.on('languageChanged', handleLanguageChange);
-    return () => {
-      i18n.off('languageChanged', handleLanguageChange);
-    };
-  }, [i18n]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const videoElement = videoRef.current;
@@ -46,27 +34,12 @@ function HeaderComponent (): JSX.Element {
                 {t('header.trustedServices')}
               </h1>
               <div className={classes.titleContainer}>
-                {currentLang === 'pl'
-                  ? (
-                  <h2
-                    className={`${classes.headerMainText} ${classes.polishText}`}
-                  >
-                    Pielęgnacja zwierząt{' '}
-                    <span
-                      className={`${classes.withHeart} ${classes.polishText}`}
-                    >
-                      z sercem
-                    </span>
-                  </h2>
-                    )
-                  : (
                   <h2 className={classes.headerMainText}>
                     {t('header.petGrooming')}&nbsp;
                     <span className={classes.withHeart}>
                       {t('header.withHeart')}
                     </span>
                   </h2>
-                    )}
                 <p className={classes.headerSecondText}>
                   {t('header.bringingBest')}
                 </p>

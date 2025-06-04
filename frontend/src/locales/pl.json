@@ -1,11 +1,6 @@
 {
   "howToFindUs": "JAK NAS ZNALEŹĆ",
-  "language": {
-    "english": "EN",
-    "polish": "PL",
-    "ukranian": "UA",
-    "russian": "RU"
-  },
+  "language":  "PL",
   "aboutUs": "O nas",
   "services": "Usługi",
   "prices": "Ceny",

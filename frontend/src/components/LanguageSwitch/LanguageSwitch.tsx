@@ -1,73 +1,46 @@
-// LanguageSwitch.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import classes from './LanguageSwitch.module.css';
-import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next';
 import LanguageIcon from '@mui/icons-material/Language';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
-interface LanguageSwitchProps {
-  onSelectLanguage: (language: string) => void
-}
-
-const DEFAULT_LANGUAGE = 'en';
-
-const LanguageSwitch: React.FC<LanguageSwitchProps> = ({ onSelectLanguage }) => {
+const LanguageSwitch: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const isMobile = useMediaQuery('(max-width:768px)');
 
-  const getInitialLanguage = (): string => {
-    return typeof i18n.language === 'string' && i18n.language.length > 0
-      ? i18n.language
-      : DEFAULT_LANGUAGE;
-  };
-
-  const [currentLanguage, setCurrentLanguage] = useState<string>(getInitialLanguage());
-
-  useEffect(() => {
-    setCurrentLanguage(getInitialLanguage());
-  }, [i18n.language]);
+  const { i18n, t } = useTranslation();
 
   const handleLanguageSelect = (language: string): void => {
-    onSelectLanguage(language);
-    setCurrentLanguage(language);
+    i18n.changeLanguage(language);
     setIsOpen(false);
-  };
-
-  const languageNames: Record<string, string> = {
-    en: 'EN',
-    pl: 'PL',
-    ua: 'UA',
-    ru: 'RU'
   };
 
   return (
     <div className={classes.languageSwitch}>
       <button className={classes.languageSwitchButton} onClick={() => { setIsOpen(!isOpen); }}>
         <LanguageIcon className={classes.languageSwitchIcon} />
-        {!isMobile && <span>{languageNames[currentLanguage]}</span>}
+        <span className={classes.languageText}>{t('language')}</span>
       </button>
       {isOpen && (
         <div className={classes.languageSwitchDropdown}>
           <div
-            className={`${classes.languageOption} ${currentLanguage === 'en' ? classes.languageOptionActive : ''}`}
+            className={`${classes.languageOption}`}
             onClick={() => { handleLanguageSelect('en'); }}
           >
             EN
           </div>
           <div
-            className={`${classes.languageOption} ${currentLanguage === 'pl' ? classes.languageOptionActive : ''}`}
+            className={`${classes.languageOption}`}
             onClick={() => { handleLanguageSelect('pl'); }}
           >
             PL
           </div>
           <div
-            className={`${classes.languageOption} ${currentLanguage === 'ua' ? classes.languageOptionActive : ''}`}
+            className={`${classes.languageOption}`}
             onClick={() => { handleLanguageSelect('ua'); }}
           >
             UA
           </div>
           <div
-            className={`${classes.languageOption} ${currentLanguage === 'ru' ? classes.languageOptionActive : ''}`}
+            className={`${classes.languageOption}`}
             onClick={() => { handleLanguageSelect('ru'); }}
           >
             RU

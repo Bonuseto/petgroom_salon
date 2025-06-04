@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { type ReactElement, useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -13,7 +12,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import LanguageSwitch from '../LanguageSwitch/LanguageSwitch';
-import i18n from '../../i18n';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
@@ -34,7 +32,6 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
   const location = useLocation();
   
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState<string | null>('en');
   const [scrolled, setScrolled] = useState(false);
   
   const handleDrawerToggle = (): void => {
@@ -54,11 +51,7 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
       }
     }
   };
-  
-  const handleLanguageSelect = (language: string): void => {
-    setSelectedLanguage(language);
-    void i18n.changeLanguage(language);
-  };
+
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -210,9 +203,7 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
                   justifyContent: 'center'
                 }
               }}>
-                <LanguageSwitch
-                  onSelectLanguage={handleLanguageSelect}
-                />
+                <LanguageSwitch/>
               </Box>
             </Box>
             
