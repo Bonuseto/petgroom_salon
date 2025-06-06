@@ -1,28 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import classes from './HeaderComponent.module.css';
-import previewVideo from './preview.mp4';
-import previewSnapshotVideo from './previewSnapshot.png';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import classes from "./HeaderComponent.module.css";
+import previewVideo from "./preview.mp4";
+import previewSnapshotVideo from "./previewSnapshot.png";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-function HeaderComponent (): JSX.Element {
-  const videoRef = useRef<HTMLVideoElement>(null);
+function HeaderComponent(): JSX.Element {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    const videoElement = videoRef.current;
-    if (videoElement != null) {
-      videoElement.addEventListener('error', (e) => {
-        console.error('Video error:', e);
-      });
-
-      videoElement.addEventListener('loadeddata', () => {
-        videoElement.play().catch((err) => {
-          console.warn('Auto-play was prevented:', err);
-        });
-      });
-    }
-  }, []);
 
   return (
     <header className={classes.headerContainer}>
@@ -31,22 +15,22 @@ function HeaderComponent (): JSX.Element {
           <div className={classes.headerElements}>
             <div className={classes.headerContent}>
               <h1 className={classes.headerSecondText}>
-                {t('header.trustedServices')}
+                {t("header.trustedServices")}
               </h1>
               <div className={classes.titleContainer}>
-                  <h2 className={classes.headerMainText}>
-                    {t('header.petGrooming')}&nbsp;
-                    <span className={classes.withHeart}>
-                      {t('header.withHeart')}
-                    </span>
-                  </h2>
+                <h2 className={classes.headerMainText}>
+                  {t("header.petGrooming")}&nbsp;
+                  <span className={classes.withHeart}>
+                    {t("header.withHeart")}
+                  </span>
+                </h2>
                 <p className={classes.headerSecondText}>
-                  {t('header.bringingBest')}
+                  {t("header.bringingBest")}
                 </p>
               </div>
               <div className={classes.headerButtonGroup}>
                 <Link className={classes.primaryButton} to="/appointments">
-                  {t('header.bookAppointment')}
+                  {t("header.bookAppointment")}
                 </Link>
               </div>
             </div>
@@ -55,7 +39,6 @@ function HeaderComponent (): JSX.Element {
               <div className={classes.shapeImageGraphic}>
                 <div className={classes.shapeImage}>
                   <video
-                    ref={videoRef}
                     muted
                     loop
                     className={classes.shapeBgVideo}
