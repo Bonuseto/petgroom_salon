@@ -1,70 +1,83 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import react from "eslint-plugin-react";
-import css from "eslint-plugin-css";
-import json from "eslint-plugin-json";
-import cssModules from "eslint-plugin-css-modules";
-import reactYouMightNotNeedAnEffect from "eslint-plugin-react-you-might-not-need-an-effect";
-import reactHooks from "eslint-plugin-react-hooks";
-import { fixupPluginRules } from "@eslint/compat";
-import globals from "globals";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+// eslint.config.mjs
 import js from "@eslint/js";
+import globals from "globals";
 import tseslint from "typescript-eslint";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
-});
+import pluginReact from "eslint-plugin-react";
+import json from "@eslint/json";
+import css from "@eslint/css";
+import { defineConfig } from "eslint/config";
+import youMightNotNeedAnEffect from "eslint-plugin-react-you-might-not-need-an-effect";
 
 export default defineConfig([
-    globalIgnores(["build/**/*", "dist/**/*", "node_modules/**/*"]),
-    js.configs.recommended,
-    ...tseslint.configs.recommended,
-    ...compat.extends(
-        "plugin:react/recommended",
-        "plugin:css/recommended",
-        "plugin:css-modules/recommended",
-    ),
-    {
-        files: ["**/*.{js,jsx,ts,tsx}"],
-        plugins: {
-            react,
-            css,
-            json,
-            "css-modules": cssModules,
-            "react-you-might-not-need-an-effect": reactYouMightNotNeedAnEffect,
-            "react-hooks": fixupPluginRules(reactHooks),
-        },
+  // 1) Core JS/TSX rules
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+  },
 
-        languageOptions: {
-            globals: {
-                ...globals.browser,
-            },
-            ecmaVersion: "latest",
-            sourceType: "module",
-            parserOptions: {
-                project: ["../tsconfig.json"],
-                extraFileExtensions: [".module.css"],
-            },
-        },
+  // 2) Browser globals for JS/TS/JSX/TSX
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
 
-        settings: {
-            react: {
-                version: "detect",
-            },
-        },
+  // 3) TypeScript‐ESLint recommended rules
+  tseslint.configs.recommended,
 
-        rules: {
-            semi: ["error", "always"],
-            "@typescript-eslint/semi": "off",
-            "react-hooks/rules-of-hooks": "error",
-            "react-hooks/exhaustive-deps": "warn",
-            "react-you-might-not-need-an-effect/you-might-not-need-an-effect": "warn",
-        },
-    }
+  // 4) React (and React Hooks) “flat” recommended rules,
+  //    with explicit React version detection (18.2.0).
+  {
+    // Start with everything that pluginReact.configs.flat.recommended gives you…
+    ...pluginReact.configs.flat.recommended,
+
+    // …then add a `settings` block so that eslint-plugin-react
+    // knows you’re on React v18.2.0:
+    settings: {
+      react: {
+        version: "18.2.0",
+      },
+    },
+  },
+
+  // 5) “You Might Not Need an Effect” plugin for .js/.jsx/.ts/.tsx files
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    plugins: {
+      "react-you-might-not-need-an-effect": youMightNotNeedAnEffect,
+    },
+    rules: {
+      "react-you-might-not-need-an-effect/you-might-not-need-an-effect": "warn",
+    },
+  },
+
+  // 6) JSON linting
+  {
+    files: ["**/*.json"],
+    plugins: { json },
+    language: "json/json",
+    extends: ["json/recommended"],
+  },
+  {
+    files: ["**/*.jsonc"],
+    plugins: { json },
+    language: "json/jsonc",
+    extends: ["json/recommended"],
+  },
+  {
+    files: ["**/*.json5"],
+    plugins: { json },
+    language: "json/json5",
+    extends: ["json/recommended"],
+  },
+
+  // 7) CSS linting
+  {
+    files: ["**/*.css"],
+    plugins: { css },
+    language: "css/css",
+    extends: ["css/recommended"],
+  },
 ]);
