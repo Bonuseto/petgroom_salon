@@ -61,6 +61,7 @@
     "eslint": "^9.28.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-you-might-not-need-an-effect": "^0.1.0",
+    "eslint-plugin-tailwindcss": "^3.18.0",
     "file-loader": "^6.2.0",
     "generate-react-cli": "^8.4.9",
     "gh-pages": "^6.1.1",

@@ -7,13 +7,27 @@ import json from "@eslint/json";
 import css from "@eslint/css";
 import { defineConfig } from "eslint/config";
 import youMightNotNeedAnEffect from "eslint-plugin-react-you-might-not-need-an-effect";
+import pluginTailwindcss from "eslint-plugin-tailwindcss";
 
 export default defineConfig([
   // 1) Core JS/TSX rules
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    plugins: { js },
-    extends: ["js/recommended"],
+    plugins: {
+      js,
+      tailwindcss: pluginTailwindcss,
+    },
+    extends: [
+      "js/recommended", // optional, pulls in all tailwindcss rules
+    ],
+    rules: {
+      "tailwindcss/classnames-order": "warn",
+      "tailwindcss/enforces-shorthand": "warn",
+      "tailwindcss/no-arbitrary-value": "warn",
+      "tailwindcss/no-custom-classname": "warn",
+      "tailwindcss/no-contradicting-classname": "warn",
+      "tailwindcss/no-unnecessary-arbitrary-value": "warn",
+    },
   },
 
   // 2) Browser globals for JS/TS/JSX/TSX
