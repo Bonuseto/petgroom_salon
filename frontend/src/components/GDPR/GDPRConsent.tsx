@@ -17,7 +17,6 @@ const GDPRConsent: React.FC<GDPRConsentProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleMoreInfo = (e: React.MouseEvent) => {
     e.preventDefault(); // Prevent label click from toggling checkbox
     e.stopPropagation(); // Stop event from bubbling up

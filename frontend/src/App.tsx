@@ -5,7 +5,6 @@ import './App.css';
 import HomePage from './components/HomePage/HomePage';
 import FormPage from './pages/FormPage';
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const apiKey = process.env.REACT_APP_API_KEY!;
 const libraries: Array<'places' | 'marker'> = ['places', 'marker'];
 
