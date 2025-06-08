@@ -50,7 +50,7 @@ const LanguageSwitch: React.FC = () => {
                   ${
                     i18n.language === code
                       ? "bg-teal-500/10 !text-teal-500"
-                      : "bg-white"
+                      : "bg-white !text-black"
                   }
                 `}
                 >
