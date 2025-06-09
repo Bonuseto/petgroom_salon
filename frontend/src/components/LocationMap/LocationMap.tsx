@@ -55,7 +55,7 @@ const LocationMap: React.FC<Props> = ({ isLoaded }) => {
   }
 
   return (
-    <Box component="section" sx={{ backgroundColor: "#fafafa", py: 8 }}>
+    <Box component="section" sx={{ backgroundColor: "#f9f7f2", py: 8 }}>
       <Container maxWidth="lg">
         <Typography
           variant="h4"
