@@ -1,3 +1,29 @@
+# robots.txt for Best Groom Studio - Professional Pet Grooming Wrocław
 # https://www.robotstxt.org/robotstxt.html
+
+# Allow all search engines to crawl the site
 User-agent: *
-Disallow:
+Allow: /
+Allow: /appointments
+Allow: /logo.png
+Allow: /manifest.json
+Crawl-delay: 1
+
+# Specific instructions for major search engines
+User-agent: Googlebot
+Allow: /
+Allow: /appointments
+Allow: /logo.png
+Crawl-delay: 1
+
+User-agent: Bingbot  
+Allow: /
+Allow: /appointments
+Allow: /logo.png
+Crawl-delay: 1
+
+# XML Sitemap
+Sitemap: https://bestgroomstudio.pl/sitemap.xml
+
+# Host directive
+Host: bestgroomstudio.pl
