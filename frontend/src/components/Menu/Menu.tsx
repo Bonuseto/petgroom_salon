@@ -17,7 +17,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LanguageSwitch from "../LanguageSwitch/LanguageSwitch";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import logo from "./logo.png";
 
 interface Props {
   window?: () => Window;
@@ -71,10 +70,10 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Box sx={{ my: 2 }}>
+      <Box sx={{ my: 2, display: "flex", justifyContent: "center" }}>
         <Box
           component="img"
-          src={logo}
+          src="/logo.png"
           alt="Salon Logo"
           sx={{ height: "60px" }}
         />
@@ -141,7 +140,7 @@ const DrawerAppBar: React.FC = (props: Props): ReactElement => {
             >
               <Box
                 component="img"
-                src={logo}
+                src="/logo.png"
                 alt="Salon Logo"
                 sx={{
                   height: {
