@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@sendgrid/mail": "^8.1.5",
     "body-parser": "^2.2.0",
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
@@ -10,6 +9,7 @@
     "i18next": "^25.0.1",
     "i18next-fs-backend": "^2.6.0",
     "nodemailer": "^6.10.0",
+    "resend": "^4.5.2",
     "vary": "^1.1.2"
   }
 }

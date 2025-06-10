@@ -1,9 +1,9 @@
-const sgMail = require('@sendgrid/mail');
+const { Resend } = require('resend');
 const path = require('path');
 const fs = require('fs');
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-console.log('SendGrid configured');
+const resend = new Resend(process.env.RESEND_API_KEY);
+console.log('Resend configured');
 
 const getLanguageDisplay = (lang) => {
   const languages = {
@@ -246,9 +246,21 @@ const sendAppointmentEmail = async (appointmentData) => {
   };
   
   try {
-    // Send emails
-    await sgMail.send(customerMsg);
-    await sgMail.send(teamMsg);
+    // Send customer confirmation email
+    const customerResult = await resend.emails.send(customerMsg);
+    if (customerResult.error) {
+      console.error('Error sending customer email:', customerResult.error);
+      throw new Error('Failed to send customer confirmation email');
+    }
+    
+    // Send team notification email
+    const teamResult = await resend.emails.send(teamMsg);
+    if (teamResult.error) {
+      console.error('Error sending team email:', teamResult.error);
+      throw new Error('Failed to send team notification email');
+    }
+    
+    console.log('Emails sent successfully');
   } catch (error) {
     console.error('Error sending emails:', error);
     throw error;
