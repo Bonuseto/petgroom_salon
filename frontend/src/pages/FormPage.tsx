@@ -130,6 +130,12 @@ const FormPage: React.FC = () => {
   };
 
   const handleGdprAccept = (): void => {
+    setFormData(prev => ({ ...prev, gdprConsent: true }));
+    setShowGdprPopup(false);
+  };
+
+  const handleGdprCancel = (): void => {
+    setFormData(prev => ({ ...prev, gdprConsent: false }));
     setShowGdprPopup(false);
   };
 
@@ -240,7 +246,7 @@ const FormPage: React.FC = () => {
   return (
     <div>
       <Menu />
-      {showGdprPopup && <GDPRPopup onAccept={handleGdprAccept} />}
+      {showGdprPopup && <GDPRPopup onAccept={handleGdprAccept} onCancel={handleGdprCancel} />}
       <div className={classes.pageWrapper}>
         <div className={classes.formContainer}>
           <div className={classes.headerSection}>
