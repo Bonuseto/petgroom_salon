@@ -4,6 +4,7 @@ import GDPRPopup from '../components/GDPR/GDPRPopup';
 import GDPRConsent from '../components/GDPR/GDPRConsent';
 import classes from './FormPage.module.css';
 import { useTranslation } from 'react-i18next';
+import { getApiUrl } from '../config/api';
 
 interface FormData {
   service: string
@@ -183,7 +184,7 @@ const FormPage: React.FC = () => {
       };
 
       const response = await fetch(
-        'https://api.bestgroomstudio.pl/api/appointments',
+        getApiUrl('/api/appointments'),
         {
           method: 'POST',
           headers: {
